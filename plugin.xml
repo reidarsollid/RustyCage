@@ -9,8 +9,8 @@
             extensions="rs"
             icon="icons/rust.png"
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
-            class="rustycage.editors.RustEditor"
-            id="rustycage.editors.RustEditor">
+            class="org.baksia.rustycage.editors.RustEditor"
+            id="org.baksia.rustycage.editors.RustEditor">
       </editor>
    </extension>
 

@@ -1,4 +1,4 @@
-package rustycage;
+package org.baksia.rustycage;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;

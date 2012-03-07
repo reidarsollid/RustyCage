@@ -1,4 +1,4 @@
-package rustycage.editors;
+package org.baksia.rustycage.editors;
 
 import org.eclipse.ui.editors.text.TextEditor;
 
@@ -7,7 +7,6 @@ public class RustEditor extends TextEditor {
     public RustEditor() {
 		super();
 		setSourceViewerConfiguration(new RustConfiguration());
-		//setDocumentProvider(new RustDocumentProvider());
 	}
 
 	public void dispose() {

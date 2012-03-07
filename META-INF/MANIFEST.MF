@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: RustyCage
 Bundle-SymbolicName: RustyCage; singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: rustycage.Activator
+Bundle-Activator: org.baksia.rustycage.Activator
 Bundle-Vendor: org.baksia
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,

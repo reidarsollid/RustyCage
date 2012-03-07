@@ -1,4 +1,4 @@
-package rustycage.editors;
+package org.baksia.rustycage.editors;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;

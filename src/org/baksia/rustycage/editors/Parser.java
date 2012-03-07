@@ -1,4 +1,4 @@
-package rustycage.editors;
+package org.baksia.rustycage.editors;
 
 /**
  * User: Reidar Sollid
