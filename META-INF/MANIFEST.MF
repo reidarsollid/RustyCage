@@ -8,6 +8,8 @@ Bundle-Vendor: org.baksia
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.jface.text,
- org.eclipse.ui.editors
+ org.eclipse.ui.editors,
+ org.eclipse.core.resources,
+ org.eclipse.ui.ide
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

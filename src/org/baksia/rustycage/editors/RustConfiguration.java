@@ -4,7 +4,9 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextDoubleClickStrategy;
 import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
+import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
+import org.eclipse.jface.text.formatter.IContentFormatter;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
@@ -34,12 +36,24 @@ public class RustConfiguration extends SourceViewerConfiguration {
     @Override
     public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
         ContentAssistant contentAssistant = new ContentAssistant();
-        //IContentAssistProcessor contentAssistProcessor =
+        IContentAssistProcessor contentAssistProcessor = new RustContentAssistProcessor();
+        contentAssistant.setContentAssistProcessor(contentAssistProcessor,IDocument.DEFAULT_CONTENT_TYPE);
         contentAssistant.setInformationControlCreator(getInformationControlCreator(sourceViewer));
         return contentAssistant;
     }
 
+    @Override
     public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
         return new RustTextHover();
+    }
+
+    @Override
+    public IContentFormatter getContentFormatter(ISourceViewer sourceViewer) {
+        return super.getContentFormatter(sourceViewer);
+    }
+
+    @Override
+    public int getTabWidth(ISourceViewer sourceViewer) {
+        return 3;
     }
 }

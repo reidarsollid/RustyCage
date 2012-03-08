@@ -12,7 +12,7 @@ public class RustPartitionScanner extends RuleBasedPartitionScanner {
 
     public RustPartitionScanner() {
         IToken comment = new Token(RUST_COMMENT);
-        IPredicateRule[] rules = new IPredicateRule[2];
+        IPredicateRule[] rules = new IPredicateRule[1];
         rules[0] = new MultiLineRule("/*", "*/", comment);
         setPredicateRules(rules);
     }

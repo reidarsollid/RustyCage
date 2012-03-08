@@ -13,5 +13,109 @@
             id="org.baksia.rustycage.editors.RustEditor">
       </editor>
    </extension>
+   <extension
+         id="rustBuilder"
+         name="Rust Project Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true">
+         <run
+               class="rustycage.builder.RustBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         id="rustNature"
+         name="Rust Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="rustycage.builder.RustNature">
+         </run>
+      </runtime>
+      <builder
+            id="RustyCage.rustBuilder">
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="RustyCage.contribution"
+            nameFilter="*"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="rustycage.builder.ToggleNatureAction"
+               enablesFor="+"
+               id="RustyCage.addRemoveNatureAction"
+               label="Add/Remove Sample Nature"
+               menubarPath="additions">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         id="xmlProblem"
+         name="XML Problem"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.baksia.rustycage.PerspectiveFactory"
+            icon="icons/sample.gif"
+            id="RustyCage.perspective"
+            name="Rust">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="RustyCage"
+            name="Rust Wizards">
+      </category>
+      <wizard
+            category="RustyCage"
+            class="org.baksia.rustycage.wizards.RustNewWizard"
+            descriptionImage="icons/rust.png"
+            finalPerspective="RustyCage.perspective"
+            icon="icons/rust.png"
+            id="org.baksia.rustycage.wizards.RustNewWizard"
+            name="Rust Editor file"
+            project="true">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.contentTypes">
+      <file-association
+            content-type="RustyCage.file-association"
+            file-extensions="rs">
+      </file-association>
+      <content-type
+            describer="RustConentDescriber"
+            file-extensions="rs"
+            id="RustyCage.content-type"
+            name="Rust content type"
+            priority="normal">
+      </content-type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.ui.resourcePerspective">
+         <view
+               id="org.eclipse.ui.navigator.ProjectExplorer"
+               minimized="false"
+               relationship="stack"
+               relative="org.eclipse.ui.views.TaskList"
+               visible="true">
+         </view>
+      </perspectiveExtension>
+   </extension>
 
 </plugin>
