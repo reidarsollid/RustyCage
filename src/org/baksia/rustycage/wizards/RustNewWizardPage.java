@@ -99,7 +99,7 @@ public class RustNewWizardPage extends WizardPage {
                 containerText.setText(container.getFullPath().toString());
             }
         }
-        fileText.setText("new_file.rc");
+        fileText.setText("new_file.rs");
     }
 
     /**
@@ -152,7 +152,7 @@ public class RustNewWizardPage extends WizardPage {
         int dotLoc = fileName.lastIndexOf('.');
         if (dotLoc != -1) {
             String ext = fileName.substring(dotLoc + 1);
-            if (ext.equalsIgnoreCase("rs") == false) {
+            if (!ext.equalsIgnoreCase("rs")) {
                 updateStatus("File extension must be \"rs\"");
                 return;
             }
