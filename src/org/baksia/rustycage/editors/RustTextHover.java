@@ -6,15 +6,15 @@ import org.eclipse.jface.text.ITextViewer;
 
 public class RustTextHover implements ITextHover {
 
-	@Override
-	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
-		
-		return null;
-	}
+    @Override
+    public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
 
-	@Override
-	public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
-		return null;
-	}
+        return null;
+    }
+
+    @Override
+    public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
+        return null;
+    }
 
 }

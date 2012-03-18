@@ -1,7 +1,10 @@
 package org.baksia.rustycage.editors;
 
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jface.text.contentassist.*;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
+import org.eclipse.jface.text.contentassist.IContextInformation;
+import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 
 /**
  * User: Reidar Sollid
@@ -12,8 +15,8 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
 
     @Override
     public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
-       // ICompletionProposal completionProposal = new CompletionProposal("hello", offset, "hello".length(), 0);
-       // ICompletionProposal completionProposal2 = new CompletionProposal("balla", offset, "balla".length(), 0);
+        // ICompletionProposal completionProposal = new CompletionProposal("hello", offset, "hello".length(), 0);
+        // ICompletionProposal completionProposal2 = new CompletionProposal("balla", offset, "balla".length(), 0);
         return new ICompletionProposal[0];
     }
 

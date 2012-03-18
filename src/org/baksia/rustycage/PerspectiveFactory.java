@@ -6,11 +6,11 @@ import org.eclipse.ui.IPerspectiveFactory;
 
 public class PerspectiveFactory implements IPerspectiveFactory {
 
-	@Override
-	public void createInitialLayout(IPageLayout layout) {
-		defineActions(layout);
+    @Override
+    public void createInitialLayout(IPageLayout layout) {
+        defineActions(layout);
         defineLayout(layout);
-	}
+    }
 
     private void defineLayout(IPageLayout layout) {
         // Editors are placed for free.
@@ -24,7 +24,7 @@ public class PerspectiveFactory implements IPerspectiveFactory {
     }
 
     public void defineActions(IPageLayout layout) {
-        layout.addNewWizardShortcut("org.baksia.rustycage.wizards.RustNewWizardPage");
+        layout.addNewWizardShortcut("org.baksia.rustycage.wizards.RustNewProjectWizard");
         layout.addNewWizardShortcut("org.baksia.rustycage.wizards.RustNewWizard");
 
         layout.addShowViewShortcut(IPageLayout.ID_EDITOR_AREA);
@@ -32,5 +32,5 @@ public class PerspectiveFactory implements IPerspectiveFactory {
         layout.addShowViewShortcut(IPageLayout.ID_TASK_LIST);
         layout.addShowViewShortcut(IPageLayout.ID_NAVIGATE_ACTION_SET);
     }
-    
+
 }

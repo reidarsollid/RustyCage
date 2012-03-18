@@ -14,7 +14,7 @@ public class Parser {
             "if", "iface", "impl", "import", "in", "int", "let", "log", "mod", "mutable",
             "native", "note", "prove", "pure", "resource", "ret", "self", "str", "syntax",
             "tag", "true", "type", "u16", "u32", "u64", "u8", "uint", "unchecked", "unsafe",
-            "use", "vec", "while"};
+            "use", "vec", "while", "enum"};
 
     public static final String[] NEW_FILE = {"import", "export", "use", "mod", "dir"};
 }

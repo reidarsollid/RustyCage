@@ -27,7 +27,7 @@ public class RustConfiguration extends SourceViewerConfiguration {
     }
 
     @Override
-    public ITextDoubleClickStrategy getDoubleClickStrategy(ISourceViewer sourceViewer,String contentType) {
+    public ITextDoubleClickStrategy getDoubleClickStrategy(ISourceViewer sourceViewer, String contentType) {
         if (doubleClickStrategy == null)
             doubleClickStrategy = new RustDoubleClickStrategy();
         return doubleClickStrategy;
@@ -37,7 +37,7 @@ public class RustConfiguration extends SourceViewerConfiguration {
     public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
         ContentAssistant contentAssistant = new ContentAssistant();
         IContentAssistProcessor contentAssistProcessor = new RustContentAssistProcessor();
-        contentAssistant.setContentAssistProcessor(contentAssistProcessor,IDocument.DEFAULT_CONTENT_TYPE);
+        contentAssistant.setContentAssistProcessor(contentAssistProcessor, IDocument.DEFAULT_CONTENT_TYPE);
         contentAssistant.setInformationControlCreator(getInformationControlCreator(sourceViewer));
         return contentAssistant;
     }
