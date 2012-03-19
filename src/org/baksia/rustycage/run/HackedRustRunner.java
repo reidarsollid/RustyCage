@@ -35,7 +35,6 @@ public class HackedRustRunner {
             while (errorScanner.hasNextLine()) {
                 messageConsoleStream.println(errorScanner.nextLine());
             }
-
             messageConsoleStream.close();
 
         } catch (IOException e) {

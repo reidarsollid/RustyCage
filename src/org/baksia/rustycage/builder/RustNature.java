@@ -16,8 +16,8 @@ public class RustNature implements IProjectNature {
         IProjectDescription desc = project.getDescription();
         ICommand[] commands = desc.getBuildSpec();
 
-        for (ICommand command1 : commands) {
-            if (command1.getBuilderName().equals(RustBuilder.BUILDER_ID)) {
+        for (ICommand command : commands) {
+            if (command.getBuilderName().equals(RustBuilder.BUILDER_ID)) {
                 return;
             }
         }

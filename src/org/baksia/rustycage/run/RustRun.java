@@ -15,9 +15,7 @@ public class RustRun implements IWorkbenchWindowActionDelegate {
     public void run(IAction action) {
         RustEditor rustEditor = (RustEditor) window.getActivePage().getActiveEditor().getAdapter(ITextEditor.class);
         if (rustEditor != null) {
-            rustEditor.getTitle();
             HackedRustRunner.run((IFile) rustEditor.getEditorInput().getAdapter(IFile.class));
-
         }
     }
 

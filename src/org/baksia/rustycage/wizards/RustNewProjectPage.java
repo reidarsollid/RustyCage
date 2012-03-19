@@ -71,6 +71,10 @@ public class RustNewProjectPage extends WizardPage {
                 if (!src.exists()) {
                     src.create(false, true, null);
                 }
+                IFolder out = project.getFolder("out");
+                if (!out.exists()) {
+                    out.create(false, true, null);
+                }
             } catch (CoreException e) {
                 updateStatus(e.getMessage());
                 return false;
