@@ -20,7 +20,7 @@ public final class HackedRustCompiler {
 
         try {
             Process exec = Runtime.getRuntime().exec("/usr/local/bin/rustc " + file.getRawLocationURI().getRawPath());
-//            +        " --out-dir out");
+                    //+ " --out-dir bin");
             Scanner scanner = new Scanner(exec.getInputStream());
             Scanner errorScanner = new Scanner(exec.getErrorStream());
             MessageConsole messageConsole = new MessageConsole("Rustc", null);
@@ -29,6 +29,7 @@ public final class HackedRustCompiler {
                     new IConsole[]{messageConsole});
 
             MessageConsoleStream messageConsoleStream = messageConsole.newMessageStream();
+            messageConsoleStream.println("Compiling " + file);
             messageConsoleStream.setColor(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
             while (scanner.hasNextLine()) {
                 messageConsoleStream.println(scanner.nextLine());
@@ -39,7 +40,6 @@ public final class HackedRustCompiler {
             messageConsoleStream.setColor(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
 
             while (errorScanner.hasNextLine()) {
-
                 messageConsoleStream.println(errorScanner.nextLine());
             }
 

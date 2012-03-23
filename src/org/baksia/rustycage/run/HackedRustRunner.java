@@ -25,7 +25,7 @@ public class HackedRustRunner {
 
             MessageConsoleStream messageConsoleStream = messageConsole.newMessageStream();
             messageConsoleStream.setColor(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
-
+            messageConsoleStream.println("Running: "+file);
             while (scanner.hasNextLine()) {
                 messageConsoleStream.println(scanner.nextLine());
             }

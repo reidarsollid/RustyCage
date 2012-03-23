@@ -20,7 +20,6 @@ public class RustConentDescriber implements IContentDescriber {
 
     @Override
     public QualifiedName[] getSupportedOptions() {
-        QualifiedName qualifiedName = new QualifiedName(null, "localName");
         return new QualifiedName[0];
     }
 }
