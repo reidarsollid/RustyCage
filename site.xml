@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.baksia.rustycage.feature_1.0.0.201203201921.jar" id="org.baksia.rustycage.feature" version="1.0.0.201203201921">
+      <category name="Language IDE"/>
+   </feature>
+   <category-def name="Language IDE" label="Rust"/>
+</site>
