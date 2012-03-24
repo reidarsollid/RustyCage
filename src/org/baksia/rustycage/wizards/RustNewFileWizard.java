@@ -15,25 +15,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 
-public class RustNewWizard extends Wizard implements INewWizard {
-    private RustNewWizardPage page;
+public class RustNewFileWizard extends Wizard implements INewWizard {
+    private RustNewFileWizardPage pageFile;
     private ISelection selection;
 
-    public RustNewWizard() {
+    public RustNewFileWizard() {
         super();
         setNeedsProgressMonitor(true);
     }
 
     @Override
     public void addPages() {
-        page = new RustNewWizardPage(selection);
-        addPage(page);
+        pageFile = new RustNewFileWizardPage(selection);
+        addPage(pageFile);
     }
 
     @Override
     public boolean performFinish() {
-        final String containerName = page.getContainerName();
-        final String fileName = page.getFileName();
+        final String containerName = pageFile.getContainerName();
+        final String fileName = pageFile.getFileName();
         IRunnableWithProgress op = new IRunnableWithProgress() {
             public void run(IProgressMonitor monitor) throws InvocationTargetException {
                 try {

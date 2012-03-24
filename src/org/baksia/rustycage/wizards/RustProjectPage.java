@@ -16,14 +16,14 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-public class RustNewProjectPage extends WizardPage {
+public class RustProjectPage extends WizardPage {
     private Text projectText;
 
     private IProject project;
 
     private ISelection selection;
 
-    protected RustNewProjectPage(ISelection selection) {
+    protected RustProjectPage(ISelection selection) {
         super("rustProjectWizard");
         setTitle("Rust project wizard");
         setDescription("Set Rust project name");
@@ -60,7 +60,7 @@ public class RustNewProjectPage extends WizardPage {
     }
 
     public boolean createProject() {
-        if (project != null) {
+        if (project != null) {                                                    
             IProjectDescription desc = project.getWorkspace().newProjectDescription(project.getName());
             try {
                 project.create(desc, null);
@@ -71,7 +71,7 @@ public class RustNewProjectPage extends WizardPage {
                 if (!src.exists()) {
                     src.create(false, true, null);
                 }
-                IFolder out = project.getFolder("out");
+                IFolder out = project.getFolder("bin");
                 if (!out.exists()) {
                     out.create(false, true, null);
                 }
@@ -84,6 +84,9 @@ public class RustNewProjectPage extends WizardPage {
     }
 
     private void dialogChanged() {
+        if(getProjectName().isEmpty()){
+            return;
+        }
         project = ResourcesPlugin.getWorkspace().getRoot()
                 .getProject(getProjectName());
 

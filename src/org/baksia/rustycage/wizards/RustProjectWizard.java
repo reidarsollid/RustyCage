@@ -6,20 +6,20 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
-public class RustNewProjectWizard extends Wizard implements INewWizard {
+public class RustProjectWizard extends Wizard implements INewWizard {
 
-    private RustNewProjectPage rustNewProjectPage;
+    private RustProjectPage rustProjectPage;
     private ISelection selection;
 
 
-    public RustNewProjectWizard() {
+    public RustProjectWizard() {
         setNeedsProgressMonitor(true);
     }
 
     @Override
     public void addPages() {
-        rustNewProjectPage = new RustNewProjectPage(selection);
-        addPage(rustNewProjectPage);
+        rustProjectPage = new RustProjectPage(selection);
+        addPage(rustProjectPage);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class RustNewProjectWizard extends Wizard implements INewWizard {
 
     @Override
     public boolean performFinish() {
-        return rustNewProjectPage.createProject();
+        return rustProjectPage.createProject();
     }
 
 }

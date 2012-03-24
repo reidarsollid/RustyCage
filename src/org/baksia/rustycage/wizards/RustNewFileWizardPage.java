@@ -20,14 +20,14 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 
-public class RustNewWizardPage extends WizardPage {
+public class RustNewFileWizardPage extends WizardPage {
     private Text containerText;
 
     private Text fileText;
 
     private ISelection selection;
 
-    public RustNewWizardPage(ISelection selection) {
+    public RustNewFileWizardPage(ISelection selection) {
         super("wizardPage");
         setTitle("Rust Editor File");
         setDescription("This wizard creates a new file with *.rs extension that can be opened by a Rust editor.");

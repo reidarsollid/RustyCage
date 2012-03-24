@@ -12,7 +12,7 @@
             class="org.baksia.rustycage.editors.RustEditor"
             id="org.baksia.rustycage.editors.RustEditor">
          <contentTypeBinding
-               contentTypeId="rustSource">
+               contentTypeId="Rust.content-type">
          </contentTypeBinding>
       </editor>
    </extension>
@@ -37,16 +37,20 @@
          </run>
       </runtime>
       <builder
-            id="RustyCage.rustBuilder">
+            id="org.baksia.rustycage.builder.RustBuilder">
       </builder>
    </extension>
    <extension
          point="org.eclipse.ui.perspectives">
       <perspective
             class="org.baksia.rustycage.PerspectiveFactory"
+            fixed="false"
             icon="icons/rust_16x16.png"
             id="RustyCage.perspective"
             name="Rust">
+         <description>
+            Rust perspective for Rust development
+         </description>
       </perspective>
    </extension>
    <extension
@@ -57,19 +61,19 @@
       </category>
       <wizard
             category="RustyCage"
-            class="org.baksia.rustycage.wizards.RustNewWizard"
+            class="org.baksia.rustycage.wizards.RustNewFileWizard"
             finalPerspective="RustyCage.perspective"
             icon="icons/rust_16x16.png"
-            id="org.baksia.rustycage.wizards.RustNewWizard"
-            name="Rust Editor file"
+            id="org.baksia.rustycage.wizards.RustNewFileWizard"
+            name="Rust file"
             project="true">
       </wizard>
       <wizard
             category="RustyCage"
-            class="org.baksia.rustycage.wizards.RustNewProjectWizard"
+            class="org.baksia.rustycage.wizards.RustProjectWizard"
             descriptionImage="icons/rust.png"
             icon="icons/rust_16x16.png"
-            id="org.baksia.rustycage.wizards.RustNewProjectWizard"
+            id="org.baksia.rustycage.wizards.RustProjectWizard"
             name="Rust Project"
             project="true">
       </wizard>
@@ -156,7 +160,7 @@
             visible="true">
          <menu
                id="rustMenu"
-               label="Rust &amp;Menu">
+               label="&amp;Rust ">
             <separator
                   name="rustGroup">
             </separator>
@@ -203,5 +207,4 @@
            </colorOverride>
        </theme>
    </extension>
-
 </plugin>
