@@ -156,6 +156,9 @@ public class RustNewFileWizardPage extends WizardPage {
                 updateStatus("File extension must be \"rs\"");
                 return;
             }
+        } else {
+            updateStatus("File extension missing \"rs\"");
+            return;
         }
         updateStatus(null);
     }
