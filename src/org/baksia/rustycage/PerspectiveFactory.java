@@ -10,11 +10,13 @@ import org.eclipse.ui.progress.IProgressConstants;
 public class PerspectiveFactory implements IPerspectiveFactory {
     public static final String ID_PROJECT_EXPLORER = "org.eclipse.ui.navigator.ProjectExplorer";
 
+
     @Override
     public void createInitialLayout(IPageLayout layout) {
         String editorArea = layout.getEditorArea();
 
         IFolderLayout folder = layout.createFolder("left", IPageLayout.LEFT, (float) 0.25, editorArea); //$NON-NLS-1$
+
         folder.addView(IPageLayout.ID_PROJECT_EXPLORER);
         folder.addView(IPageLayout.ID_RES_NAV);
         folder.addPlaceholder(IPageLayout.ID_RES_NAV);

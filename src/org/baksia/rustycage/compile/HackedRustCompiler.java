@@ -1,6 +1,9 @@
 package org.baksia.rustycage.compile;
 
+import org.baksia.rustycage.Activator;
+import org.baksia.rustycage.preferences.PreferenceConstants;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.console.ConsolePlugin;
@@ -19,8 +22,10 @@ public final class HackedRustCompiler {
     public static boolean compile(IFile file) {
 
         try {
-            Process exec = Runtime.getRuntime().exec("/usr/local/bin/rustc " + file.getRawLocationURI().getRawPath());
-                    //+ " --out-dir bin");
+            IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+            String rustPath = preferenceStore.getString(PreferenceConstants.RUST_C);
+            Process exec = Runtime.getRuntime().exec(rustPath + "rustc " + file.getRawLocationURI().getRawPath());
+            //+ " --out-dir bin");
             Scanner scanner = new Scanner(exec.getInputStream());
             Scanner errorScanner = new Scanner(exec.getErrorStream());
             MessageConsole messageConsole = new MessageConsole("Rustc", null);

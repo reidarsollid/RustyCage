@@ -36,7 +36,7 @@
             </run>
         </runtime>
         <builder
-                id="org.baksia.rustycage.builder.RustBuilder">
+                id="RustyCage.rustBuilder">
         </builder>
     </extension>
     <extension
@@ -136,20 +136,6 @@
         <initializer
                 class="org.baksia.rustycage.preferences.PreferenceInitializer">
         </initializer>
-    </extension>
-    <extension
-            id="id1"
-            point="org.eclipse.core.resources.builders">
-        <builder
-                hasNature="true">
-            <run
-                    class="org.baksia.rustycage.builder.RustBuilder">
-                <parameter
-                        name="RustyCage.parameter"
-                        value="RustyCage.parameter">
-                </parameter>
-            </run>
-        </builder>
     </extension>
     <extension
             point="org.eclipse.ui.actionSets">

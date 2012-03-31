@@ -16,8 +16,8 @@ public class RustPreferencePage extends FieldEditorPreferencePage implements IWo
 
     @Override
     public void createFieldEditors() {
-        addField(new DirectoryFieldEditor(PreferenceConstants.P_PATH,
-                "&Rust home:", getFieldEditorParent()));
+        addField(new DirectoryFieldEditor(PreferenceConstants.RUST_C,
+                "&Rust compiler:", getFieldEditorParent()));
         addField(new BooleanFieldEditor(PreferenceConstants.P_BOOLEAN, "&An example of a boolean preference", getFieldEditorParent()));
 
         addField(new RadioGroupFieldEditor(PreferenceConstants.P_CHOICE, "An example of a multiple-choice preference", 1,
