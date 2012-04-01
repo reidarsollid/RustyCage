@@ -19,7 +19,7 @@ public class RustScanner extends RuleBasedScanner {
             public boolean isWordPart(char c) {
                 return Character.isJavaIdentifierPart(c);
             }
-        });
+        }, Token.WHITESPACE);
 
 
         Token comment = new Token(new TextAttribute(RustColorConstants.COMMENT));
