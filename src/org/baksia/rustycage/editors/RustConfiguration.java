@@ -39,6 +39,12 @@ public class RustConfiguration extends SourceViewerConfiguration {
         IContentAssistProcessor contentAssistProcessor = new RustContentAssistProcessor();
         contentAssistant.setContentAssistProcessor(contentAssistProcessor, IDocument.DEFAULT_CONTENT_TYPE);
         contentAssistant.setInformationControlCreator(getInformationControlCreator(sourceViewer));
+        contentAssistant.enableAutoActivation(true);
+        contentAssistant.setAutoActivationDelay(500);
+        contentAssistant.setProposalPopupOrientation(IContentAssistant.PROPOSAL_OVERLAY);
+        contentAssistant.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_ABOVE);
+        contentAssistant.setContextInformationPopupBackground(RustColorConstants.CONTENT_ASSIST);
+
         return contentAssistant;
     }
 

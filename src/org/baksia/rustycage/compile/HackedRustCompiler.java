@@ -22,9 +22,15 @@ public final class HackedRustCompiler {
     public static boolean compile(IFile file) {
 
         try {
+            //String time_passes = " --time-passes";
+
             IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
             String rustPath = preferenceStore.getString(PreferenceConstants.RUST_C);
-            Process exec = Runtime.getRuntime().exec(rustPath + "rustc " + file.getRawLocationURI().getRawPath());
+            String argument = "";
+            if (file.getFileExtension().equals("rc")) {
+                argument = "--static ";
+            }
+            Process exec = Runtime.getRuntime().exec(rustPath + "rustc " + argument + file.getRawLocationURI().getRawPath());
             //+ " --out-dir bin");
             Scanner scanner = new Scanner(exec.getInputStream());
             Scanner errorScanner = new Scanner(exec.getErrorStream());

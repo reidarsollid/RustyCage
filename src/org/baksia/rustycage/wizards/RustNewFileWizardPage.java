@@ -30,7 +30,7 @@ public class RustNewFileWizardPage extends WizardPage {
     public RustNewFileWizardPage(ISelection selection) {
         super("wizardPage");
         setTitle("Rust Editor File");
-        setDescription("This wizard creates a new file with *.rs extension that can be opened by a Rust editor.");
+        setDescription("This wizard creates a new file with *.rs and *.rc extension that can be opened by a Rust editor.");
         this.selection = selection;
     }
 
@@ -152,12 +152,12 @@ public class RustNewFileWizardPage extends WizardPage {
         int dotLoc = fileName.lastIndexOf('.');
         if (dotLoc != -1) {
             String ext = fileName.substring(dotLoc + 1);
-            if (!ext.equalsIgnoreCase("rs")) {
-                updateStatus("File extension must be \"rs\"");
+            if (!ext.equalsIgnoreCase("rs") && !ext.equalsIgnoreCase("rc")) {
+                updateStatus("File extension must be \"rs\" or \"rc\"");
                 return;
             }
         } else {
-            updateStatus("File extension missing \"rs\"");
+            updateStatus("File extension missing \"rs\" or \"rc\"");
             return;
         }
         updateStatus(null);

@@ -91,6 +91,7 @@ public class RustBuilder extends IncrementalProjectBuilder {
         }
     }
 
+    @Override
     protected IProject[] build(int kind, Map args, IProgressMonitor monitor)
             throws CoreException {
         if (kind == FULL_BUILD) {

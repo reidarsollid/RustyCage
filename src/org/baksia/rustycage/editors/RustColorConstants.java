@@ -10,4 +10,5 @@ public class RustColorConstants {
     public static Color COMMENT = new Color(Display.getCurrent(), new RGB(188, 143, 143));
     public static final Color STRING = new Color(Display.getCurrent(), new RGB(70, 130, 180)); //new RGB(119, 136, 153));
     public static final Color NUMBERS = new Color(Display.getCurrent(), new RGB(104, 131, 139));
+    public static final Color CONTENT_ASSIST = new Color(Display.getCurrent(), new RGB(220, 220, 220));
 }

@@ -1,10 +1,12 @@
 package org.baksia.rustycage.editors;
 
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
-import org.eclipse.jface.text.contentassist.IContextInformation;
-import org.eclipse.jface.text.contentassist.IContextInformationValidator;
+import org.eclipse.jface.text.contentassist.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Reidar Sollid
@@ -15,14 +17,39 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
 
     @Override
     public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
-        // ICompletionProposal completionProposal = new CompletionProposal("hello", offset, "hello".length(), 0);
-        // ICompletionProposal completionProposal2 = new CompletionProposal("balla", offset, "balla".length(), 0);
-        return new ICompletionProposal[0];
+        IDocument document = viewer.getDocument();
+        List<ICompletionProposal> result = new ArrayList<ICompletionProposal>(Parser.KEYWORDS.length);
+        for (String keyword : Parser.KEYWORDS) {
+            String docString = getTypedString(document, offset);
+            if (keyword.startsWith(docString)) {
+                IContextInformation info = new ContextInformation(keyword, "Rust keyword");
+                result.add(new CompletionProposal(keyword, offset - docString.length(), docString.length(), keyword.length(), null, keyword, info, "Rust keyword"));
+            }
+        }
+        ICompletionProposal[] iCompletionProposals = new ICompletionProposal[result.size()];
+        return result.toArray(iCompletionProposals);
+    }
+
+    private String getTypedString(IDocument document, int offset) {
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            while (true) {
+                char c = document.getChar(--offset);
+                if (Character.isWhitespace(c)) {
+                    return stringBuilder.toString();
+                }
+                stringBuilder.append(c);
+            }
+
+        } catch (BadLocationException e) {
+            return stringBuilder.toString();
+        }
+
     }
 
     @Override
     public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
-        return new IContextInformation[0];
+        return null;
     }
 
     @Override
@@ -33,7 +60,7 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
 
     @Override
     public char[] getContextInformationAutoActivationCharacters() {
-        return new char[0];
+        return new char[]{':', ':'};
     }
 
     @Override

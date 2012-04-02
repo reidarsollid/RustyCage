@@ -11,12 +11,12 @@
                 class="org.baksia.rustycage.editors.RustEditor"
                 id="org.baksia.rustycage.editors.RustEditor">
             <contentTypeBinding
-                    contentTypeId="Rust.content-type">
+                    contentTypeId="org.baksia.rustycage.rustfile">
             </contentTypeBinding>
         </editor>
     </extension>
     <extension
-            id="rustBuilder"
+            id="org.baksia.rustycage.rustBuilder"
             name="Rust Project Builder"
             point="org.eclipse.core.resources.builders">
         <builder
@@ -36,7 +36,7 @@
             </run>
         </runtime>
         <builder
-                id="RustyCage.rustBuilder">
+                id="org.baksia.rustycage.rustBuilder">
         </builder>
     </extension>
     <extension
@@ -45,7 +45,7 @@
                 class="org.baksia.rustycage.PerspectiveFactory"
                 fixed="false"
                 icon="$nl$/icons/rust_16x16.png"
-                id="RustyCage.perspective"
+                id="org.baksia.rustycage.perspective"
                 name="Rust">
             <description>
                 Rust perspective for Rust development
@@ -61,34 +61,35 @@
         <wizard
                 category="RustyCage"
                 class="org.baksia.rustycage.wizards.RustNewFileWizard"
-                finalPerspective="RustyCage.perspective"
+                finalPerspective="org.baksia.rustycage.perspective"
                 icon="$nl$/icons/rust_16x16.png"
                 id="org.baksia.rustycage.wizards.RustNewFileWizard"
                 name="Rust file"
                 project="true">
         </wizard>
         <wizard
-                category="RustyCage"
-                class="org.baksia.rustycage.wizards.RustProjectWizard"
-                descriptionImage="$nl$/icons/rust.png"
-                icon="$nl$/icons/rust_16x16.png"
-                id="org.baksia.rustycage.wizards.RustProjectWizard"
-                name="Rust Project"
-                project="true">
+              category="RustyCage"
+              class="org.baksia.rustycage.wizards.RustProjectWizard"
+              descriptionImage="$nl$/icons/rust.png"
+              finalPerspective="org.baksia.rustycage.perspective"
+              icon="$nl$/icons/rust_16x16.png"
+              id="org.baksia.rustycage.wizards.RustProjectWizard"
+              name="Rust Project"
+              project="true">
         </wizard>
     </extension>
     <extension
             point="org.eclipse.core.runtime.contentTypes">
         <file-association
                 content-type="rustSource"
-                file-extensions="rs">
+                file-extensions="rs, rc">
         </file-association>
         <content-type
-                describer="org.baksia.rustycage.RustConentDescriber"
-                file-extensions="rs"
-                id="Rust.content-type"
-                name="rustSource"
-                priority="normal">
+              base-type="org.eclipse.core.runtime.text"
+              describer="org.baksia.rustycage.RustConentDescriber"
+              file-extensions="rs, rc"
+              id="org.baksia.rustycage.rustfile"
+              name="Rust file">
         </content-type>
     </extension>
     <extension
