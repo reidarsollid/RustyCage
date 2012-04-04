@@ -13,10 +13,12 @@ import java.util.Scanner;
 
 public class HackedRustRunner {
     public static void run(IFile iFile) {
+        Process exec = null;
         try {
             String rawPath = iFile.getRawLocationURI().getRawPath();
             String file = rawPath.substring(0, rawPath.lastIndexOf("."));
-            Process exec = Runtime.getRuntime().exec(file);
+            //TODO : Need a stop button to kill process
+            exec = Runtime.getRuntime().exec(file);
             Scanner scanner = new Scanner(exec.getInputStream());
             Scanner errorScanner = new Scanner(exec.getErrorStream());
             MessageConsole messageConsole = new MessageConsole("Rust run", null);
@@ -25,7 +27,7 @@ public class HackedRustRunner {
 
             MessageConsoleStream messageConsoleStream = messageConsole.newMessageStream();
             messageConsoleStream.setColor(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
-            messageConsoleStream.println("Running: "+file);
+            messageConsoleStream.println("Running: " + file);
             while (scanner.hasNextLine()) {
                 messageConsoleStream.println(scanner.nextLine());
             }
@@ -38,7 +40,13 @@ public class HackedRustRunner {
             messageConsoleStream.close();
 
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            if (exec != null) {
+                exec.destroy();
+            }
+        } finally {
+            if (exec != null) {
+                exec.destroy();
+            }
         }
     }
 }

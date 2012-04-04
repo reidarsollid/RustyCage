@@ -31,8 +31,6 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
             fetchLibProposals(docString, result, offset);
         } else {
             for (String keyword : Parser.KEYWORDS) {
-
-                System.out.println(docString);
                 if (keyword.startsWith(docString)) {
                     IContextInformation info = new ContextInformation(keyword, "Rust keyword");
                     result.add(new CompletionProposal(keyword, offset - docString.length(), docString.length(), keyword.length()));//, null, keyword, info, "Rust keyword"));
