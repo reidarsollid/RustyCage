@@ -7,8 +7,7 @@ public class RustEditor extends TextEditor {
 
     public RustEditor() {
         super();
-//        addListenerObject();
-        //TODO : chenge on focus gained and focus lost
+        //TODO : change on focus gained and focus lost
         PlatformUI.getWorkbench().getThemeManager().setCurrentTheme("org.baksia.rustycage.ui.theme");
         setSourceViewerConfiguration(new RustConfiguration());
     }

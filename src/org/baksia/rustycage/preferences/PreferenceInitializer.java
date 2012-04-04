@@ -4,9 +4,6 @@ import org.baksia.rustycage.Activator;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-/**
- * Class used to initialize default preference values.
- */
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
     public void initializeDefaultPreferences() {
@@ -17,6 +14,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
                 "Default value");
 
         store.setDefault(PreferenceConstants.RUST_C, "/usr/local/bin/");
+        store.setDefault(PreferenceConstants.P_PATH, "");
     }
 
 }
