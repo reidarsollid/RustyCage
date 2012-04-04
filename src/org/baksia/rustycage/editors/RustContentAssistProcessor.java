@@ -21,9 +21,10 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
         List<ICompletionProposal> result = new ArrayList<ICompletionProposal>(Parser.KEYWORDS.length);
         for (String keyword : Parser.KEYWORDS) {
             String docString = getTypedString(document, offset);
+            System.out.println(docString);
             if (keyword.startsWith(docString)) {
                 IContextInformation info = new ContextInformation(keyword, "Rust keyword");
-                result.add(new CompletionProposal(keyword, offset - docString.length(), docString.length(), keyword.length(), null, keyword, info, "Rust keyword"));
+                result.add(new CompletionProposal(keyword, offset - docString.length(), docString.length(), keyword.length()));//, null, keyword, info, "Rust keyword"));
             }
         }
         ICompletionProposal[] iCompletionProposals = new ICompletionProposal[result.size()];
@@ -36,7 +37,7 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
             while (true) {
                 char c = document.getChar(--offset);
                 if (Character.isWhitespace(c)) {
-                    return stringBuilder.toString();
+                    return stringBuilder.reverse().toString();
                 }
                 stringBuilder.append(c);
             }
