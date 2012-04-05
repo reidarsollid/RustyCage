@@ -19,4 +19,5 @@ Require-Bundle: org.eclipse.jface,
  org.eclipse.ui.ide,
  org.eclipse.debug.core,
  org.eclipse.debug.ui,
- org.eclipse.ui
+ org.eclipse.ui,
+ org.eclipse.ui.navigator

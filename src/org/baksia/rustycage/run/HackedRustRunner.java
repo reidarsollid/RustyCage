@@ -2,6 +2,7 @@ package org.baksia.rustycage.run;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
@@ -22,9 +23,14 @@ public class HackedRustRunner {
             Scanner scanner = new Scanner(exec.getInputStream());
             Scanner errorScanner = new Scanner(exec.getErrorStream());
             MessageConsole messageConsole = new MessageConsole("Rust run", null);
+
             ConsolePlugin.getDefault().getConsoleManager().addConsoles(
                     new IConsole[]{messageConsole});
 
+            /*
+                IPath path = Path.fromOSString(filePath);
+                IFile file = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(path);
+             */
             MessageConsoleStream messageConsoleStream = messageConsole.newMessageStream();
             messageConsoleStream.setColor(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
             messageConsoleStream.println("Running: " + file);

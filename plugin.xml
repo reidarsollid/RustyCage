@@ -167,14 +167,15 @@
                     style="push">
             </action>
             <action
-                    class="org.baksia.rustycage.run.RustRun"
-                    icon="$nl$/icons/Run.gif"
-                    id="rustycage.actions.runActions"
-                    label="Run"
-                    menubarPath="rustMenu/runGroup"
-                    style="push"
-                    toolbarPath="rustGroup"
-                    tooltip="Run rust file">
+                  class="org.baksia.rustycage.run.RustRun"
+                  disabledIcon="icons/sample.gif"
+                  icon="$nl$/icons/Run.gif"
+                  id="rustycage.actions.runActions"
+                  label="Run"
+                  menubarPath="rustMenu/runGroup"
+                  style="push"
+                  toolbarPath="rustGroup"
+                  tooltip="Run rust file">
             </action>
         </actionSet>
     </extension>
@@ -192,5 +193,13 @@
                     value="255,193,37">
             </colorOverride>
         </theme>
+    </extension>
+    <extension
+          point="org.eclipse.ui.navigator.navigatorContent">
+       <commonWizard
+             type="new"
+             wizardId="org.baksia.rustycage.wizards.RustNewFileWizard">
+          <enablement></enablement>
+       </commonWizard>
     </extension>
 </plugin>
