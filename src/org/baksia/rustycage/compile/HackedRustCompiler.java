@@ -3,6 +3,11 @@ package org.baksia.rustycage.compile;
 import org.baksia.rustycage.Activator;
 import org.baksia.rustycage.preferences.PreferenceConstants;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
@@ -16,6 +21,8 @@ import java.util.Scanner;
 
 
 public final class HackedRustCompiler {
+    private static final String MARKER_TYPE = "org.eclipse.core.resources.problemmarker";
+
     private HackedRustCompiler() {
     }
 
@@ -23,13 +30,15 @@ public final class HackedRustCompiler {
 
         try {
             //String time_passes = " --time-passes";
-
+            clearMarkers(file);
             IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
             String rustPath = preferenceStore.getString(PreferenceConstants.RUST_C);
             String argument = "";
             if (file.getFileExtension().equals("rc")) {
                 argument = "--static ";
             }
+            //Crate file
+            //IResource rs = project.getFile(project.getName()+ ".rc");
             Process exec = Runtime.getRuntime().exec(rustPath + "rustc " + argument + file.getRawLocationURI().getRawPath());
             //+ " --out-dir bin");
             Scanner scanner = new Scanner(exec.getInputStream());
@@ -51,7 +60,17 @@ public final class HackedRustCompiler {
             messageConsoleStream.setColor(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
 
             while (errorScanner.hasNextLine()) {
+                String firstLine = errorScanner.nextLine();
+                parseProblemFirstLine(firstLine, file);
+                messageConsoleStream.println(firstLine);
+                if (!errorScanner.hasNextLine()) {
+                    break;
+                }
+                String secondLine = errorScanner.nextLine();
+                parseProblemSecondLine(secondLine, file);
+                messageConsoleStream.println(secondLine);
                 messageConsoleStream.println(errorScanner.nextLine());
+
             }
 
             messageConsoleStream.close();
@@ -60,6 +79,44 @@ public final class HackedRustCompiler {
             return false;
         }
 
+    }
+
+    private static void parseProblemSecondLine(String errorString, IFile file) {
+       //Ignore for now
+    }
+
+    private static void clearMarkers(IFile file) {
+        try {
+            file.deleteMarkers(MARKER_TYPE, false, IResource.DEPTH_ZERO);
+        } catch (CoreException e) {
+            Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage()));
+        }
+    }
+
+    private static void parseProblemFirstLine(String errorString, IFile file) {
+        if (errorString.contains(".rs")) {
+            ///home/reidar/runtime-EclipseApplication/RustProject/src/new_file.rs:4:1: 4:8 error: unresolved name: println
+            String tokens[] = errorString.split(":");
+            String markerString = tokens[tokens.length - 1] + ": " + tokens[tokens.length - 2];
+            int lineNumber = Integer.parseInt(tokens[1]);
+            addMarker(file, markerString, lineNumber, IMarker.SEVERITY_ERROR);
+        }
+    }
+
+    private static void addMarker(IFile file, String message, int lineNumber, int severity) {
+        try {
+            IMarker marker = file.createMarker(MARKER_TYPE);
+            marker.setAttribute(IMarker.MESSAGE, message);
+            marker.setAttribute(IMarker.SEVERITY, severity);
+
+            if (lineNumber == -1) {
+                lineNumber = 1;
+            }
+            marker.setAttribute(IMarker.LINE_NUMBER, lineNumber);
+
+        } catch (CoreException e) {
+            Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage()));
+        }
     }
 
 }

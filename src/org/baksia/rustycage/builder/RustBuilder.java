@@ -1,12 +1,13 @@
 package org.baksia.rustycage.builder;
 
+import org.baksia.rustycage.Activator;
+import org.baksia.rustycage.compile.HackedRustCompiler;
 import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.xml.sax.SAXException;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.util.Map;
 
@@ -36,11 +37,25 @@ public class RustBuilder extends IncrementalProjectBuilder {
         }
     }
 
+    private class RustResourceVisitor implements IResourceVisitor, IResourceDeltaVisitor {
 
-    class SampleResourceVisitor implements IResourceVisitor {
-        public boolean visit(IResource resource) {
 
-            //return true to continue visiting children.
+        @Override
+        public boolean visit(IResourceDelta iResourceDelta) throws CoreException {
+            switch (iResourceDelta.getKind()) {
+                case IResourceDelta.ADDED:
+                    return true;
+                case IResourceDelta.REMOVED:
+                    return true;
+                case IResourceDelta.CHANGED:
+                    return true;
+                default:
+                    return true;
+            }
+        }
+
+        @Override
+        public boolean visit(IResource iResource) throws CoreException {
             return true;
         }
     }
@@ -73,7 +88,7 @@ public class RustBuilder extends IncrementalProjectBuilder {
 
     public static final String BUILDER_ID = "RustyCage.rustBuilder";
 
-    private static final String MARKER_TYPE = "RustyCage.rustProlbem";
+    private static final String MARKER_TYPE = "org.eclipse.core.resources.problemmarker";
 
     private SAXParserFactory parserFactory;
 
@@ -88,23 +103,38 @@ public class RustBuilder extends IncrementalProjectBuilder {
             }
             marker.setAttribute(IMarker.LINE_NUMBER, lineNumber);
         } catch (CoreException e) {
+            Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage()));
         }
     }
 
     @Override
     protected IProject[] build(int kind, Map args, IProgressMonitor monitor)
             throws CoreException {
-        if (kind == FULL_BUILD) {
-            fullBuild(monitor);
-        } else {
-            IResourceDelta delta = getDelta(getProject());
-            if (delta == null) {
+        switch (kind) {
+            case FULL_BUILD:
                 fullBuild(monitor);
-            } else {
+                break;
+            case AUTO_BUILD:
+            case CLEAN_BUILD:
+                cleanBuild(monitor);
+            case INCREMENTAL_BUILD:
+                IResourceDelta delta = getDelta(getProject());
                 incrementalBuild(delta, monitor);
-            }
+            default:
+
+            break;
+
         }
         return null;
+    }
+
+    private void cleanBuild(IProgressMonitor monitor) throws CoreException {
+        clean(monitor);
+        fullBuild(monitor);
+    }
+
+    private void rustCompile(IResource resource) {
+      //  HackedRustCompiler.compile(resource.getFullPath().toFile())
     }
 
 //	void checkXML(IResource resource) {
@@ -129,22 +159,14 @@ public class RustBuilder extends IncrementalProjectBuilder {
     protected void fullBuild(final IProgressMonitor monitor)
             throws CoreException {
         try {
-            getProject().accept(new SampleResourceVisitor());
+            getProject().accept(new RustResourceVisitor());
         } catch (CoreException e) {
         }
-    }
-
-    private SAXParser getParser() throws ParserConfigurationException,
-            SAXException {
-        if (parserFactory == null) {
-            parserFactory = SAXParserFactory.newInstance();
-        }
-        return parserFactory.newSAXParser();
     }
 
     protected void incrementalBuild(IResourceDelta delta,
                                     IProgressMonitor monitor) throws CoreException {
         // the visitor does the work.
-        delta.accept(new SampleDeltaVisitor());
+        delta.accept(new RustResourceVisitor());
     }
 }

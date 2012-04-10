@@ -11,22 +11,23 @@ public class PerspectiveFactory implements IPerspectiveFactory {
     public static final String ID_PROJECT_EXPLORER = "org.eclipse.ui.navigator.ProjectExplorer";
 
 
+
     @Override
     public void createInitialLayout(IPageLayout layout) {
         String editorArea = layout.getEditorArea();
-
         IFolderLayout folder = layout.createFolder("left", IPageLayout.LEFT, (float) 0.25, editorArea); //$NON-NLS-1$
-
         folder.addView(IPageLayout.ID_PROJECT_EXPLORER);
         folder.addView(IPageLayout.ID_RES_NAV);
         folder.addPlaceholder(IPageLayout.ID_RES_NAV);
         folder.addPlaceholder(ID_PROJECT_EXPLORER);
 
+
         IFolderLayout outputfolder = layout.createFolder("bottom", IPageLayout.BOTTOM, (float) 0.75, editorArea); //$NON-NLS-1$
-//        outputfolder.addView(IPageLayout.ID_PROBLEM_VIEW);
+        outputfolder.addView(IPageLayout.ID_PROBLEM_VIEW);
         outputfolder.addView(IConsoleConstants.ID_CONSOLE_VIEW);
         outputfolder.addPlaceholder(NewSearchUI.SEARCH_VIEW_ID);
         outputfolder.addPlaceholder(IConsoleConstants.ID_CONSOLE_VIEW);
+        outputfolder.addPlaceholder(IPageLayout.ID_PROBLEM_VIEW);
         outputfolder.addPlaceholder(IPageLayout.ID_BOOKMARKS);
         outputfolder.addPlaceholder(IProgressConstants.PROGRESS_VIEW_ID);
 
@@ -40,7 +41,8 @@ public class PerspectiveFactory implements IPerspectiveFactory {
         // views - search
         layout.addShowViewShortcut(NewSearchUI.SEARCH_VIEW_ID);
 
-        // views - debugging
+
+        layout.addShowViewShortcut(IPageLayout.ID_PROBLEM_VIEW);
         layout.addShowViewShortcut(IConsoleConstants.ID_CONSOLE_VIEW);
 
         // views - standard workbench

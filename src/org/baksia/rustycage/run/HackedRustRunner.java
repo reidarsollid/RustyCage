@@ -8,12 +8,13 @@ import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
+import org.eclipse.ui.progress.IProgressService;
 
 import java.io.IOException;
 import java.util.Scanner;
 
 public class HackedRustRunner {
-    public static void run(IFile iFile) {
+    public static void run(IFile iFile, IProgressService progressService) {
         Process exec = null;
         try {
             String rawPath = iFile.getRawLocationURI().getRawPath();
@@ -31,6 +32,7 @@ public class HackedRustRunner {
                 IPath path = Path.fromOSString(filePath);
                 IFile file = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(path);
              */
+         //   progressService.
             MessageConsoleStream messageConsoleStream = messageConsole.newMessageStream();
             messageConsoleStream.setColor(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
             messageConsoleStream.println("Running: " + file);

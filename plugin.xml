@@ -111,6 +111,11 @@
                     relationship="bottom"
                     visible="true">
             </view>
+            <view
+                  id="org.baksia.rustycage.cli.RustConsoleView"
+                  minimized="false"
+                  relationship="stack">
+            </view>
         </perspectiveExtension>
     </extension>
     <extension
@@ -123,6 +128,9 @@
         <persistent
                 value="true">
         </persistent>
+        <super
+                type="org.eclipse.core.resources.textmarker">
+        </super>
     </extension>
     <extension
             point="org.eclipse.ui.preferencePages">

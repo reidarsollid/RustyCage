@@ -33,7 +33,7 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
             for (String keyword : Parser.KEYWORDS) {
                 if (keyword.startsWith(docString)) {
                     IContextInformation info = new ContextInformation(keyword, "Rust keyword");
-                    result.add(new CompletionProposal(keyword, offset - docString.length(), docString.length(), keyword.length()));//, null, keyword, info, "Rust keyword"));
+                    result.add(new CompletionProposal(keyword, offset - docString.length(), docString.length(), keyword.length()));
                 }
             }
         }
@@ -52,6 +52,9 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
 
         IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
         String rustPath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcore";
+        if (rustPath == null) {
+            return;
+        }
         File libDir = new File(rustPath);
         for (File file : libDir.listFiles()) {
             if (file.getName().endsWith(".rs") && file.getName().startsWith(lib)) {
@@ -66,8 +69,8 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
                                 IContextInformation info = new ContextInformation(token, lib);
                                 String resultWord = token.substring(0, token.indexOf("("));
                                 String displayString = token;
-                                if(token.contains("{")) {
-                                     displayString = token.substring(0, token.indexOf("{"));
+                                if (token.contains("{")) {
+                                    displayString = token.substring(0, token.indexOf("{"));
                                 }
                                 //TODO : This is butt ugly, but shows me what I need from the lib
                                 result.add(new CompletionProposal(resultWord, offset - word.length(), word.length(), resultWord.length(), null, displayString, info, readLine));
