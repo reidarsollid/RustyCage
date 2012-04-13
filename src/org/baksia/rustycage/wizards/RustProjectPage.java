@@ -11,6 +11,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -24,6 +25,8 @@ public class RustProjectPage extends WizardPage {
     private Text author;
 
     private IProject project;
+
+    private Button isLib;
 
     private ISelection selection;
 
@@ -39,7 +42,7 @@ public class RustProjectPage extends WizardPage {
         Composite container = new Composite(parent, SWT.NULL);
         GridLayout layout = new GridLayout();
         container.setLayout(layout);
-        layout.numColumns = 4;
+        layout.numColumns = 5;
         layout.verticalSpacing = 9;
         Label label = new Label(container, SWT.NULL);
         label.setText("&Project name:");
@@ -53,8 +56,15 @@ public class RustProjectPage extends WizardPage {
                 dialogChanged();
             }
         });
+
+        isLib = new Button(container, SWT.CHECK);
+        isLib.setText("Library");
+        isLib.setLayoutData(gd);
+        isLib.setSelection(true);
+
         Label lblVersion = new Label(container, SWT.NULL);
         lblVersion.setText("&Version :");
+
 
 
         version = new Text(container, SWT.BORDER | SWT.SINGLE);
@@ -115,10 +125,19 @@ public class RustProjectPage extends WizardPage {
 
 
     private InputStream openContentStream() {
-        String contents =
-                "#[link(name = \"" + project.getName() + "\", vers = \"" + version.getText() + "\", author = \"" + author.getText() + "\")];\n" +
-                        "#[crate_type = \"lib\"];";
-        return new ByteArrayInputStream(contents.getBytes());
+        StringBuilder contentBuilder = new StringBuilder();
+        contentBuilder.append("#[link(name = \"")
+                .append(project.getName())
+                .append("\", vers = \"")
+                .append(version.getText())
+                .append("\", author = \"")
+                .append(author.getText())
+                .append("\")];\n");
+        if (isLib.getSelection()) {
+            contentBuilder.append("#[crate_type = \"lib\"];");
+        }
+
+        return new ByteArrayInputStream(contentBuilder.toString().getBytes());
     }
 
     private void dialogChanged() {

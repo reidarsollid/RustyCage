@@ -111,11 +111,6 @@
                     relationship="bottom"
                     visible="true">
             </view>
-            <view
-                  id="org.baksia.rustycage.cli.RustConsoleView"
-                  minimized="false"
-                  relationship="stack">
-            </view>
         </perspectiveExtension>
     </extension>
     <extension
@@ -207,6 +202,11 @@
        <commonWizard
              type="new"
              wizardId="org.baksia.rustycage.wizards.RustNewFileWizard">
+          <enablement></enablement>
+       </commonWizard>
+       <commonWizard
+             type="new"
+             wizardId="org.baksia.rustycage.wizards.RustProjectWizard">
           <enablement></enablement>
        </commonWizard>
     </extension>

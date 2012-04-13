@@ -59,11 +59,7 @@ public class RustNewFileWizard extends Wizard implements INewWizard {
         return true;
     }
 
-    private void doFinish(
-            String containerName,
-            String fileName,
-            IProgressMonitor monitor)
-            throws CoreException {
+    private void doFinish(String containerName, String fileName, IProgressMonitor monitor) throws CoreException {
         // create a sample file
         monitor.beginTask("Creating " + fileName, 2);
         IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
@@ -90,8 +86,6 @@ public class RustNewFileWizard extends Wizard implements INewWizard {
             }
             if (crateFile.exists()) {
                 crateFile.appendContents(crateStream, true, true, monitor);
-            } else {
-                System.out.println(crateFile);
             }
             crateStream.close();
             stream.close();
@@ -115,7 +109,8 @@ public class RustNewFileWizard extends Wizard implements INewWizard {
     }
 
     private InputStream openCrateContentStream(String fileName) {
-        String contents = "\nmod " + fileName + ";";
+        String modName = fileName.substring(0, fileName.length() - 3);
+        String contents = "\nmod " + modName + ";";
         return new ByteArrayInputStream(contents.getBytes());
     }
 
