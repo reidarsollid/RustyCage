@@ -6,6 +6,8 @@ import org.eclipse.swt.SWT;
 
 
 public class RustScanner extends RuleBasedScanner {
+
+
     public RustScanner() {
 
         WordRule rule = new WordRule(new IWordDetector() {

@@ -52,6 +52,13 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
 
         IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
         String rustPath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcore";
+        String rustPathStd = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libstd";
+        createProposals(result, offset, word, lib, rustPath);
+        createProposals(result, offset, word, lib, rustPathStd);
+
+    }
+
+    private void createProposals(List<ICompletionProposal> result, int offset, String word, String lib, String rustPath) {
         if (rustPath == null) {
             return;
         }
@@ -94,7 +101,6 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
                 }
             }
         }
-
     }
 
     private String getTypedString(IDocument document, int offset) {

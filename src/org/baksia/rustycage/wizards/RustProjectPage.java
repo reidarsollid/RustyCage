@@ -1,10 +1,9 @@
 package org.baksia.rustycage.wizards;
 
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IProjectDescription;
-import org.eclipse.core.resources.ResourcesPlugin;
+import org.baksia.rustycage.Activator;
+import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -16,8 +15,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 public class RustProjectPage extends WizardPage {
     private Text projectText;
+    private Text version;
+    private Text author;
 
     private IProject project;
 
@@ -35,15 +39,39 @@ public class RustProjectPage extends WizardPage {
         Composite container = new Composite(parent, SWT.NULL);
         GridLayout layout = new GridLayout();
         container.setLayout(layout);
-        layout.numColumns = 2;
+        layout.numColumns = 4;
         layout.verticalSpacing = 9;
         Label label = new Label(container, SWT.NULL);
         label.setText("&Project name:");
 
-        projectText = new Text(container, SWT.BORDER | SWT.SINGLE);
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+        projectText = new Text(container, SWT.BORDER | SWT.SINGLE);
         projectText.setLayoutData(gd);
         projectText.addModifyListener(new ModifyListener() {
+            @Override
+            public void modifyText(ModifyEvent e) {
+                dialogChanged();
+            }
+        });
+        Label lblVersion = new Label(container, SWT.NULL);
+        lblVersion.setText("&Version :");
+
+
+        version = new Text(container, SWT.BORDER | SWT.SINGLE);
+        version.setLayoutData(gd);
+        version.addModifyListener(new ModifyListener() {
+            @Override
+            public void modifyText(ModifyEvent e) {
+                dialogChanged();
+            }
+        });
+        Label lblAuthor = new Label(container, SWT.NULL);
+        lblAuthor.setText("&Author:");
+
+
+        author = new Text(container, SWT.BORDER | SWT.SINGLE);
+        author.setLayoutData(gd);
+        author.addModifyListener(new ModifyListener() {
             @Override
             public void modifyText(ModifyEvent e) {
                 dialogChanged();
@@ -56,11 +84,13 @@ public class RustProjectPage extends WizardPage {
     }
 
     private void initialize() {
-        projectText.setText("RustProject");
+        projectText.setText("rust_project");
     }
 
     public boolean createProject() {
-        if (project != null) {                                                    
+        if (project != null) {
+            IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+            preferenceStore.setValue("ProjectName", project.getName());
             IProjectDescription desc = project.getWorkspace().newProjectDescription(project.getName());
             try {
                 project.create(desc, null);
@@ -71,9 +101,9 @@ public class RustProjectPage extends WizardPage {
                 if (!src.exists()) {
                     src.create(false, true, null);
                 }
-                IFolder out = project.getFolder("bin");
-                if (!out.exists()) {
-                    out.create(false, true, null);
+                IFile file = project.getFile(project.getName() + ".rc");
+                if (!file.exists()) {
+                    file.create(openContentStream(), true, null);
                 }
             } catch (CoreException e) {
                 updateStatus(e.getMessage());
@@ -83,8 +113,16 @@ public class RustProjectPage extends WizardPage {
         return true;
     }
 
+
+    private InputStream openContentStream() {
+        String contents =
+                "#[link(name = \"" + project.getName() + "\", vers = \"" + version.getText() + "\", author = \"" + author.getText() + "\")];\n" +
+                        "#[crate_type = \"lib\"];";
+        return new ByteArrayInputStream(contents.getBytes());
+    }
+
     private void dialogChanged() {
-        if(getProjectName().isEmpty()){
+        if (getProjectName().isEmpty()) {
             return;
         }
         project = ResourcesPlugin.getWorkspace().getRoot()

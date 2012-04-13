@@ -1,9 +1,11 @@
 package org.baksia.rustycage.wizards;
 
+import org.baksia.rustycage.Activator;
 import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.*;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -65,21 +67,36 @@ public class RustNewFileWizard extends Wizard implements INewWizard {
         // create a sample file
         monitor.beginTask("Creating " + fileName, 2);
         IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+
         IResource resource = root.findMember(new Path(containerName));
         if (!resource.exists() || !(resource instanceof IContainer)) {
             throwCoreException("Container \"" + containerName + "\" does not exist.");
         }
         IContainer container = (IContainer) resource;
         final IFile file = container.getFile(new Path(fileName));
+
+        IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+        String projectName = preferenceStore.getString("ProjectName");
+
+        IProject project = root.getProject(projectName);
+        IFile crateFile = project.getFile(projectName + ".rc");
         try {
             InputStream stream = openContentStream();
+            InputStream crateStream = openCrateContentStream(fileName);
             if (file.exists()) {
                 file.setContents(stream, true, true, monitor);
             } else {
                 file.create(stream, true, monitor);
             }
+            if (crateFile.exists()) {
+                crateFile.appendContents(crateStream, true, true, monitor);
+            } else {
+                System.out.println(crateFile);
+            }
+            crateStream.close();
             stream.close();
         } catch (IOException e) {
+            e.printStackTrace();
         }
         monitor.worked(1);
         monitor.setTaskName("Opening file for editing...");
@@ -90,10 +107,16 @@ public class RustNewFileWizard extends Wizard implements INewWizard {
                 try {
                     IDE.openEditor(page, file, true);
                 } catch (PartInitException e) {
+                    e.printStackTrace();
                 }
             }
         });
         monitor.worked(1);
+    }
+
+    private InputStream openCrateContentStream(String fileName) {
+        String contents = "\nmod " + fileName + ";";
+        return new ByteArrayInputStream(contents.getBytes());
     }
 
     private InputStream openContentStream() {

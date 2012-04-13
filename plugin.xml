@@ -5,7 +5,7 @@
             point="org.eclipse.ui.editors">
         <editor
                 name="Rusty Cage"
-                extensions="rs"
+                extensions="rs, rc"
                 icon="$nl$/icons/rust_16x16.png"
                 contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
                 class="org.baksia.rustycage.editors.RustEditor"

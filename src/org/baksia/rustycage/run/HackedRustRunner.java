@@ -2,12 +2,8 @@ package org.baksia.rustycage.run;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.console.ConsolePlugin;
-import org.eclipse.ui.console.IConsole;
-import org.eclipse.ui.console.MessageConsole;
-import org.eclipse.ui.console.MessageConsoleStream;
+import org.eclipse.ui.console.*;
 import org.eclipse.ui.progress.IProgressService;
 
 import java.io.IOException;
@@ -17,6 +13,7 @@ public class HackedRustRunner {
     public static void run(IFile iFile, IProgressService progressService) {
         Process exec = null;
         try {
+
             String rawPath = iFile.getRawLocationURI().getRawPath();
             String file = rawPath.substring(0, rawPath.lastIndexOf("."));
             //TODO : Need a stop button to kill process
@@ -32,7 +29,7 @@ public class HackedRustRunner {
                 IPath path = Path.fromOSString(filePath);
                 IFile file = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(path);
              */
-         //   progressService.
+
             MessageConsoleStream messageConsoleStream = messageConsole.newMessageStream();
             messageConsoleStream.setColor(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
             messageConsoleStream.println("Running: " + file);
