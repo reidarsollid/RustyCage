@@ -1,8 +1,6 @@
 package org.baksia.rustycage.editors;
 
-import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.ITextDoubleClickStrategy;
-import org.eclipse.jface.text.ITextHover;
+import org.eclipse.jface.text.*;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
@@ -61,5 +59,11 @@ public class RustConfiguration extends SourceViewerConfiguration {
     @Override
     public int getTabWidth(ISourceViewer sourceViewer) {
         return 3;
+    }
+
+    @Override
+    public IAutoEditStrategy[] getAutoEditStrategies(ISourceViewer sourceViewer, String contentType) {
+        IAutoEditStrategy strategy = IDocument.DEFAULT_CONTENT_TYPE.equals(contentType) ? new RustEditStrategy() : new DefaultIndentLineAutoEditStrategy();
+        return new IAutoEditStrategy[]{strategy};
     }
 }

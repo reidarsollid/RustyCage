@@ -15,9 +15,7 @@ public class RustCompile implements IWorkbenchWindowActionDelegate {
     public void run(IAction action) {
         RustEditor rustEditor = (RustEditor) window.getActivePage().getActiveEditor().getAdapter(ITextEditor.class);
         if (rustEditor != null) {
-
             HackedRustCompiler.compile((IFile) rustEditor.getEditorInput().getAdapter(IFile.class));
-
         }
 
     }

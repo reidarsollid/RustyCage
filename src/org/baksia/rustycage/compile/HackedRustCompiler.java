@@ -33,13 +33,10 @@ public final class HackedRustCompiler {
             clearMarkers(file);
             IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
             String rustPath = preferenceStore.getString(PreferenceConstants.RUST_C);
-            String argument = "";
-            if (file.getFileExtension().equals("rc")) {
-                argument = "--static ";
-            }
-            //Crate file
-            //IResource rs = project.getFile(project.getName()+ ".rc");
-            Process exec = Runtime.getRuntime().exec(rustPath + "rustc " + argument + file.getRawLocationURI().getRawPath());
+
+            String rustProject = preferenceStore.getString("RustProject");
+
+            Process exec = Runtime.getRuntime().exec(rustPath + "rustc " /*+ argument */ + file.getRawLocationURI().getRawPath());
             //+ " --out-dir bin");
             Scanner scanner = new Scanner(exec.getInputStream());
             Scanner errorScanner = new Scanner(exec.getErrorStream());
@@ -61,14 +58,19 @@ public final class HackedRustCompiler {
 
             while (errorScanner.hasNextLine()) {
                 String firstLine = errorScanner.nextLine();
-                parseProblemFirstLine(firstLine, file);
+                IFile theFile = findCorrectFile(firstLine, file);
+                clearMarkers(theFile);
+                parseProblemFirstLine(firstLine, theFile);
                 messageConsoleStream.println(firstLine);
                 if (!errorScanner.hasNextLine()) {
                     break;
                 }
                 String secondLine = errorScanner.nextLine();
-                parseProblemSecondLine(secondLine, file);
+                parseProblemSecondLine(secondLine, theFile);
                 messageConsoleStream.println(secondLine);
+                if (!errorScanner.hasNextLine()) {
+                    break;
+                }
                 messageConsoleStream.println(errorScanner.nextLine());
 
             }
@@ -77,12 +79,27 @@ public final class HackedRustCompiler {
             return true;
         } catch (IOException e) {
             return false;
+        } catch (CoreException e) {
+            return false;
         }
 
     }
 
+    private static IFile findCorrectFile(String firstLine, IFile file) throws CoreException {
+        if (file.getFileExtension().equals("rc")) {
+            IResource[] resources = file.getParent().members();
+            for (IResource resource : resources) {
+                if (firstLine.contains(resource.getName())) {
+                    return (IFile) resource;
+                }
+            }
+            //this is not the file we want to mark IResource members[] = aFolder.members();
+        }
+        return file;
+    }
+
     private static void parseProblemSecondLine(String errorString, IFile file) {
-       //Ignore for now
+        //Ignore for now
     }
 
     private static void clearMarkers(IFile file) {

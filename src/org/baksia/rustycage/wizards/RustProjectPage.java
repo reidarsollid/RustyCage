@@ -111,7 +111,7 @@ public class RustProjectPage extends WizardPage {
                 if (!src.exists()) {
                     src.create(false, true, null);
                 }
-                IFile file = project.getFile(project.getName() + ".rc");
+                IFile file = src.getFile(project.getName() + ".rc");
                 if (!file.exists()) {
                     file.create(openContentStream(), true, null);
                 }

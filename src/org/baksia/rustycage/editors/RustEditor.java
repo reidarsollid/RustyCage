@@ -14,7 +14,7 @@ public class RustEditor extends TextEditor {
 
     @Override
     public void dispose() {
-        //TODO : Figure out defauøt theme and chenge on focus gained and focus lost
+        //TODO : Figure out default theme and change on focus gained and focus lost
         PlatformUI.getWorkbench().getThemeManager().setCurrentTheme("Default");
         super.dispose();
     }
@@ -28,6 +28,5 @@ public class RustEditor extends TextEditor {
     public void setFocus() {
         super.setFocus();
     }
-
 
 }
