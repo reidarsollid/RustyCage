@@ -20,5 +20,4 @@ Require-Bundle: org.eclipse.jface,
  org.eclipse.debug.core,
  org.eclipse.debug.ui,
  org.eclipse.ui,
- org.eclipse.ui.navigator,
- org.scala-ide.scala.library;bundle-version="2.9.1"
+ org.eclipse.ui.navigator

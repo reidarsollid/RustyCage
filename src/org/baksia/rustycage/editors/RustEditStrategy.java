@@ -21,18 +21,22 @@ public class RustEditStrategy implements IAutoEditStrategy {
     @Override
     public void customizeDocumentCommand(IDocument document, DocumentCommand command) {
         try {
-            if (command.text.equals(CHAR_FNUT)) {
-                command.text = CHAR_FNUT;
-                configureCaret(command);
-            } else if (command.text.equals(STRING_FNUT)) {
-                command.text = STRING_FNUT;
-                configureCaret(command);
-            } else if (command.text.equals(CURLY_BRACE_LEFT)) {
-                int currentLine = document.getLineOfOffset(command.offset);
-                String indent = getIntend(document, currentLine);
-                command.text = CURLY_BRACE_LEFT + CRLF + indent + CURLY_BRACE_RIGHT;
-                command.caretOffset = command.offset + 1;
-                command.shiftsCaret = false;
+            switch (command.text) {
+                case CHAR_FNUT:
+                    command.text = CHAR_FNUT;
+                    configureCaret(command);
+                    break;
+                case STRING_FNUT:
+                    command.text = STRING_FNUT;
+                    configureCaret(command);
+                    break;
+                case CURLY_BRACE_LEFT:
+                    int currentLine = document.getLineOfOffset(command.offset);
+                    String indent = getIntend(document, currentLine);
+                    command.text = CURLY_BRACE_LEFT + CRLF + indent + CURLY_BRACE_RIGHT;
+                    command.caretOffset = command.offset + 1;
+                    command.shiftsCaret = false;
+                    break;
             }
         } catch (BadLocationException e) {
 

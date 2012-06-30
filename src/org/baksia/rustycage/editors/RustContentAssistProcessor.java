@@ -53,8 +53,10 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
         IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
         String rustPath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcore";
         String rustPathStd = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libstd";
+        String rustPathUv = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libuv";
         createProposals(result, offset, word, lib, rustPath);
         createProposals(result, offset, word, lib, rustPathStd);
+        createProposals(result, offset, word, lib, rustPathUv);
 
     }
 
