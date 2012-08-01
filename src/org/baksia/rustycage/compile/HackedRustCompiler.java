@@ -26,7 +26,7 @@ public final class HackedRustCompiler {
     private HackedRustCompiler() {
     }
 
-    public static boolean compile(IFile file) {
+    public static boolean compile(IFile file, String argument) {
 
         try {
             //String time_passes = " --time-passes";
@@ -34,9 +34,19 @@ public final class HackedRustCompiler {
             IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
             String rustPath = preferenceStore.getString(PreferenceConstants.RUST_C);
 
-            String rustProject = preferenceStore.getString("RustProject");
+            String rustProject = preferenceStore.getString(PreferenceConstants.P_PATH);
 
-            Process exec = Runtime.getRuntime().exec(rustPath + "rustc " /*+ argument */ + file.getRawLocationURI().getRawPath());
+            String projectName = preferenceStore.getString("ProjectName");
+            String rawPath = file.getRawLocationURI().getRawPath();
+            int endIndex = rawPath.indexOf(projectName);
+            String src = "";
+            if(endIndex != -1 ) {
+            	String home = rawPath.substring(0, endIndex);
+                src = " -L " + home +projectName +"/src";
+            }
+             
+
+            Process exec = Runtime.getRuntime().exec(rustPath + "rustc " + argument + rawPath +  src);
             //+ " --out-dir bin");
             Scanner scanner = new Scanner(exec.getInputStream());
             Scanner errorScanner = new Scanner(exec.getErrorStream());
@@ -115,7 +125,12 @@ public final class HackedRustCompiler {
             ///home/reidar/runtime-EclipseApplication/RustProject/src/new_file.rs:4:1: 4:8 error: unresolved name: println
             String tokens[] = errorString.split(":");
             String markerString = tokens[tokens.length - 1] + ": " + tokens[tokens.length - 2];
-            int lineNumber = Integer.parseInt(tokens[1]);
+            int lineNumber = 0;
+            try {
+                lineNumber = Integer.parseInt(tokens[1]);
+            } catch (NumberFormatException exception) {
+                lineNumber = 0;
+            }
             addMarker(file, markerString, lineNumber, IMarker.SEVERITY_ERROR);
         }
     }

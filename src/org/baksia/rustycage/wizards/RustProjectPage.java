@@ -66,7 +66,6 @@ public class RustProjectPage extends WizardPage {
         lblVersion.setText("&Version :");
 
 
-
         version = new Text(container, SWT.BORDER | SWT.SINGLE);
         version.setLayoutData(gd);
         version.addModifyListener(new ModifyListener() {
@@ -101,6 +100,7 @@ public class RustProjectPage extends WizardPage {
         if (project != null) {
             IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
             preferenceStore.setValue("ProjectName", project.getName());
+            preferenceStore.setValue("IsLib", isLib.getSelection());
             IProjectDescription desc = project.getWorkspace().newProjectDescription(project.getName());
             try {
                 project.create(desc, null);
@@ -110,6 +110,10 @@ public class RustProjectPage extends WizardPage {
                 IFolder src = project.getFolder("src");
                 if (!src.exists()) {
                     src.create(false, true, null);
+                }
+                IFolder test = project.getFolder("test");
+                if (!test.exists()) {
+                    test.create(false, true, null);
                 }
                 IFile file = src.getFile(project.getName() + ".rc");
                 if (!file.exists()) {
