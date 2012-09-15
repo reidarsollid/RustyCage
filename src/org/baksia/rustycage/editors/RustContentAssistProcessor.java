@@ -32,8 +32,8 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
         } else {
             for (String keyword : Parser.KEYWORDS) {
                 if (keyword.startsWith(docString)) {
-                    IContextInformation info = new ContextInformation(keyword, "Rust keyword");
-                    result.add(new CompletionProposal(keyword, offset - docString.length(), docString.length(), keyword.length()));
+                    //   IContextInformation info = new ContextInformation(keyword, "Rust keyword");
+                    result.add(new CompletionProposal(keyword, offset - docString.length(), docString.length(), (keyword.length() - 1)));
                 }
             }
         }
@@ -82,7 +82,7 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
                                     displayString = token.substring(0, token.indexOf("{"));
                                 }
                                 //TODO : This is butt ugly, but shows me what I need from the lib
-                                result.add(new CompletionProposal(resultWord, offset - word.length(), word.length(), resultWord.length(), null, displayString, info, readLine));
+                                result.add(new CompletionProposal(resultWord, offset - (word.length() + 1), word.length(), resultWord.length(), null, displayString, info, readLine));
                             }
                         }
                     }
