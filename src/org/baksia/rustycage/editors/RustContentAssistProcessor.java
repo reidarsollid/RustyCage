@@ -33,7 +33,7 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
             for (String keyword : Parser.KEYWORDS) {
                 if (keyword.startsWith(docString)) {
                     //   IContextInformation info = new ContextInformation(keyword, "Rust keyword");
-                    result.add(new CompletionProposal(keyword, offset - docString.length(), docString.length(), (keyword.length() - 1)));
+                    result.add(new CompletionProposal(keyword, offset - docString.length(), docString.length(), keyword.length()));
                 }
             }
         }
@@ -76,13 +76,13 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
                             String token = readLine.split("fn")[1];
                             if (token.contains("(")) {
                                 IContextInformation info = new ContextInformation(token, lib);
-                                String resultWord = token.substring(0, token.indexOf("("));
+                                String resultWord = token.substring(0, token.indexOf("(")).trim();
                                 String displayString = token;
                                 if (token.contains("{")) {
                                     displayString = token.substring(0, token.indexOf("{"));
                                 }
                                 //TODO : This is butt ugly, but shows me what I need from the lib
-                                result.add(new CompletionProposal(resultWord, offset - (word.length() + 1), word.length(), resultWord.length(), null, displayString, info, readLine));
+                                result.add(new CompletionProposal(resultWord, offset - word.length(), word.length(), resultWord.length(), null, displayString, info, readLine));
                             }
                         }
                     }
