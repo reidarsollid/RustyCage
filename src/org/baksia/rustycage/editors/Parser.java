@@ -1,14 +1,9 @@
 package org.baksia.rustycage.editors;
 
-/**
- * User: Reidar Sollid
- * Date: 07.03.12
- * Time: 21:05
- */
 public class Parser {
     public static final String[] KEYWORDS = {
-            "any", "as", "assert", "be", "bind", "block", "bool", "break",
-            "char", "check", "claim", "const", "cont",
+            "alt", "any", "as", "assert", "be", "bind", "block", "bool", "break",
+            "char", "check", "claim", "const", "cont", "class",
             "do", "else", "export",
             "f32", "f64", "fail", "false", "float", "fn", "for", "i16", "i32", "i64", "i8",
             "if", "iface", "impl", "import", "in", "int", "let", "log", "mod", "mutable",
