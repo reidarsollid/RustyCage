@@ -165,11 +165,6 @@
                     tooltip="Compiles Rust file">
             </action>
             <action
-                    id="RustyCage.runAction"
-                    label="Run"
-                    style="push">
-            </action>
-            <action
                   class="org.baksia.rustycage.run.RustRun"
                   disabledIcon="icons/sample.gif"
                   icon="$nl$/icons/Run.gif"

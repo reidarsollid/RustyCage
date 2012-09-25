@@ -29,6 +29,7 @@ public class RustScanner extends RuleBasedScanner {
         Token keyword = new Token(new TextAttribute(RustColorConstants.KEYWORD, null, SWT.BOLD));
         Token file = new Token(new TextAttribute(RustColorConstants.NEW_FILE, null, SWT.ITALIC));
         Token numbers = new Token(new TextAttribute(RustColorConstants.NUMBERS));
+        Token pointer = new Token(new TextAttribute(RustColorConstants.POINTER));
         //add tokens for each reserved word
         for (int n = 0; n < Parser.KEYWORDS.length; n++) {
             rule.addWord(Parser.KEYWORDS[n], keyword);
@@ -37,9 +38,9 @@ public class RustScanner extends RuleBasedScanner {
             rule.addWord(Parser.NEW_FILE[n], file);
         }
 
-
         setRules(new IRule[]{
                 rule,
+                new PointerRule(pointer),
                 new NumberRule(numbers),
                 new EndOfLineRule("//", comment, '\\'),
                 new SingleLineRule("\"", "\"", string, '\\'),
