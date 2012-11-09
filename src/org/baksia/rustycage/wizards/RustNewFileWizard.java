@@ -1,6 +1,6 @@
 package org.baksia.rustycage.wizards;
 
-import org.baksia.rustycage.Activator;
+import org.baksia.rustycage.RustPlugin;
 import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.*;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -70,7 +70,7 @@ public class RustNewFileWizard extends Wizard implements INewWizard {
         }
         IContainer container = (IContainer) resource;
         final IFile file = container.getFile(new Path(fileName));
-        IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+        IPreferenceStore preferenceStore = RustPlugin.getDefault().getPreferenceStore();
         String projectName = preferenceStore.getString("ProjectName");
         IFile crateFile = container.getFile(new Path(projectName + ".rc"));
 

@@ -1,6 +1,6 @@
 package org.baksia.rustycage.editors;
 
-import org.baksia.rustycage.Activator;
+import org.baksia.rustycage.RustPlugin;
 import org.baksia.rustycage.preferences.PreferenceConstants;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.BadLocationException;
@@ -50,7 +50,7 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
         String lib = tokens[0];
 
 
-        IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+        IPreferenceStore preferenceStore = RustPlugin.getDefault().getPreferenceStore();
         String rustPath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcore";
         String rustPathStd = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libstd";
         String rustPathUv = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libuv";

@@ -1,6 +1,6 @@
 package org.baksia.rustycage.wizards;
 
-import org.baksia.rustycage.Activator;
+import org.baksia.rustycage.RustPlugin;
 import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -98,7 +98,7 @@ public class RustProjectPage extends WizardPage {
 
     public boolean createProject() {
         if (project != null) {
-            IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+            IPreferenceStore preferenceStore = RustPlugin.getDefault().getPreferenceStore();
             preferenceStore.setValue("ProjectName", project.getName());
             preferenceStore.setValue("IsLib", isLib.getSelection());
             IProjectDescription desc = project.getWorkspace().newProjectDescription(project.getName());

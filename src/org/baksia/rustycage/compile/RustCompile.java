@@ -1,6 +1,6 @@
 package org.baksia.rustycage.compile;
 
-import org.baksia.rustycage.Activator;
+import org.baksia.rustycage.RustPlugin;
 import org.baksia.rustycage.editors.RustEditor;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -18,10 +18,12 @@ public class RustCompile implements IWorkbenchWindowActionDelegate {
     @Override
     public void run(IAction action) {
         RustEditor rustEditor = (RustEditor) window.getActivePage().getActiveEditor().getAdapter(ITextEditor.class);
-        IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+
+        IPreferenceStore preferenceStore = RustPlugin.getDefault().getPreferenceStore();
         boolean isLib = preferenceStore.getBoolean("IsLib");
         if (rustEditor != null) {
             IResource iResource = (IResource) rustEditor.getEditorInput().getAdapter(IResource.class);
+
             IPath fullPath = iResource.getFullPath();
             String argument = "";
             if (fullPath.toString().contains("test") && !fullPath.toString().contains("src")) {
@@ -29,7 +31,7 @@ public class RustCompile implements IWorkbenchWindowActionDelegate {
             } else if (isLib) {
                 argument = "--lib ";
             }
-            HackedRustCompiler.compile((IFile) rustEditor.getEditorInput().getAdapter(IFile.class), argument);
+            HackedRustCompiler.compile((IFile) rustEditor.getEditorInput().getAdapter(IFile.class), argument, null);
         }
 
     }

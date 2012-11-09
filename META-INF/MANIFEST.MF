@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: RustyCage
 Bundle-SymbolicName: RustyCage; singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.baksia.rustycage.Activator
+Bundle-Activator: org.baksia.rustycage.RustPlugin
 Bundle-Vendor: org.baksia
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

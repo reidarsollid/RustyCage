@@ -1,6 +1,6 @@
 package org.baksia.rustycage.preferences;
 
-import org.baksia.rustycage.Activator;
+import org.baksia.rustycage.RustPlugin;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.ui.IWorkbench;
@@ -11,7 +11,7 @@ public class RustPreferencePage extends FieldEditorPreferencePage implements IWo
 
     public RustPreferencePage() {
         super(GRID);
-        setPreferenceStore(Activator.getDefault().getPreferenceStore());
+        setPreferenceStore(RustPlugin.getDefault().getPreferenceStore());
         setDescription("Rust preferences page");
     }
 
@@ -23,7 +23,7 @@ public class RustPreferencePage extends FieldEditorPreferencePage implements IWo
 
     @Override
     public void init(IWorkbench workbench) {
-        //IEclipsePreferences node = InstanceScope.INSTANCE.getNode(Activator.PLUGIN_ID);
+        //IEclipsePreferences node = InstanceScope.INSTANCE.getNode(RustPlugin.PLUGIN_ID);
         //node.put("RUST_HOME", );
     }
 
