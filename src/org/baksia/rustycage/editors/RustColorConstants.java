@@ -12,4 +12,5 @@ public class RustColorConstants {
     public static final Color NUMBERS = new Color(Display.getCurrent(), new RGB(104, 131, 139));
     public static final Color CONTENT_ASSIST = new Color(Display.getCurrent(), new RGB(220, 220, 220));
     public static final Color POINTER = new Color(Display.getCurrent(), new RGB(205, 92, 92));
+    public static final Color CHAR = new Color(Display.getCurrent(), new RGB(61, 89, 171));
 }

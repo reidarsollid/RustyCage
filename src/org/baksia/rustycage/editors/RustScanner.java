@@ -26,6 +26,7 @@ public class RustScanner extends RuleBasedScanner {
 
         Token comment = new Token(new TextAttribute(RustColorConstants.COMMENT));
         Token string = new Token(new TextAttribute(RustColorConstants.STRING));
+        Token chars = new Token(new TextAttribute(RustColorConstants.CHAR));
         Token keyword = new Token(new TextAttribute(RustColorConstants.KEYWORD, null, SWT.BOLD));
         Token file = new Token(new TextAttribute(RustColorConstants.NEW_FILE, null, SWT.ITALIC));
         Token numbers = new Token(new TextAttribute(RustColorConstants.NUMBERS));
@@ -44,7 +45,7 @@ public class RustScanner extends RuleBasedScanner {
                 new NumberRule(numbers),
                 new EndOfLineRule("//", comment, '\\'),
                 new SingleLineRule("\"", "\"", string, '\\'),
-                new SingleLineRule("\"", "\"", string, '\\'),
+                new SingleLineRule("\'","\'",chars,'\\'),
                 new MultiLineRule("/*", "*/", comment, '\\'),
 
                 new WhitespaceRule(new IWhitespaceDetector() {
