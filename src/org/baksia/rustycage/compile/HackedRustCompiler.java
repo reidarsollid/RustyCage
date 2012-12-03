@@ -95,12 +95,12 @@ public final class HackedRustCompiler {
             if (!errorScanner.hasNextLine()) {
                 break;
             }
-            String secondLine = errorScanner.nextLine();
-            parseProblemSecondLine(secondLine, theFile);
+           /* String secondLine = errorScanner.nextLine();
+            parseProblemFirstLine(secondLine, theFile);
             messageConsoleStream.println(secondLine);
             if (!errorScanner.hasNextLine()) {
                 break;
-            }
+            }*/
             messageConsoleStream.println(errorScanner.nextLine());
 
         }
@@ -134,7 +134,8 @@ public final class HackedRustCompiler {
     }
 
     private static void parseProblemFirstLine(String errorString, IFile file) {
-        if (errorString.contains(".rs")) {
+        //TODO: Replace with regexp
+        if (errorString.contains(".rs") && errorString.contains("error")) {
             ///home/reidar/runtime-EclipseApplication/RustProject/src/new_file.rs:4:1: 4:8 error: unresolved name: println
             String tokens[] = errorString.split(":");
             String markerString = tokens[tokens.length - 1] + ": " + tokens[tokens.length - 2];

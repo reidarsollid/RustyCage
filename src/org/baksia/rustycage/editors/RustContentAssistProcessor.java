@@ -25,7 +25,7 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
     @Override
     public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
         IDocument document = viewer.getDocument();
-        List<ICompletionProposal> result = new ArrayList<ICompletionProposal>(Parser.KEYWORDS.length);
+        List<ICompletionProposal> result = new ArrayList<>(Parser.KEYWORDS.length);
         String docString = getTypedString(document, offset);
         if (docString.contains("::")) {
             fetchLibProposals(docString, result, offset);
