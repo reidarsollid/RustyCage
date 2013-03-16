@@ -1,14 +1,14 @@
 package org.baksia.rustycage.compile;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 import org.baksia.rustycage.RustPlugin;
 import org.baksia.rustycage.preferences.PreferenceConstants;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
@@ -17,152 +17,116 @@ import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
 
-import java.io.IOException;
-import java.util.Scanner;
-
-
 public final class HackedRustCompiler {
-    private static final String MARKER_TYPE = "org.eclipse.core.resources.problemmarker";
+	private static ProblemMarker problemMarker = new ProblemMarker();
 
-    private HackedRustCompiler() {
+	private HackedRustCompiler() {
 
-    }
+	}
 
-    public static boolean compile(IFile file, String argument, IProgressMonitor monitor) {
+	public static boolean compile(IFile file, String argument,
+			IProgressMonitor monitor) {
 
-        try {
-            //String time_passes = " --time-passes";
-            clearMarkers(file);
-            IPreferenceStore preferenceStore = RustPlugin.getDefault().getPreferenceStore();
-            String rustPath = preferenceStore.getString(PreferenceConstants.RUST_C);
+		try {
+			// String time_passes = " --time-passes";
+			problemMarker.clearMarkers(file);
+			IPreferenceStore preferenceStore = RustPlugin.getDefault()
+					.getPreferenceStore();
+			String rustPath = preferenceStore
+					.getString(PreferenceConstants.RUST_C);
 
-//            String rustProject = preferenceStore.getString(PreferenceConstants.P_PATH);
+			// String rustProject =
+			// preferenceStore.getString(PreferenceConstants.P_PATH);
 
-            String projectName = preferenceStore.getString("ProjectName");
-            String rawPath = file.getRawLocationURI().getRawPath();
-            int endIndex = rawPath.indexOf(projectName);
-            String src = "";
-            if (endIndex != -1) {
-                String home = rawPath.substring(0, endIndex);
-                src = " -L " + home + projectName + "/src";
-            }
+			String projectName = preferenceStore.getString("ProjectName");
+			String rawPath = file.getRawLocationURI().getRawPath();
+			int endIndex = rawPath.indexOf(projectName);
+			String src = "";
+			if (endIndex != -1) {
+				String home = rawPath.substring(0, endIndex);
+				src = " -L " + home + projectName + "/src";
+			}
 
-            //RuntimeProcess runtimeProcess = new RuntimeProcess();
-//            DebugPlugin.exec(rustPath + "rustc " + argument,new File(rustProject));
+			// RuntimeProcess runtimeProcess = new RuntimeProcess();
+			// DebugPlugin.exec(new String[]{rustPath + "rustc " , argument},new
+			// File(rustProject));
 
-            Process exec = Runtime.getRuntime().exec(rustPath + "rustc " + argument + rawPath + src);
-//            ProcessConsole processConsole = new ProcessConsole(exec,null);
+			Process exec = Runtime.getRuntime().exec(
+					rustPath + "rustc " + argument + rawPath + src);
+			// ProcessConsole processConsole = new ProcessConsole(exec,null);
 
+			// + " --out-dir bin");
+			Scanner scanner = new Scanner(exec.getInputStream());
+			Scanner errorScanner = new Scanner(exec.getErrorStream());
+			MessageConsole messageConsole = new MessageConsole("Rustc", null);
+			messageConsole.activate();
+			ConsolePlugin.getDefault().getConsoleManager()
+					.addConsoles(new IConsole[] { messageConsole });
 
-            //+ " --out-dir bin");
-            Scanner scanner = new Scanner(exec.getInputStream());
-            Scanner errorScanner = new Scanner(exec.getErrorStream());
-            MessageConsole messageConsole = new MessageConsole("Rustc", null);
+			writeToConsole(file, scanner, errorScanner, messageConsole);
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		} catch (CoreException e) {
+			e.printStackTrace();
+			return false;
+		}
 
-            ConsolePlugin.getDefault().getConsoleManager().addConsoles(
-                    new IConsole[]{messageConsole});
+	}
 
-            writeToConsole(file, scanner, errorScanner, messageConsole);
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        } catch (CoreException e) {
-            e.printStackTrace();
-            return false;
-        }
+	private static void writeToConsole(IFile file, Scanner scanner,
+			Scanner errorScanner, MessageConsole messageConsole)
+			throws IOException, CoreException {
+		MessageConsoleStream messageConsoleStream = messageConsole
+				.newMessageStream();
+		messageConsoleStream.println("Compiling " + file);
+		messageConsoleStream.setColor(Display.getCurrent().getSystemColor(
+				SWT.COLOR_BLACK));
+		while (scanner.hasNextLine()) {
+			messageConsoleStream.println(scanner.nextLine());
+		}
+		messageConsoleStream.close();
+		messageConsoleStream = messageConsole.newMessageStream();
 
-    }
+		messageConsoleStream.setColor(Display.getCurrent().getSystemColor(
+				SWT.COLOR_RED));
 
-    private static void writeToConsole(IFile file, Scanner scanner, Scanner errorScanner, MessageConsole messageConsole) throws IOException, CoreException {
-        MessageConsoleStream messageConsoleStream = messageConsole.newMessageStream();
-        messageConsoleStream.println("Compiling " + file);
-        messageConsoleStream.setColor(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
-        while (scanner.hasNextLine()) {
-            messageConsoleStream.println(scanner.nextLine());
-        }
-        messageConsoleStream.close();
-        messageConsoleStream = messageConsole.newMessageStream();
+		while (errorScanner.hasNextLine()) {
+			String firstLine = errorScanner.nextLine();
+			IFile theFile = findCorrectFile(firstLine, file);
+			
+			problemMarker.parseProblemFirstLine(firstLine, theFile);
+			messageConsoleStream.println(firstLine);
+			if (!errorScanner.hasNextLine()) {
+				break;
+			}
+			String secondLine = errorScanner.nextLine();
+			problemMarker.parseProblemSecondLine(secondLine, theFile);
+			messageConsoleStream.println(secondLine);
+			if (!errorScanner.hasNextLine()) {
+				break;
+			}
+			messageConsoleStream.println(errorScanner.nextLine());
 
-        messageConsoleStream.setColor(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+		}
 
-        while (errorScanner.hasNextLine()) {
-            String firstLine = errorScanner.nextLine();
-            IFile theFile = findCorrectFile(firstLine, file);
-            clearMarkers(theFile);
-            parseProblemFirstLine(firstLine, theFile);
-            messageConsoleStream.println(firstLine);
-            if (!errorScanner.hasNextLine()) {
-                break;
-            }
-           /* String secondLine = errorScanner.nextLine();
-            parseProblemFirstLine(secondLine, theFile);
-            messageConsoleStream.println(secondLine);
-            if (!errorScanner.hasNextLine()) {
-                break;
-            }*/
-            messageConsoleStream.println(errorScanner.nextLine());
+		messageConsoleStream.close();
+	}
 
-        }
-
-        messageConsoleStream.close();
-    }
-
-    private static IFile findCorrectFile(String firstLine, IFile file) throws CoreException {
-        if (file.getFileExtension().equals("rc")) {
-            IResource[] resources = file.getParent().members();
-            for (IResource resource : resources) {
-                if (firstLine.contains(resource.getName())) {
-                    return (IFile) resource;
-                }
-            }
-            //this is not the file we want to mark IResource members[] = aFolder.members();
-        }
-        return file;
-    }
-
-    private static void parseProblemSecondLine(String errorString, IFile file) {
-        //Ignore for now
-    }
-
-    private static void clearMarkers(IFile file) {
-        try {
-            file.deleteMarkers(MARKER_TYPE, false, IResource.DEPTH_ZERO);
-        } catch (CoreException e) {
-            RustPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID, e.getMessage()));
-        }
-    }
-
-    private static void parseProblemFirstLine(String errorString, IFile file) {
-        //TODO: Replace with regexp
-        if (errorString.contains(".rs") && errorString.contains("error")) {
-            ///home/reidar/runtime-EclipseApplication/RustProject/src/new_file.rs:4:1: 4:8 error: unresolved name: println
-            String tokens[] = errorString.split(":");
-            String markerString = tokens[tokens.length - 1] + ": " + tokens[tokens.length - 2];
-            int lineNumber = 0;
-            try {
-                lineNumber = Integer.parseInt(tokens[1]);
-            } catch (NumberFormatException exception) {
-                lineNumber = 0;
-            }
-            addMarker(file, markerString, lineNumber, IMarker.SEVERITY_ERROR);
-        }
-    }
-
-    private static void addMarker(IFile file, String message, int lineNumber, int severity) {
-        try {
-            IMarker marker = file.createMarker(MARKER_TYPE);
-            marker.setAttribute(IMarker.MESSAGE, message);
-            marker.setAttribute(IMarker.SEVERITY, severity);
-
-            if (lineNumber == -1) {
-                lineNumber = 1;
-            }
-            marker.setAttribute(IMarker.LINE_NUMBER, lineNumber);
-
-        } catch (CoreException e) {
-            RustPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID, e.getMessage()));
-        }
-    }
-
+	private static IFile findCorrectFile(String firstLine, IFile file)
+			throws CoreException {
+		if (file.getFileExtension().equals("rc")) {
+			IResource[] resources = file.getParent().members();
+			for (IResource resource : resources) {
+				if (firstLine.contains(resource.getName())) {
+					return (IFile) resource;
+				}
+			}
+			// this is not the file we want to mark IResource members[] =
+			// aFolder.members();
+		}
+		return file;
+	}	
+	
 }
