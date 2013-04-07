@@ -13,6 +13,7 @@ import org.eclipse.jface.text.source.SourceViewerConfiguration;
 
 public class RustConfiguration extends SourceViewerConfiguration {
 
+    public static final int TAB_WIDTH = 3;
     private RustDoubleClickStrategy doubleClickStrategy;
 
     @Override
@@ -58,7 +59,7 @@ public class RustConfiguration extends SourceViewerConfiguration {
 
     @Override
     public int getTabWidth(ISourceViewer sourceViewer) {
-        return 3;
+        return TAB_WIDTH;
     }
 
     @Override

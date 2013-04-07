@@ -10,35 +10,34 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.*;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * User: Reidar Sollid
- * Date: 08.03.12
- * Time: 14:20
- */
 public class RustContentAssistProcessor implements IContentAssistProcessor {
 
     @Override
     public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
         IDocument document = viewer.getDocument();
         List<ICompletionProposal> result = new ArrayList<>(Parser.KEYWORDS.length);
-        String docString = getTypedString(document, offset);
-        if (docString.contains("::")) {
-            fetchLibProposals(docString, result, offset);
+        String typedString = getTypedString(document, offset);
+        if (typedString.contains("::")) {
+            fetchLibProposals(typedString, result, offset);
         } else {
             for (String keyword : Parser.KEYWORDS) {
-                if (keyword.startsWith(docString)) {
+                if (keyword.startsWith(typedString)) {
                     //   IContextInformation info = new ContextInformation(keyword, "Rust keyword");
-                    result.add(new CompletionProposal(keyword, offset - docString.length(), docString.length(), keyword.length()));
+                    result.add(new CompletionProposal(keyword.trim(), offset - typedString.length(), typedString.length(), keyword.length()));
                 }
             }
+            //TODO: Try sort string array before creating CompletionProposal
             IPreferenceStore preferenceStore = RustPlugin.getDefault().getPreferenceStore();
             String rustPathCrate = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcore/core.rc";
             String rustPathStdCrate = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libstd/std.rc";
-            createCrateProposals(result, offset, docString, rustPathCrate, rustPathStdCrate);
+            createCrateProposals(result, offset, typedString, rustPathCrate, rustPathStdCrate);
 
 
         }
@@ -46,7 +45,7 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
         return result.toArray(iCompletionProposals);
     }
 
-    private void createCrateProposals(List<ICompletionProposal> result, int offset, String docString, String... files) {
+    private void createCrateProposals(List<ICompletionProposal> result, int offset, String typedString, String... files) {
         for (String file : files) {
             File aFile = new File(file);
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(aFile))) {
@@ -56,7 +55,7 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
                         String export = readLine.replace("export", "").replace(";", "");
                         for (String token : export.split(",")) {
                             String module = token.trim();
-                            result.add(new CompletionProposal(module, offset - docString.length(), docString.length(), module.length()));
+                            result.add(new CompletionProposal(module, offset - typedString.length(), typedString.length(), module.length()));
                         }
 
                     }
