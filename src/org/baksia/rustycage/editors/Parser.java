@@ -9,7 +9,7 @@ public class Parser {
             "if", "iface", "impl", "import", "in", "int", "let", "log", "mod", "mut",
             "native", "note", "prove", "pure", "resource", "return", "self", "str", "syntax",
             "tag", "true", "type", "u16", "u32", "u64", "u8", "uint", "unchecked", "unsafe",
-            "use", "vec", "while", "enum", "copy", "loop", "match"};
+            "use", "vec", "while", "enum", "copy", "loop", "match", "move"};
 
     public static final String[] NEW_FILE = {"import", "export", "use", "mod", "dir"};
 }
