@@ -2,21 +2,23 @@ package org.baksia.rustycage.compile;
 
 import org.baksia.rustycage.RustPlugin;
 import org.baksia.rustycage.editors.RustEditor;
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.IWorkbenchWindowActionDelegate;
+import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-public class RustCompile implements IWorkbenchWindowActionDelegate {
-    private IWorkbenchWindow window;
+public class RustCompile extends AbstractHandler {
 
     @Override
-    public void run(IAction action) {
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
+
         RustEditor rustEditor = (RustEditor) window.getActivePage().getActiveEditor().getAdapter(ITextEditor.class);
 
         IPreferenceStore preferenceStore = RustPlugin.getDefault().getPreferenceStore();
@@ -33,22 +35,7 @@ public class RustCompile implements IWorkbenchWindowActionDelegate {
             }
             HackedRustCompiler.compile((IFile) rustEditor.getEditorInput().getAdapter(IFile.class), argument, null);
         }
-
+        return null;
     }
 
-    @Override
-    public void selectionChanged(IAction action, ISelection selection) {
-
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void dispose() {
-
-    }
-
-    @Override
-    public void init(IWorkbenchWindow window) {
-        this.window = window;
-    }
 }

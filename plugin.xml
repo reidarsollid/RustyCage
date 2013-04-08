@@ -142,42 +142,6 @@
         </initializer>
     </extension>
     <extension
-            point="org.eclipse.ui.actionSets">
-        <actionSet
-                id="RustyCage.actionSet"
-                label="Rust Action Set"
-                visible="true">
-            <menu
-                    id="rustMenu"
-                    label="&amp;Rust ">
-                <separator
-                        name="rustGroup">
-                </separator>
-            </menu>
-            <action
-                    class="org.baksia.rustycage.compile.RustCompile"
-                    icon="$nl$/icons/Compile.gif"
-                    id="rustycage.actions.compileActions"
-                    label="Copmpile"
-                    menubarPath="rustMenu/compileGroup"
-                    style="push"
-                    toolbarPath="rustGroup"
-                    tooltip="Compiles Rust file">
-            </action>
-            <action
-                  class="org.baksia.rustycage.run.RustRun"
-                  disabledIcon="icons/sample.gif"
-                  icon="$nl$/icons/Run.gif"
-                  id="rustycage.actions.runActions"
-                  label="Run"
-                  menubarPath="rustMenu/runGroup"
-                  style="push"
-                  toolbarPath="rustGroup"
-                  tooltip="Run rust file">
-            </action>
-        </actionSet>
-    </extension>
-    <extension
             point="org.eclipse.ui.themes">
         <theme
                 id="org.baksia.rustycage.ui.theme"
@@ -204,5 +168,104 @@
              wizardId="org.baksia.rustycage.wizards.RustProjectWizard">
           <enablement></enablement>
        </commonWizard>
+    </extension>
+    <extension
+          point="org.eclipse.e4.ui.css.swt.theme">
+       <theme
+             basestylesheeturi="css/darkrust.css"
+             id="org.baksia.theme.darkrust"
+             label="Dark Rust Theme">
+       </theme>
+    </extension>
+    <extension
+          point="org.eclipse.ui.commands">
+       <category
+             id="RustyCage.commands.category"
+             name="Rust">
+       </category>
+       <command
+             categoryId="RustyCage.commands.category"
+             id="org.baksia.rustycage.commands.compileCommand"
+             name="Compile">
+       </command>
+       <command
+             categoryId="RustyCage.commands.category"
+             id="org.baksia.rustycage.commands.runCommand"
+             name="Run">
+       </command>
+    </extension>
+    <extension
+          point="org.eclipse.ui.handlers">
+       <handler
+             class="org.baksia.rustycage.compile.RustCompile"
+             commandId="org.baksia.rustycage.commands.compileCommand">
+       </handler>
+       <handler
+             class="org.baksia.rustycage.run.RustRun"
+             commandId="org.baksia.rustycage.commands.runCommand">
+       </handler>
+    </extension>
+    <extension
+          point="org.eclipse.ui.bindings">
+       <key
+             commandId="org.baksia.rustycage.commands.compileCommand"
+             contextId="org.eclipse.ui.contexts.window"
+             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+             sequence="M1+c">
+       </key>
+       <key
+             commandId="org.baksia.rustycage.commands.runCommand"
+             contextId="org.eclipse.ui.contexts.window"
+             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+             sequence="M1+r">
+       </key>
+    </extension>
+    <extension
+          point="org.eclipse.ui.menus">
+       <menuContribution
+             allPopups="true"
+             locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+          <menu
+                id="rustycage.actions.compileActions"
+                label="Rust"
+                mnemonic="M">
+             <command
+                   commandId="org.baksia.rustycage.commands.compileCommand"
+                   icon="icons/Compile.gif"
+                   id="org.baksia.rustycage.commands.compileCommand"
+                   label="Rust Compile"
+                   mnemonic="S"
+                   style="push"
+                   tooltip="Compiles rust files and crates">
+             </command>
+             <command
+                   commandId="org.baksia.rustycage.commands.runCommand"
+                   icon="icons/Run.gif"
+                   label="Run"
+                   style="push"
+                   tooltip="Run Rust files">
+             </command>
+          </menu>
+       </menuContribution>
+       <menuContribution
+             locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+          <toolbar
+                id="RustyCage.toolbars.rustToolbar">
+             <command
+                   commandId="org.baksia.rustycage.commands.compileCommand"
+                   icon="icons/Compile.gif"
+                   id="RustyCage.toolbars.sampleCommand"
+                   label="Compile"
+                   style="push"
+                   tooltip="Compile Rust files">
+             </command>
+             <command
+                   commandId="org.baksia.rustycage.commands.runCommand"
+                   icon="icons/Run.gif"
+                   label="Run"
+                   style="push">
+             </command>
+          </toolbar>
+       </menuContribution>
     </extension>
 </plugin>
