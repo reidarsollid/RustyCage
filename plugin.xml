@@ -79,20 +79,6 @@
         </wizard>
     </extension>
     <extension
-            point="org.eclipse.core.runtime.contentTypes">
-        <file-association
-                content-type="rustSource"
-                file-extensions="rs, rc">
-        </file-association>
-        <content-type
-              base-type="org.eclipse.core.runtime.text"
-              describer="org.baksia.rustycage.RustConentDescriber"
-              file-extensions="rs, rc"
-              id="org.baksia.rustycage.rustfile"
-              name="Rust file">
-        </content-type>
-    </extension>
-    <extension
             id="Rust"
             name="Rust"
             point="org.eclipse.ui.perspectiveExtensions">
@@ -211,7 +197,7 @@
              commandId="org.baksia.rustycage.commands.compileCommand"
              contextId="org.eclipse.ui.contexts.window"
              schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-             sequence="M1+c">
+             sequence="M1+k">
        </key>
        <key
              commandId="org.baksia.rustycage.commands.runCommand"
@@ -267,5 +253,19 @@
              </command>
           </toolbar>
        </menuContribution>
+    </extension>
+    <extension
+          point="org.eclipse.core.contenttype.contentTypes">
+       <file-association
+             content-type="RustyCage.rust"
+             file-extensions="rs,rc"
+             file-names="Rust files">
+       </file-association>
+       <content-type
+             describer="org.baksia.rustycage.RustConentDescriber"
+             id="RustyCage.contentType.rust"
+             name="Rust file"
+             priority="high">
+       </content-type>
     </extension>
 </plugin>
