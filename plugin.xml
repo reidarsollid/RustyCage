@@ -55,8 +55,8 @@
     <extension
             point="org.eclipse.ui.newWizards">
         <category
-                id="RustyCage"
-                name="Rust Wizards">
+              id="RustyCage"
+              name="Rust Wizards">
         </category>
         <wizard
                 category="RustyCage"
@@ -267,5 +267,32 @@
              name="Rust file"
              priority="high">
        </content-type>
+    </extension>
+    <extension
+          point="org.eclipse.ui.importWizards">
+       <category
+             id="org.baksia.rustycage.fileimport.rustCategory"
+             name="Rust">
+       </category>
+       <wizard
+             category="org.baksia.rustycage.fileimport.rustCategory"
+             class="org.baksia.rustycage.fileimport.RustImportWizard"
+             icon="icons/rust_16x16.png"
+             id="org.baksia.rustycage.fileimport.RustImportWizard"
+             name="Import Rust File">
+          <description>
+             Import a file from the local file system into the workspace.
+          </description>
+       </wizard>
+       <wizard
+             category="org.baksia.rustycage.fileimport.rustCategory"
+             class="org.baksia.rustycage.fileimport.RustImportProjectWizard"
+             icon="icons/rust_16x16.png"
+             id="org.baksia.rustycage.fileimport.RustProjectImportWizard"
+             name="Import Rust Project">
+          <description>
+             Import Rust Project from the local file system
+          </description>
+       </wizard>
     </extension>
 </plugin>
