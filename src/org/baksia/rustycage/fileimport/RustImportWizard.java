@@ -38,7 +38,7 @@ public class RustImportWizard extends Wizard implements IImportWizard {
 	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench, org.eclipse.jface.viewers.IStructuredSelection)
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		setWindowTitle("File Import Wizard"); //NON-NLS-1
+		setWindowTitle("Rust File Import Wizard"); //NON-NLS-1
 		setNeedsProgressMonitor(true);
 		mainPage = new RustImportWizardPage("Import Rust File",selection); //NON-NLS-1
 	}
