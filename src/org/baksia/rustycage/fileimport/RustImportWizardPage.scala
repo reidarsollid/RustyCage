@@ -15,6 +15,9 @@ import com.codeminders.scalaws.helpers.io.SourceInputStream
 class RustImportWizardPage(pageName: String, selection: IStructuredSelection) extends WizardNewFileCreationPage(pageName, selection) {
   protected var editor: FileFieldEditor = null
 
+  setTitle(pageName)
+  setDescription("Import a file from the local file system into the workspace")
+
   override def createAdvancedControls(parent: Composite) {
     val fileSelectionArea = new Composite(parent, SWT.NONE)
     val fileSelectionData = new GridData(GridData.GRAB_HORIZONTAL | GridData.FILL_HORIZONTAL)
