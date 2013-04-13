@@ -52,9 +52,12 @@ public class RustConfiguration extends SourceViewerConfiguration {
         return new RustTextHover();
     }
 
+    //http://wiki.eclipse.org/FAQ_How_do_I_support_formatting_in_my_editor%3F
     @Override
     public IContentFormatter getContentFormatter(ISourceViewer sourceViewer) {
-        return super.getContentFormatter(sourceViewer);
+
+        return null;//new RustContentFormatter(sourceViewer);
+
     }
 
     @Override
