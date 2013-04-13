@@ -1,5 +1,6 @@
 package org.baksia.rustycage.compile;
 
+
 import org.baksia.rustycage.RustPlugin;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -61,7 +62,7 @@ public class ProblemMarker {
 			RustPlugin
 					.getDefault()
 					.getLog()
-					.log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID, e
+					.log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID(), e
 							.getMessage()));
 		}
 	}
@@ -73,7 +74,7 @@ public class ProblemMarker {
 			RustPlugin
 					.getDefault()
 					.getLog()
-					.log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID, e
+					.log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID(), e
 							.getMessage()));
 		}
 	}

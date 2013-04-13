@@ -61,7 +61,7 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
                     }
                 }
             } catch (IOException e) {
-                RustPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID, e.getMessage()));
+                RustPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID(), e.getMessage()));
             }
         }
     }
@@ -113,7 +113,7 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
                             }
                         }
                     } catch (IOException handled) {
-                        RustPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID, handled.getMessage()));
+                        RustPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID(), handled.getMessage()));
                     }
                 }
             }

@@ -1,5 +1,6 @@
 package org.baksia.rustycage.preferences;
 
+
 import org.baksia.rustycage.RustPlugin;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;

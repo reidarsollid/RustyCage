@@ -1,5 +1,6 @@
 package org.baksia.rustycage.builder;
 
+
 import org.baksia.rustycage.RustPlugin;
 import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.CoreException;
@@ -102,7 +103,7 @@ public class RustBuilder extends IncrementalProjectBuilder {
             }
             marker.setAttribute(IMarker.LINE_NUMBER, lineNumber);
         } catch (CoreException e) {
-            RustPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID, e.getMessage()));
+            RustPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID(), e.getMessage()));
         }
     }
 
