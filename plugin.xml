@@ -262,7 +262,7 @@
              file-names="Rust files">
        </file-association>
        <content-type
-             describer="org.baksia.rustycage.RustConentDescriber"
+             describer="org.baksia.rustycage.RustContentDescriber"
              id="RustyCage.contentType.rust"
              name="Rust file"
              priority="high">

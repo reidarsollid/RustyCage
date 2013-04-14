@@ -11,6 +11,7 @@ import org.eclipse.jface.preference.FileFieldEditor
 import org.eclipse.core.runtime.{IStatus, Path}
 import org.eclipse.swt.events.{ModifyListener, ModifyEvent}
 import com.codeminders.scalaws.helpers.io.SourceInputStream
+import scala.io._
 
 class RustImportWizardPage(pageName: String, selection: IStructuredSelection) extends WizardNewFileCreationPage(pageName, selection) {
   protected var editor: FileFieldEditor = null
@@ -31,7 +32,7 @@ class RustImportWizardPage(pageName: String, selection: IStructuredSelection) ex
     fileSelectionArea.setLayout(fileSelectionLayout)
 
     editor = new FileFieldEditor("fileSelect", "Select File: ", fileSelectionArea)
-    editor.getTextControl(leSelectionArea).addModifyListener(new ModifyListener() {
+    editor.getTextControl(fileSelectionArea).addModifyListener(new ModifyListener() {
       def modifyText(e: ModifyEvent) {
         val path = new Path(editor.getStringValue)
         setFileName(path.lastSegment())

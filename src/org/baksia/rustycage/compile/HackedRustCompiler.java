@@ -1,10 +1,7 @@
 package org.baksia.rustycage.compile;
 
-import java.io.IOException;
-import java.util.Scanner;
-
 import org.baksia.rustycage.RustPlugin;
-import org.baksia.rustycage.preferences.PreferenceConstants;
+import org.baksia.rustycage.preferences.PreferenceConstants$;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -16,6 +13,11 @@ import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+
 
 public final class HackedRustCompiler {
 	private static ProblemMarker problemMarker = new ProblemMarker();
@@ -33,7 +35,7 @@ public final class HackedRustCompiler {
 			IPreferenceStore preferenceStore = RustPlugin.getDefault()
 					.getPreferenceStore();
 			String rustPath = preferenceStore
-					.getString(PreferenceConstants.RUST_C);
+					.getString(PreferenceConstants$.MODULE$.RUST_C());
 
 			// String rustProject =
 			// preferenceStore.getString(PreferenceConstants.P_PATH);

@@ -2,6 +2,7 @@ package org.baksia.rustycage.editors;
 
 import org.baksia.rustycage.RustPlugin;
 import org.baksia.rustycage.preferences.PreferenceConstants;
+import org.baksia.rustycage.preferences.PreferenceConstants$;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -35,8 +36,8 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
             }
             //TODO: Try sort string array before creating CompletionProposal
             IPreferenceStore preferenceStore = RustPlugin.getDefault().getPreferenceStore();
-            String rustPathCrate = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcore/core.rc";
-            String rustPathStdCrate = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libstd/std.rc";
+            String rustPathCrate = preferenceStore.getString(PreferenceConstants$.MODULE$.P_PATH()) + "/src/libcore/core.rc";
+            String rustPathStdCrate = preferenceStore.getString(PreferenceConstants$.MODULE$.P_PATH()) + "/src/libstd/std.rc";
             createCrateProposals(result, offset, typedString, rustPathCrate, rustPathStdCrate);
 
 
@@ -76,8 +77,8 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
 
 
         IPreferenceStore preferenceStore = RustPlugin.getDefault().getPreferenceStore();
-        String rustPath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcore";
-        String rustPathStd = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libstd";
+        String rustPath = preferenceStore.getString(PreferenceConstants$.MODULE$.P_PATH()) + "/src/libcore";
+        String rustPathStd = preferenceStore.getString(PreferenceConstants$.MODULE$.P_PATH()) + "/src/libstd";
 
         createProposals(result, offset, word, lib, rustPath);
         createProposals(result, offset, word, lib, rustPathStd);

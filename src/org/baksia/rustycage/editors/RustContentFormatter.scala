@@ -6,5 +6,7 @@ import org.eclipse.jface.text.IRegion
 import org.eclipse.jface.text.source.ISourceViewer
 
 class RustContentFormatter(val sourceView: ISourceViewer) extends IContentFormatter {
-
+	def format( document: IDocument,  region: IRegion) {}
+	
+	def getFormattingStrategy(contentType: String):IFormattingStrategy = null
 }
