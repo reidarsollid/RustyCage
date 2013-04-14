@@ -14,6 +14,7 @@ import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -44,17 +45,19 @@ public final class HackedRustCompiler {
 			String rawPath = file.getRawLocationURI().getRawPath();
 			int endIndex = rawPath.indexOf(projectName);
 			String src = "";
+			String bin = "";
 			if (endIndex != -1) {
 				String home = rawPath.substring(0, endIndex);
+				bin = home + projectName + "/.bin";
 				src = " -L " + home + projectName + "/src";
 			}
 
 			// RuntimeProcess runtimeProcess = new RuntimeProcess();
 			// DebugPlugin.exec(new String[]{rustPath + "rustc " , argument},new
-			// File(rustProject));
-
+			// File(rustProject));            
+            new File(bin).mkdir();
 			Process exec = Runtime.getRuntime().exec(
-					rustPath + "rustc " + argument + rawPath + src);
+					rustPath + "rustc " + argument + rawPath + src+" --out-dir " + bin);
 			// ProcessConsole processConsole = new ProcessConsole(exec,null);
 
 			// + " --out-dir bin");
