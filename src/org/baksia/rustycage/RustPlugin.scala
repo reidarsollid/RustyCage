@@ -9,12 +9,12 @@ import org.eclipse.ui.plugin.AbstractUIPlugin
 class RustPlugin extends AbstractUIPlugin {
 	override def start(context: BundleContext) {
 	  super.start(context)
-	  RustPlugin.plugin = RustPlugin.this
+	  RustPlugin.plugin = this
 	}
 	
 	override def stop(context: BundleContext) {
 	  super.stop(context)
-	  RustPlugin.plugin = null
+	  RustPlugin.plugin = null 
 	}
 }
 

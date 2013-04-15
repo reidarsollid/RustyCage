@@ -6,7 +6,7 @@
         <editor
                 name="Rusty Cage"
                 extensions="rs, rc"
-                icon="$nl$/icons/rust_16x16.png"
+                icon="icons/rust_16x16.png"
                 contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
                 class="org.baksia.rustycage.editors.RustEditor"
                 id="org.baksia.rustycage.editors.RustEditor">
@@ -128,21 +128,6 @@
         </initializer>
     </extension>
     <extension
-            point="org.eclipse.ui.themes">
-        <theme
-                id="org.baksia.rustycage.ui.theme"
-                name="Rust Theme">
-            <colorOverride
-                    id="org.eclipse.ui.workbench.ACTIVE_TAB_BG_END"
-                    value="218,165,32">
-            </colorOverride>
-            <colorOverride
-                    id="org.eclipse.ui.workbench.ACTIVE_TAB_BG_START"
-                    value="255,193,37">
-            </colorOverride>
-        </theme>
-    </extension>
-    <extension
           point="org.eclipse.ui.navigator.navigatorContent">
        <commonWizard
              type="new"
@@ -154,14 +139,6 @@
              wizardId="org.baksia.rustycage.wizards.RustProjectWizard">
           <enablement></enablement>
        </commonWizard>
-    </extension>
-    <extension
-          point="org.eclipse.e4.ui.css.swt.theme">
-       <theme
-             basestylesheeturi="css/darkrust.css"
-             id="org.baksia.theme.darkrust"
-             label="Dark Rust Theme">
-       </theme>
     </extension>
     <extension
           point="org.eclipse.ui.commands">
@@ -187,7 +164,7 @@
              commandId="org.baksia.rustycage.commands.compileCommand">
        </handler>
        <handler
-             class="org.baksia.rustycage.run.RustRun"
+             class="org.baksia.rustycage.run.RustRunner"
              commandId="org.baksia.rustycage.commands.runCommand">
        </handler>
     </extension>

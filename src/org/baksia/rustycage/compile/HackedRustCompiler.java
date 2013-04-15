@@ -1,7 +1,7 @@
 package org.baksia.rustycage.compile;
 
 import org.baksia.rustycage.RustPlugin;
-import org.baksia.rustycage.preferences.PreferenceConstants$;
+import org.baksia.rustycage.preferences.PreferenceConstants;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -36,7 +36,7 @@ public final class HackedRustCompiler {
 			IPreferenceStore preferenceStore = RustPlugin.getDefault()
 					.getPreferenceStore();
 			String rustPath = preferenceStore
-					.getString(PreferenceConstants$.MODULE$.RUST_C());
+					.getString(PreferenceConstants.RUST_C());
 
 			// String rustProject =
 			// preferenceStore.getString(PreferenceConstants.P_PATH);

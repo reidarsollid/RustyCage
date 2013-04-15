@@ -1,6 +1,5 @@
 package org.baksia.rustycage.compile;
 
-
 import org.baksia.rustycage.RustPlugin;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;

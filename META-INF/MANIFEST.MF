@@ -22,5 +22,4 @@ Require-Bundle: org.eclipse.jface,
  org.eclipse.debug.core,
  org.eclipse.debug.ui,
  org.eclipse.ui,
- org.eclipse.ui.navigator,
- org.eclipse.e4.ui.css.swt.theme
+ org.eclipse.ui.navigator
