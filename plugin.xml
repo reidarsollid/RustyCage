@@ -160,7 +160,7 @@
     <extension
           point="org.eclipse.ui.handlers">
        <handler
-             class="org.baksia.rustycage.compile.RustCompile"
+             class="org.baksia.rustycage.compile.RustCompileHandler"
              commandId="org.baksia.rustycage.commands.compileCommand">
        </handler>
        <handler
