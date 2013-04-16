@@ -21,7 +21,7 @@ trait ProblemMarker3 extends MessageConsoleScala {
   }
 
   private[compile] def addProblemMarkers(message: String) {
-    parseProblemFirstLine(message, getFile())
+    parseProblemFirstLine(message, file)
   }
   
   private[compile] def parseProblemSecondLine(errorString: String, file: IFile) {
