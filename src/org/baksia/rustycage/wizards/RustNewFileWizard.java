@@ -70,7 +70,7 @@ public class RustNewFileWizard extends Wizard implements INewWizard {
         }
         IContainer container = (IContainer) resource;
         final IFile file = container.getFile(new Path(fileName));
-        IPreferenceStore preferenceStore = RustPlugin.getDefault().getPreferenceStore();
+        IPreferenceStore preferenceStore = RustPlugin.prefStore();
         String projectName = preferenceStore.getString("ProjectName");
         IFile crateFile = container.getFile(new Path(projectName + ".rc"));
 

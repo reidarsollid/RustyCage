@@ -6,7 +6,7 @@ import org.baksia.rustycage.RustPlugin
 
 class RustPreferencePage extends FieldEditorPreferencePage(FieldEditorPreferencePage.GRID) with IWorkbenchPreferencePage {
 	
-  setPreferenceStore(RustPlugin.getDefault().getPreferenceStore)
+  setPreferenceStore(RustPlugin.prefStore)
   
   setDescription("Rust preferences page")
 

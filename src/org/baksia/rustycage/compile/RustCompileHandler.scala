@@ -12,7 +12,7 @@ class RustCompileHandler extends AbstractHandler {
   def execute(event: ExecutionEvent): Object = {
     val window = HandlerUtil.getActiveWorkbenchWindowChecked(event)
     val rustEditor = window.getActivePage.getActiveEditor.getAdapter(classOf[ITextEditor]).asInstanceOf[RustEditor]
-    val preferenceStore = RustPlugin.getDefault().getPreferenceStore
+    val preferenceStore = RustPlugin.prefStore
     val isLib = preferenceStore.getBoolean("IsLib")
     if (rustEditor != null) {
       val iResource =  rustEditor.getEditorInput.getAdapter(classOf[IResource]).asInstanceOf[IResource]

@@ -28,13 +28,10 @@ public class RustProjectPage extends WizardPage {
 
     private Button isLib;
 
-    private ISelection selection;
-
     protected RustProjectPage(ISelection selection) {
         super("rustProjectWizard");
         setTitle("Rust project wizard");
         setDescription("Set Rust project name");
-        this.selection = selection;
     }
 
     @Override
@@ -98,7 +95,7 @@ public class RustProjectPage extends WizardPage {
 
     public boolean createProject() {
         if (project != null) {
-            IPreferenceStore preferenceStore = RustPlugin.getDefault().getPreferenceStore();
+            IPreferenceStore preferenceStore = RustPlugin.prefStore();
             preferenceStore.setValue("ProjectName", project.getName());
             preferenceStore.setValue("IsLib", isLib.getSelection());
             IProjectDescription desc = project.getWorkspace().newProjectDescription(project.getName());

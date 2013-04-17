@@ -2,24 +2,38 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: RustyCage
 Bundle-SymbolicName: RustyCage; singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.1.0.qualifier
 Bundle-Activator: org.baksia.rustycage.RustPlugin
-Bundle-Vendor: org.baksia
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.jface,
- org.eclipse.ui.workbench,
- org.scala-ide.scala.library;bundle-version="2.10.1",
+Bundle-Vendor: Baksia
+Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.scala-ide.scala.compiler;bundle-version="2.10.1",
- org.eclipse.osgi,
- org.eclipse.search,
- org.eclipse.ui.console,
+ org.eclipse.ui.ide,
  org.eclipse.core.resources,
  org.eclipse.jface.text,
+ org.eclipse.ui.console,
+ org.eclipse.jdt.ui,
+ org.scala-ide.scala.library,
  org.eclipse.ui.editors,
- org.eclipse.ui.ide,
- org.eclipse.debug.core,
+ org.eclipse.core.runtime,
  org.eclipse.debug.ui,
+ org.eclipse.help,
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.debug.ui,
+ org.eclipse.jdt.junit,
+ org.eclipse.jdt.launching,
+ org.eclipse.jdt.ui,
+ org.eclipse.jface.text,
  org.eclipse.ui,
- org.eclipse.ui.navigator
+ org.eclipse.ui.console,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.forms,
+ org.eclipse.ui.ide,
+ org.scala-ide.scala.library,
+ org.scala-ide.scala.compiler,
+ org.scala-ide.sdt.core,
+ org.eclipse.core.resources,
+ scalariform,
+ org.eclipse.core.filesystem
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: src/

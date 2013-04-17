@@ -9,7 +9,7 @@ class RustEditor extends TextEditor {
   override def dispose() {
     super.dispose()
   }
-
+  
   override def createActions() {
     super.createActions()
   }

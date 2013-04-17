@@ -16,7 +16,7 @@ object RustyCageCompile {
   import scala.sys.process._
   def compile(file: IFile, argument: String, monitor: IProgressMonitor): Boolean = {
     try {
-      val preferenceStore: IPreferenceStore = RustPlugin.getDefault().getPreferenceStore
+      val preferenceStore: IPreferenceStore = RustPlugin.prefStore
       val rustPath: String = preferenceStore.getString(PreferenceConstants.RUST_C)
       val projectName: String = preferenceStore.getString("ProjectName")
       val rawPath: String = file.getRawLocationURI.getRawPath

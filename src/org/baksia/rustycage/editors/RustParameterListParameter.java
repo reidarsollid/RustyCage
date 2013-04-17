@@ -6,11 +6,6 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationPresenter;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 
-/**
- * User: Reidar Sollid
- * Date: 08.03.12
- * Time: 15:55
- */
 public class RustParameterListParameter implements IContextInformationValidator,IContextInformationPresenter {
     private int offset;
     private ITextViewer viewer;

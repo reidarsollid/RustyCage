@@ -74,7 +74,7 @@ trait ProblemMarker3 extends MessageConsoleScala {
 
     } catch {
       case e: CoreException =>
-        RustPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID, e.getMessage()));
+        RustPlugin.log(IStatus.ERROR, RustPlugin.PluginId, e)
     }
   }
 
@@ -84,7 +84,7 @@ trait ProblemMarker3 extends MessageConsoleScala {
     }
     catch {
       case e: CoreException => {
-        RustPlugin.getDefault.getLog.log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID, e.getMessage))
+        RustPlugin.log(IStatus.ERROR, RustPlugin.PluginId, e)
       }
     }
   }

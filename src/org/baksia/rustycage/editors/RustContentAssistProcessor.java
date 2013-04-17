@@ -3,7 +3,6 @@ package org.baksia.rustycage.editors;
 import org.baksia.rustycage.RustPlugin;
 import org.baksia.rustycage.preferences.PreferenceConstants;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -22,19 +21,19 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
     @Override
     public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
         IDocument document = viewer.getDocument();
-        List<ICompletionProposal> result = new ArrayList<>(Parser.KEYWORDS.length);
+        List<ICompletionProposal> result = new ArrayList<>(RustParser.Keywords().length);
         String typedString = getTypedString(document, offset);
         if (typedString.contains("::")) {
             fetchLibProposals(typedString, result, offset);
         } else {
-            for (String keyword : Parser.KEYWORDS) {
+            for (String keyword : RustParser.Keywords()) {
                 if (keyword.startsWith(typedString)) {
                     //   IContextInformation info = new ContextInformation(keyword, "Rust keyword");
                     result.add(new CompletionProposal(keyword.trim(), offset - typedString.length(), typedString.length(), keyword.length()));
                 }
             }
             //TODO: Try sort string array before creating CompletionProposal
-            IPreferenceStore preferenceStore = RustPlugin.getDefault().getPreferenceStore();
+            IPreferenceStore preferenceStore = RustPlugin.prefStore();
             String rustPathCrate = preferenceStore.getString(PreferenceConstants.P_PATH()) + "/src/libcore/core.rc";
             String rustPathStdCrate = preferenceStore.getString(PreferenceConstants.P_PATH()) + "/src/libstd/std.rc";
             createCrateProposals(result, offset, typedString, rustPathCrate, rustPathStdCrate);
@@ -61,7 +60,7 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
                     }
                 }
             } catch (IOException e) {
-                RustPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID(), e.getMessage()));
+                RustPlugin.log(IStatus.ERROR, RustPlugin.PluginId(), e);
             }
         }
     }
@@ -75,7 +74,7 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
         String lib = tokens[0];
 
 
-        IPreferenceStore preferenceStore = RustPlugin.getDefault().getPreferenceStore();
+        IPreferenceStore preferenceStore = RustPlugin.prefStore();
         String rustPath = preferenceStore.getString(PreferenceConstants.P_PATH()) + "/src/libcore";
         String rustPathStd = preferenceStore.getString(PreferenceConstants.P_PATH()) + "/src/libstd";
 
@@ -113,7 +112,7 @@ public class RustContentAssistProcessor implements IContentAssistProcessor {
                             }
                         }
                     } catch (IOException handled) {
-                        RustPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, RustPlugin.PLUGIN_ID(), handled.getMessage()));
+                        RustPlugin.log(IStatus.ERROR, RustPlugin.PluginId(), handled);
                     }
                 }
             }

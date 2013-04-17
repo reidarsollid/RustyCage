@@ -24,24 +24,24 @@ public class RustScanner extends RuleBasedScanner {
         }, Token.WHITESPACE);
 
 
-        Token comment = new Token(new TextAttribute(RustColorConstants.COMMENT));
-        Token string = new Token(new TextAttribute(RustColorConstants.STRING));
-        Token chars = new Token(new TextAttribute(RustColorConstants.CHAR));
-        Token keyword = new Token(new TextAttribute(RustColorConstants.KEYWORD, null, SWT.BOLD));
-        Token file = new Token(new TextAttribute(RustColorConstants.NEW_FILE, null, SWT.ITALIC));
-        Token numbers = new Token(new TextAttribute(RustColorConstants.NUMBERS));
-        Token pointer = new Token(new TextAttribute(RustColorConstants.POINTER));
+        Token comment = new Token(new TextAttribute(RustColorConstants.COMMENT()));
+        Token string = new Token(new TextAttribute(RustColorConstants.STRING()));
+        Token chars = new Token(new TextAttribute(RustColorConstants.CHAR()));
+        Token keyword = new Token(new TextAttribute(RustColorConstants.KEYWORD(), null, SWT.BOLD));
+        Token file = new Token(new TextAttribute(RustColorConstants.NEW_FILE(), null, SWT.ITALIC));
+        Token numbers = new Token(new TextAttribute(RustColorConstants.NUMBERS()));
+        Token pointer = new Token(new TextAttribute(RustColorConstants.POINTER()));
         //add tokens for each reserved word
-        for (int n = 0; n < Parser.KEYWORDS.length; n++) {
-            rule.addWord(Parser.KEYWORDS[n], keyword);
+        for (int n = 0; n < RustParser.Keywords().length; n++) {
+            rule.addWord(RustParser.Keywords()[n], keyword);
         }
-        for (int n = 0; n < Parser.NEW_FILE.length; n++) {
-            rule.addWord(Parser.NEW_FILE[n], file);
+        for (int n = 0; n < RustParser.NewFile().length; n++) {
+            rule.addWord(RustParser.NewFile()[n], file);
         }
 
         setRules(new IRule[]{
                 rule,
-                new PointerRule(pointer),
+                new RustPointerRule(pointer),
                 new NumberRule(numbers),
                 new EndOfLineRule("//", comment, '\\'),
                 new SingleLineRule("\"", "\"", string, '\\'),
