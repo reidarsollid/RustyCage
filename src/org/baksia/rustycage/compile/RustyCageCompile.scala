@@ -31,7 +31,7 @@ object RustyCageCompile {
       new File(bin).mkdir
       
      val execCompile = rustPath + "rustc " + argument + rawPath + src + " --out-dir " + bin
-     val messageConsole = new MessageConsoleScala(file, "Run : ") with ProblemMarker3
+     val messageConsole = new MessageConsoleScala(file, "Run : ") with ProblemMarker
 
       val logger = ProcessLogger (
         (o: String) => messageConsole.message(o),

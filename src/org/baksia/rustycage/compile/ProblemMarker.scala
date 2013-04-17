@@ -9,7 +9,7 @@ import org.eclipse.core.runtime.Status
 import org.eclipse.core.runtime.IStatus
 import scala.annotation.tailrec
 
-trait ProblemMarker3 extends MessageConsoleScala {
+trait ProblemMarker extends MessageConsoleScala {
   val MARKER_TYPE = "org.eclipse.core.resources.problemmarker"
 		  
   if(file.getFileExtension() == "rc") clearAllMarkers(file) else clearMarkers(file)
