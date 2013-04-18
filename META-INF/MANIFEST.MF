@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: RustyCage
-Bundle-SymbolicName: RustyCage; singleton:=true
+Bundle-SymbolicName: org.baksia.rustycage;singleton:=true
 Bundle-Version: 1.1.0.qualifier
 Bundle-Activator: org.baksia.rustycage.RustPlugin
 Bundle-Vendor: Baksia
