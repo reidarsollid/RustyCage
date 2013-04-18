@@ -108,10 +108,11 @@ public class RustProjectPage extends WizardPage {
                 if (!src.exists()) {
                     src.create(false, true, null);
                 }
-                IFolder test = project.getFolder("test");
-                if (!test.exists()) {
-                    test.create(false, true, null);
+                IFolder bin = project.getFolder("bin");
+                if (!bin.exists()) {
+                    bin.create(false, true, null);
                 }
+                bin.setHidden(true);
                 IFile file = src.getFile(project.getName() + ".rc");
                 if (!file.exists()) {
                     file.create(openContentStream(), true, null);

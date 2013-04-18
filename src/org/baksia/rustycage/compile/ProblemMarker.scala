@@ -3,7 +3,7 @@ package org.baksia.rustycage.compile
 import org.baksia.rustycage.run.MessageConsoleScala
 import org.eclipse.core.runtime.CoreException
 import org.baksia.rustycage.RustPlugin
-import org.eclipse.core.resources.{IFile, IMarker}
+import org.eclipse.core.resources.{ IFile, IMarker }
 import org.eclipse.core.resources.IResource
 import org.eclipse.core.runtime.Status
 import org.eclipse.core.runtime.IStatus
@@ -11,19 +11,22 @@ import scala.annotation.tailrec
 
 trait ProblemMarker extends MessageConsoleScala {
   val MARKER_TYPE = "org.eclipse.core.resources.problemmarker"
-		  
-  if(file.getFileExtension() == "rc") clearAllMarkers(file) else clearMarkers(file)
-    
-    
+
+  if (file.getFileExtension() == "rc") clearAllMarkers(file) else clearMarkers(file)
+
   override def errorMessage(message: String) {
     super.errorMessage(message)
     addProblemMarkers(message)
   }
 
+  override def message(message: String) {
+    super.message(message)
+  }
+
   private[compile] def addProblemMarkers(message: String) {
     parseProblemFirstLine(message, file)
   }
-  
+
   private[compile] def parseProblemSecondLine(errorString: String, file: IFile) {
     val theFile = findCorrectFile(errorString, file)
     if (errorString.contains(".rs")) {
@@ -32,8 +35,7 @@ trait ProblemMarker extends MessageConsoleScala {
       var lineNumber: Int = 0
       try {
         lineNumber = Integer.parseInt(tokens(1).replaceAll("[^\\d]", ""))
-      }
-      catch {
+      } catch {
         case exception: NumberFormatException => {
           lineNumber = 0
         }
@@ -50,8 +52,7 @@ trait ProblemMarker extends MessageConsoleScala {
       var lineNumber: Int = 0
       try {
         lineNumber = Integer.parseInt(tokens(1))
-      }
-      catch {
+      } catch {
         case exception: NumberFormatException => {
           lineNumber = 0
         }
@@ -81,18 +82,17 @@ trait ProblemMarker extends MessageConsoleScala {
   private[compile] def clearMarkers(file: IFile) {
     try {
       file.deleteMarkers(MARKER_TYPE, false, IResource.DEPTH_ZERO)
-    }
-    catch {
+    } catch {
       case e: CoreException => {
         RustPlugin.log(IStatus.ERROR, RustPlugin.PluginId, e)
       }
     }
   }
-  
+
   def clearAllMarkers(file: IFile) {
-    file.getParent.members.foreach(file => file.deleteMarkers(MARKER_TYPE, false,IResource.DEPTH_ZERO))
+    file.getParent.members.foreach(file => file.deleteMarkers(MARKER_TYPE, false, IResource.DEPTH_ZERO))
   }
-  
+
   private def findCorrectFile(firstLine: String, file: IFile): IFile = {
     if (file.getFileExtension == "rc") {
       val resources: Array[IResource] = file.getParent.members

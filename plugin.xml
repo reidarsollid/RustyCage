@@ -30,11 +30,11 @@
    <extension
          point="org.eclipse.ui.importWizards">
       <category
-            name="Rust File Import"
+            name="Rust"
             id="org.baksia.rustycage.fileimport.rustCategory">
       </category>
       <wizard
-            name="Rust Import File"
+            name="Import Rust File"
             icon="icons/rust_16x16.png"
             category="org.baksia.rustycage.fileimport.rustCategory"
             class="org.baksia.rustycage.fileimport.RustImportWizard"
@@ -48,7 +48,7 @@
             class="org.baksia.rustycage.fileimport.RustImportProjectWizard"
             icon="icons/rust_16x16.png"
             id="org.baksia.rustycage.fileimport.RustProjectImportWizard   "
-            name="name">
+            name="Import Rust Project ">
          <description>
             Import Rust Project from the local file system (Not implemented)
          </description>
@@ -148,7 +148,7 @@
             <command
                   commandId="RustyCage.commands.compileCommand"
                   icon="icons/Compile.gif"
-                  label="Rust Compile"
+                  label="Compile"
                   style="push"
                   tooltip="Compiles rust files and crates">
             </command>

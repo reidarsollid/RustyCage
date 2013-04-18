@@ -25,18 +25,18 @@ object RustyCageCompile {
       var bin: String = ""
       if (endIndex != -1) {
         val home: String = rawPath.substring(0, endIndex)
-        bin = home + projectName + "/.bin"
+        bin = home + projectName + "/bin"
         src = " -L " + home + projectName + "/src"
-      }
-      new File(bin).mkdir
+      }     
       
      val execCompile = rustPath + "rustc " + argument + rawPath + src + " --out-dir " + bin
-     val messageConsole = new MessageConsoleScala(file, "Run : ") with ProblemMarker
+     val messageConsole = new MessageConsoleScala(file, "Compile : ") with ProblemMarker
 
       val logger = ProcessLogger (
         (o: String) => messageConsole.message(o),
         (e: String) => messageConsole.errorMessage(e))
-
+        
+        messageConsole.message("<<<<Done>>>>")
       execCompile ! logger
       true
     }
