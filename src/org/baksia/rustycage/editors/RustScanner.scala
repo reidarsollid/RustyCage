@@ -1,12 +1,11 @@
 package org.baksia.rustycage.editors
 
 import org.eclipse.jface.text.rules._
-import org.eclipse.wst.dtd.core.internal.tokenizer.Token
 import org.eclipse.jface.text.TextAttribute
 import org.eclipse.swt.SWT
 
 class RustScanner extends RuleBasedScanner {
-  def rule: WordRule = new WordRule(new IWordDetector() {
+  val rule: WordRule = new WordRule(new IWordDetector() {
 
     def isWordStart(c: Char) = Character.isJavaIdentifierStart(c)
 
@@ -34,7 +33,7 @@ class RustScanner extends RuleBasedScanner {
     def isWhitespace(c: Char) = Character.isWhitespace(c)
   })
 
-  Array[IRule](rule,
+  val rules = Array[IRule](rule,
     new RustPointerRule(pointer),
     new NumberRule(numbers),
     new EndOfLineRule("//", comment, '\\'),
@@ -42,4 +41,6 @@ class RustScanner extends RuleBasedScanner {
     new SingleLineRule("\'", "\'", chars, '\\'),
     new MultiLineRule("/*", "*/", comment, '\\'),
     whiteSpaceRule)
+    
+    setRules(rules)
 }
