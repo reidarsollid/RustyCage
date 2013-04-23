@@ -59,7 +59,7 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
         }))
   }
 
-  def crateSearch(startPath: File, fileBuffer: ListBuffer[File]): List[File] = {
+  def rustFileSearch(startPath: File, fileBuffer: ListBuffer[File]): List[File] = {
     fileBuffer ++= startPath.listFiles.filter(!_.isDirectory()).filter(_.getName.endsWith(".rs"))
     startPath.listFiles.filter(_.isDirectory()).foreach(d => crateSearch(d, fileBuffer))
     fileBuffer.toList
