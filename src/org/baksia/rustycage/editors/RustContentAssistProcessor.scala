@@ -61,13 +61,13 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
 
   def rustFileSearch(startPath: File, fileBuffer: ListBuffer[File]): List[File] = {
     fileBuffer ++= startPath.listFiles.filter(!_.isDirectory()).filter(_.getName.endsWith(".rs"))
-    startPath.listFiles.filter(_.isDirectory()).foreach(d => crateSearch(d, fileBuffer))
+    startPath.listFiles.filter(_.isDirectory()).foreach(d => rustFileSearch(d, fileBuffer))
     fileBuffer.toList
   }
 
   def findFiles(path: String*): List[File] = {
     val fileBuffer: ListBuffer[File] = new ListBuffer
-    path.foreach(l => crateSearch(new File(l), fileBuffer))
+    path.foreach(l => rustFileSearch(new File(l), fileBuffer))
     fileBuffer.toList
   }
 
