@@ -29,7 +29,7 @@ class RustNewFileWizard extends Wizard with INewWizard {
     val containerName = pageFile.getContainerName
     val fileName = pageFile.getFileName
     def op = new IRunnableWithProgress() {
-      def run(monitor:IProgressMonitor ) {
+      def run(monitor: IProgressMonitor) {
         try {
           doFinish(containerName, fileName, monitor)
         } catch {
@@ -54,7 +54,7 @@ class RustNewFileWizard extends Wizard with INewWizard {
     val root: IWorkspaceRoot = ResourcesPlugin.getWorkspace.getRoot
 
     val container: IContainer = root.findMember(new Path(containerName)).asInstanceOf[IContainer]
-   
+
     if (!container.exists()) {
       throwCoreException("Container \"" + containerName + "\" does not exist.")
     }
@@ -93,11 +93,14 @@ class RustNewFileWizard extends Wizard with INewWizard {
   }
 
   private def openContentStream(): InputStream = {
-    val contents = "/*This file is generated with RustyCage*/"
-    new ByteArrayInputStream(contents.getBytes)
+    if (RustPlugin.prefStore.getBoolean("IsLib")) new ByteArrayInputStream(TEMPLATE_LIB.getBytes)
+    else
+      new ByteArrayInputStream(TEMPLATE_MAIN.getBytes)
+
+
   }
 
-  private def throwCoreException(message: String) =  {
+  private def throwCoreException(message: String) = {
     val status =
       new Status(IStatus.ERROR, "RustyCage", IStatus.OK, message, null)
     throw new CoreException(status)
@@ -106,4 +109,18 @@ class RustNewFileWizard extends Wizard with INewWizard {
   private var pageFile: RustNewFileWizardPage = _
 
   private var selection: ISelection = _
+
+  private val TEMPLATE_MAIN =
+    """/******
+      | * This file is generated with RustyCage*/
+      | */
+      |fn main() {
+      | io::println("Hello world");
+      |}""".stripMargin
+
+  private val TEMPLATE_LIB =
+    """/******
+      | * This file is generated with RustyCage
+      | */""".stripMargin
+
 }
