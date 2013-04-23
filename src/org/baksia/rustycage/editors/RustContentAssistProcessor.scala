@@ -30,12 +30,13 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
       fetchLibProposals(typedString, proposalBuffer, offset, libWord)
     } else {
       RustParser.Keywords.foreach(keyword =>
+        if(keyword.startsWith(typedString))
         proposalBuffer += new CompletionProposal(keyword.trim(), offset - typedString.length(), typedString.length(), keyword.length()))
     }
 
     proposalBuffer.toArray
   }
-
+  
   private def fetchLibProposals(typedString: String, proposalsdBuffer: ArrayBuffer[ICompletionProposal], offset: Int, libWord: (String, String)) {
     val preferenceStore = RustPlugin.prefStore
     val rustPath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcore"

@@ -112,7 +112,7 @@ class RustNewFileWizard extends Wizard with INewWizard {
 
   private val TEMPLATE_MAIN =
     """/******
-      | * This file is generated with RustyCage*/
+      | * This file is generated with RustyCage
       | */
       |fn main() {
       | io::println("Hello world");
