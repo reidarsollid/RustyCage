@@ -1,7 +1,7 @@
 package org.baksia.rustycage.editors
 
-import org.eclipse.jface.text.contentassist.{ CompletionProposal, ICompletionProposal, IContentAssistProcessor }
-import org.eclipse.jface.text.{ IDocument, ITextViewer }
+import org.eclipse.jface.text.contentassist.{CompletionProposal, ICompletionProposal, IContentAssistProcessor}
+import org.eclipse.jface.text.{IDocument, ITextViewer}
 import scala.collection.mutable.ArrayBuffer
 import org.eclipse.jface.text.contentassist.IContextInformation
 import scala.annotation.tailrec
@@ -19,6 +19,7 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
   }
 
   import SplitToTuple._
+
   override def computeCompletionProposals(viewer: ITextViewer, offset: Int): Array[ICompletionProposal] = {
     val document = viewer.getDocument
     val typedString = getTypedString(document, offset)
@@ -30,13 +31,13 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
       fetchLibProposals(typedString, proposalBuffer, offset, libWord)
     } else {
       RustParser.Keywords.foreach(keyword =>
-        if(keyword.startsWith(typedString))
-        proposalBuffer += new CompletionProposal(keyword.trim(), offset - typedString.length(), typedString.length(), keyword.length()))
+        if (keyword.startsWith(typedString))
+          proposalBuffer += new CompletionProposal(keyword.trim(), offset - typedString.length(), typedString.length(), keyword.length()))
     }
 
     proposalBuffer.toArray
   }
-  
+
   private def fetchLibProposals(typedString: String, proposalsdBuffer: ArrayBuffer[ICompletionProposal], offset: Int, libWord: (String, String)) {
     val preferenceStore = RustPlugin.prefStore
     val rustPath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcore"
@@ -44,7 +45,7 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
     val word = libWord._2
     val lib = libWord._1
     findFiles(rustPath, rustPathStd).foreach(file =>
-      Source.fromFile(file).getLines.foreach(line =>
+      Source.fromFile(file).getLines().foreach(line =>
         if (line.startsWith("fn") && line.contains(word)) {
           val token = line.splitToTuple("fn")._2
           if (token.contains("(")) {
@@ -61,8 +62,8 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
   }
 
   def rustFileSearch(startPath: File, fileBuffer: ListBuffer[File]): List[File] = {
-    fileBuffer ++= startPath.listFiles.filter(!_.isDirectory()).filter(_.getName.endsWith(".rs"))
-    startPath.listFiles.filter(_.isDirectory()).foreach(d => rustFileSearch(d, fileBuffer))
+    fileBuffer ++= startPath.listFiles.filter(!_.isDirectory).filter(_.getName.endsWith(".rs"))
+    startPath.listFiles.filter(_.isDirectory).foreach(d => rustFileSearch(d, fileBuffer))
     fileBuffer.toList
   }
 

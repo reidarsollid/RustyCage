@@ -8,6 +8,7 @@ import org.eclipse.jface.text.presentation.PresentationReconciler
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer
 import org.eclipse.jface.text.IDocument
 import org.eclipse.jface.text.IAutoEditStrategy
+import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.formatter.IContentFormatter
 import org.eclipse.jface.text.ITextHover
 import org.eclipse.jface.text.contentassist.IContentAssistant
@@ -46,7 +47,7 @@ class RustConfiguration extends SourceViewerConfiguration {
   override def getTextHover(sourceViewer: ISourceViewer, contentType: String): ITextHover = new RustTextHover()
 
   //http://wiki.eclipse.org/FAQ_How_do_I_support_formatting_in_my_editor%3F    
-  override def getContentFormatter(sourceViewer: ISourceViewer): IContentFormatter = null
+  override def getContentFormatter(sourceViewer: ISourceViewer): IContentFormatter = super.getContentFormatter(sourceViewer)
   //new RustContentFormatter(sourceViewer);
 
   override def getTabWidth(sourceViewer: ISourceViewer): Int = 2
@@ -58,3 +59,4 @@ class RustConfiguration extends SourceViewerConfiguration {
   }
 
 }
+

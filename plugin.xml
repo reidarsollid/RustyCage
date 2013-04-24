@@ -239,5 +239,19 @@
             commandId="RustyCage.commands.runCommand">
       </handler>
    </extension>
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <category
+            id="org.baksia.rustycage.export.rustCategory"
+            name="Rust">
+      </category>
+      <wizard
+            category="org.baksia.rustycage.export.rustCategory"
+            class="org.baksia.rustycage.packagetool.RustExportPackage"
+            icon="icons/rust_16x16.png"
+            id="RustyCage.export.package.wizard"
+            name="Package">
+      </wizard>
+   </extension>
 
 </plugin>

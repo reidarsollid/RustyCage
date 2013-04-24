@@ -5,7 +5,7 @@ import org.eclipse.ui.editors.text.TextEditor
 class RustEditor extends TextEditor {
 
   setSourceViewerConfiguration(new RustConfiguration())
-
+  
   override def dispose() {
     super.dispose()
   }
@@ -17,4 +17,6 @@ class RustEditor extends TextEditor {
   override def setFocus() {
     super.setFocus()
   }
+  
+  
 }
