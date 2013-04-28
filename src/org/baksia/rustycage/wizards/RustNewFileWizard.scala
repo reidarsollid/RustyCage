@@ -58,6 +58,7 @@ class RustNewFileWizard extends Wizard with INewWizard {
     if (!container.exists()) {
       throwCoreException("Container \"" + containerName + "\" does not exist.")
     }
+    
     val file = container.getFile(new Path(fileName))
     val preferenceStore = RustPlugin.prefStore
     val projectName = preferenceStore.getString("ProjectName")

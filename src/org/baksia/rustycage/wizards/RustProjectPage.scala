@@ -24,88 +24,88 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
   setDescription("Set Rust project name")
 
   override def createControl(parent: Composite) {
-    val container = new Composite(parent, SWT.NULL);
-    val layout = new GridLayout();
-    container.setLayout(layout);
-    layout.numColumns = 5;
-    layout.verticalSpacing = 9;
-    val label = new Label(container, SWT.NULL);
-    label.setText("&Project name:");
+    val container = new Composite(parent, SWT.NULL)
+    val layout = new GridLayout()
+    container.setLayout(layout)
+    layout.numColumns = 5
+    layout.verticalSpacing = 9
+    val label = new Label(container, SWT.NULL)
+    label.setText("&Project name:")
 
-    val gd = new GridData(GridData.FILL_HORIZONTAL);
-    projectText = new Text(container, SWT.BORDER | SWT.SINGLE);
-    projectText.setLayoutData(gd);
+    val gd = new GridData(GridData.FILL_HORIZONTAL)
+    projectText = new Text(container, SWT.BORDER | SWT.SINGLE)
+    projectText.setLayoutData(gd)
     projectText.addModifyListener(new ModifyListener() {
 
       override def modifyText(e: ModifyEvent) {
-        dialogChanged();
+        dialogChanged()
       }
-    });
+    })
 
-    isLib = new Button(container, SWT.CHECK);
-    isLib.setText("Library");
-    isLib.setLayoutData(gd);
-    isLib.setSelection(true);
+    isLib = new Button(container, SWT.CHECK)
+    isLib.setText("Library")
+    isLib.setLayoutData(gd)
+    isLib.setSelection(true)
 
-    val lblVersion = new Label(container, SWT.NULL);
-    lblVersion.setText("&Version :");
+    val lblVersion = new Label(container, SWT.NULL)
+    lblVersion.setText("&Version :")
 
-    version = new Text(container, SWT.BORDER | SWT.SINGLE);
-    version.setLayoutData(gd);
+    version = new Text(container, SWT.BORDER | SWT.SINGLE)
+    version.setLayoutData(gd)
     version.addModifyListener(new ModifyListener() {
 
       override def modifyText(e: ModifyEvent) {
-        dialogChanged();
+        dialogChanged()
       }
-    });
-    val lblAuthor = new Label(container, SWT.NULL);
-    lblAuthor.setText("&Author:");
+    })
+    val lblAuthor = new Label(container, SWT.NULL)
+    lblAuthor.setText("&Author:")
 
-    author = new Text(container, SWT.BORDER | SWT.SINGLE);
-    author.setLayoutData(gd);
+    author = new Text(container, SWT.BORDER | SWT.SINGLE)
+    author.setLayoutData(gd)
     author.addModifyListener(new ModifyListener() {
 
       override def modifyText(e: ModifyEvent) {
-        dialogChanged();
+        dialogChanged()
       }
-    });
+    })
 
-    initialize();
-    dialogChanged();
-    setControl(container);
+    initialize()
+    dialogChanged()
+    setControl(container)
   }
 
   private def initialize() {
-    projectText.setText("rust_project");
+    projectText.setText("rust_project")
   }
 
   def createProject(): Boolean = {
     if (project != null) {
       val preferenceStore = RustPlugin.prefStore
-      preferenceStore.setValue("ProjectName", project.getName());
-      preferenceStore.setValue("IsLib", isLib.getSelection());
-      val desc = project.getWorkspace().newProjectDescription(project.getName());
+      preferenceStore.setValue("ProjectName", project.getName)
+      preferenceStore.setValue("IsLib", isLib.getSelection)
+      val desc = project.getWorkspace.newProjectDescription(project.getName)
       try {
-        project.create(desc, null);
-        if (!project.isOpen()) {
-          project.open(null);
+        project.create(desc, null)
+        if (!project.isOpen) {
+          project.open(null)
         }
-        val src = project.getFolder("src");
+        val src = project.getFolder("src")
         if (!src.exists()) {
-          src.create(false, true, null);
+          src.create(false, true, null)
         }
-        val bin = project.getFolder("bin");
+        val bin = project.getFolder("bin")
         if (!bin.exists()) {
-          bin.create(false, true, null);
+          bin.create(false, true, null)
         }
-        bin.setHidden(true);
-        val file = src.getFile(project.getName() + ".rc");
+        bin.setHidden(true)
+        val file = src.getFile(project.getName + ".rc")
         if (!file.exists()) {
-          file.create(openContentStream(), true, null);
+          file.create(openContentStream(), true, null)
         }
       } catch {
         case e: CoreException =>
-          updateStatus(e.getMessage());
+          updateStatus(e.getMessage)
           false
       }
     }
@@ -113,19 +113,19 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
   }
 
   private def openContentStream(): InputStream = {
-    val contentBuilder = new StringBuilder();
+    val contentBuilder = new StringBuilder()
     contentBuilder.append("#[link(name = \"")
-      .append(project.getName())
+      .append(project.getName)
       .append("\", vers = \"")
-      .append(version.getText())
+      .append(version.getText)
       .append("\", author = \"")
-      .append(author.getText())
-      .append("\")];\n");
-    if (isLib.getSelection()) {
-      contentBuilder.append("#[crate_type = \"lib\"];");
+      .append(author.getText)
+      .append("\")];\n")
+    if (isLib.getSelection) {
+      contentBuilder.append("#[crate_type = \"lib\"];")
     }
 
-    return new ByteArrayInputStream(contentBuilder.toString().getBytes());
+    new ByteArrayInputStream(contentBuilder.toString().getBytes)
   }
 
   private def dialogChanged() {
@@ -136,15 +136,15 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
       .getProject(getProjectName());
 
     if (project.exists()) {
-      updateStatus("Project already exists");
-      return ;
+      updateStatus("Project already exists")
+      return
     }
-    updateStatus(null);
+    updateStatus(null)
   }
 
   private def updateStatus(message: String) {
-    setErrorMessage(message);
-    setPageComplete(message == null);
+    setErrorMessage(message)
+    setPageComplete(message == null)
   }
 
   def getProjectName(): String = projectText.getText()

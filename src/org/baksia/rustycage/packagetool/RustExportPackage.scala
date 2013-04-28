@@ -10,7 +10,7 @@ import org.eclipse.ui.IWorkbench
 
 class RustExportPackage extends Wizard with IExportWizard {
 	def init(workbench: IWorkbench ,  selection: IStructuredSelection) {
-		addPage(new RustExportPackageWizardPage())
+		addPage(new RustExportPackageWizardPage(workbench))
 	}
 	
 	def performFinish(): Boolean = {

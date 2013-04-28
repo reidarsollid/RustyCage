@@ -8,10 +8,10 @@ object RustyCageRunner {
   import scala.sys.process._
   def run(iFile: IFile, progressService: IProgressService) {
     val rawPath = iFile.getRawLocationURI.getRawPath
-    val file: String = rawPath.substring(0, rawPath.lastIndexOf(".")).replace("src", "bin")
-
+    val file: String = rawPath.substring(0, rawPath.lastIndexOf(".")).replaceFirst("/src", "/bin").replaceFirst("/test", "/bin")
+    
     val messageConsole = new MessageConsoleScala(iFile, "Run : ")
-
+    messageConsole.message("Running: " + file)
     val logger = ProcessLogger(
       (o: String) => messageConsole.message(o),
       (e: String) => messageConsole.errorMessage(e))
