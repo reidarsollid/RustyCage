@@ -25,7 +25,7 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
     val typedString = getTypedString(document, offset)
 
     //KeyWord completions
-    val proposalBuffer = new ArrayBuffer[ICompletionProposal](RustParser.Keywords.length)
+    val proposalBuffer = new ArrayBuffer[ICompletionProposal]()
     if (typedString.contains("::")) {
       val libWord = typedString.splitToTuple("::")
       fetchLibProposals(typedString, proposalBuffer, offset, libWord)
@@ -38,38 +38,49 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
     proposalBuffer.toArray
   }
 
+
   private def fetchLibProposals(typedString: String, proposalsdBuffer: ArrayBuffer[ICompletionProposal], offset: Int, libWord: (String, String)) {
     val preferenceStore = RustPlugin.prefStore
     val rustPath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcore"
     val rustPathStd = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libstd"
     val word = libWord._2
     val lib = libWord._1
-    findFiles(rustPath, rustPathStd).foreach(file =>
-      Source.fromFile(file).getLines().foreach(line =>
-        if (line.startsWith("fn") && line.contains(word)) {
-          val token = line.splitToTuple("fn")._2
+    val list = findFiles(word = lib, rustPath, rustPathStd)
+    if (!list.isEmpty) {
+      Source.fromFile(list(0), "UTF-8").getLines().toList.foreach(line =>
+
+        if (line.startsWith("fn") && line.contains(word) && !line.contains("test")) {
+
+          val token = line.replace("fn", "")
+
           if (token.contains("(")) {
             val info = new ContextInformation(token, lib)
             val resultWord = token.substring(0, token.indexOf("(")).trim()
+
             var displayString = token
             if (token.contains("{")) {
               displayString = token.substring(0, token.indexOf("{"))
             }
+
             //TODO : This is butt ugly, but shows me what I need from the lib
             proposalsdBuffer += new CompletionProposal(resultWord, offset - word.length(), word.length(), resultWord.length(), null, displayString, info, line)
+
           }
-        }))
+        })
+    }
   }
 
-  def rustFileSearch(startPath: File, fileBuffer: ListBuffer[File]): List[File] = {
-    fileBuffer ++= startPath.listFiles.filter(!_.isDirectory).filter(_.getName.endsWith(".rs"))
-    startPath.listFiles.filter(_.isDirectory).foreach(d => rustFileSearch(d, fileBuffer))
+  def rustFileSearch(startPath: File, fileBuffer: ListBuffer[File], word: String): List[File] = {
+    fileBuffer ++= startPath.listFiles.filter(f => !f.isDirectory && (f.getName.endsWith(word + ".rs")))
+    if (!fileBuffer.isEmpty) fileBuffer
+    else
+      startPath.listFiles.filter(_.isDirectory).foreach(d => rustFileSearch(d, fileBuffer, word))
     fileBuffer.toList
   }
 
-  def findFiles(path: String*): List[File] = {
+  def findFiles(word: String, path: String*): List[File] = {
     val fileBuffer: ListBuffer[File] = new ListBuffer
-    path.foreach(l => rustFileSearch(new File(l), fileBuffer))
+    path.foreach(l => rustFileSearch(new File(l), fileBuffer, word))
     fileBuffer.toList
   }
 
