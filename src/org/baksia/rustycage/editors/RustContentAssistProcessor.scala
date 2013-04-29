@@ -49,7 +49,7 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
     if (!list.isEmpty) {
       Source.fromFile(list(0), "UTF-8").getLines().toList.foreach(line =>
 
-        if (line.startsWith("fn") && line.contains(word) && !line.contains("test")) {
+        if (line.trim().startsWith("fn") && line.contains(word) && !line.contains("test")) {
 
           val token = line.replace("fn", "")
 
