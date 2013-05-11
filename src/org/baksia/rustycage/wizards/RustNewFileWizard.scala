@@ -56,13 +56,13 @@ class RustNewFileWizard extends Wizard with INewWizard {
     val container: IContainer = root.findMember(new Path(containerName)).asInstanceOf[IContainer]
 
     if (!container.exists()) {
-      throwCoreException("Container \"" + containerName + "\" does not exist.")
+      throwCoreException(s"Container \'$containerName\' does not exist.")
     }
     
     val file = container.getFile(new Path(fileName))
     val preferenceStore = RustPlugin.prefStore
     val projectName = preferenceStore.getString("ProjectName")
-    val crateFile = container.getFile(new Path(projectName + ".rc"))
+    val crateFile = container.getFile(new Path(s"$projectName.rc"))
     val stream: InputStream = openContentStream()
     val crateStream: InputStream = openCrateContentStream(fileName)
     if (file.exists()) {
@@ -89,10 +89,11 @@ class RustNewFileWizard extends Wizard with INewWizard {
 
   private def openCrateContentStream(fileName: String): InputStream = {
     val modName = fileName.substring(0, fileName.length() - 3)
-    val contents = "\nmod " + modName + ";"
+    val contents = s"\nmod $modName;"
     new ByteArrayInputStream(contents.getBytes)
   }
 
+  //TODO: Remove isLib from prefStore. Ask in new file wizard for main function
   private def openContentStream(): InputStream = {
     if (RustPlugin.prefStore.getBoolean("IsLib")) new ByteArrayInputStream(TEMPLATE_LIB.getBytes)
     else

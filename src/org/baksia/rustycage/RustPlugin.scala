@@ -1,7 +1,5 @@
 package org.baksia.rustycage
 
-import org.eclipse.core.resources.IProject
-import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.runtime.Status
 import org.eclipse.jface.preference.IPreferenceStore
 import org.eclipse.jface.resource.ImageDescriptor
@@ -16,22 +14,23 @@ object RustPlugin {
   def prefStore: IPreferenceStore = plugin.getPreferenceStore
 
   def getImageDescriptor(path: String): ImageDescriptor = {
-    AbstractUIPlugin.imageDescriptorFromPlugin(PluginId, path);
+    AbstractUIPlugin.imageDescriptorFromPlugin(PluginId, path)
   }
 
   def log(status: Int, msg: String, ex: Throwable = null): Unit = {
-    plugin.getLog.log(new Status(status, plugin.getBundle().getSymbolicName(), msg, ex))
+    plugin.getLog.log(new Status(status, plugin.getBundle.getSymbolicName, msg, ex))
   }
 }
 
 class RustPlugin extends AbstractUIPlugin {
-  override def start(context: BundleContext): Unit = {
+  override def start(context: BundleContext) {
     super.start(context)
     RustPlugin.plugin = this
   }
 
-  override def stop(context: BundleContext): Unit = {
+  override def stop(context: BundleContext) {
     RustPlugin.plugin = null
     super.stop(context)
   }
+
 }

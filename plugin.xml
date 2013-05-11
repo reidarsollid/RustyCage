@@ -71,13 +71,14 @@
                 project="true">
       </wizard>
       <wizard
-              category="RustyCage"
+            category="RustyCage"
             class="org.baksia.rustycage.wizards.RustProjectWizard"
-              descriptionImage="$nl$/icons/rust.png"
+            descriptionImage="$nl$/icons/rust.png"
             finalPerspective="org.baksia.rustycage.perspective"
             icon="icons/rust_16x16.png"
             id="org.baksia.rustycage.wizards.RustProjectWizard"
-            name="Rust Project">
+            name="Rust Project"
+            project="true">
               project="true">
       </wizard>
    </extension>

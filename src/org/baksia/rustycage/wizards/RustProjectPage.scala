@@ -16,7 +16,6 @@ import org.eclipse.swt.layout.GridData
 import org.eclipse.swt.events.ModifyListener
 import org.eclipse.swt.events.ModifyEvent
 import org.eclipse.swt.widgets.Button
-import org.eclipse.jface.viewers.IStructuredSelection
 import org.eclipse.jface.viewers.ISelection
 
 class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wizard") {
@@ -81,6 +80,7 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
 
   def createProject(): Boolean = {
     if (project != null) {
+      //TODO: Change to project preferences
       val preferenceStore = RustPlugin.prefStore
       preferenceStore.setValue("ProjectName", project.getName)
       preferenceStore.setValue("IsLib", isLib.getSelection)
@@ -129,11 +129,11 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
   }
 
   private def dialogChanged() {
-    if (getProjectName().isEmpty()) {
-      return ;
+    if (getProjectName().isEmpty) {
+      return;
     }
-    project = ResourcesPlugin.getWorkspace().getRoot()
-      .getProject(getProjectName());
+    project = ResourcesPlugin.getWorkspace.getRoot
+      .getProject(getProjectName())
 
     if (project.exists()) {
       updateStatus("Project already exists")
@@ -147,7 +147,7 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
     setPageComplete(message == null)
   }
 
-  def getProjectName(): String = projectText.getText()
+  def getProjectName: String = projectText.getText
 
   private var projectText: Text = _
   private var version: Text = _
