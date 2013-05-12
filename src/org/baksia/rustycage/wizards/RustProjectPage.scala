@@ -129,11 +129,11 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
   }
 
   private def dialogChanged() {
-    if (getProjectName().isEmpty) {
+    if (getProjectName.isEmpty) {
       return;
     }
     project = ResourcesPlugin.getWorkspace.getRoot
-      .getProject(getProjectName())
+      .getProject(getProjectName)
 
     if (project.exists()) {
       updateStatus("Project already exists")

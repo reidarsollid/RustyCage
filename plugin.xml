@@ -8,7 +8,7 @@
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             default="true"
             extensions="rs, rc"
-            icon="icons/rust_16x16.png"
+            icon="icons/rustyrust.png"
             id="org.baksia.rustycage.editors.RustEditor"
             name="Rust Editor">
          <contentTypeBinding
@@ -35,7 +35,7 @@
       </category>
       <wizard
             name="Import Rust File"
-            icon="icons/rust_16x16.png"
+            icon="icons/rustyrust.png"
             category="org.baksia.rustycage.fileimport.rustCategory"
             class="org.baksia.rustycage.fileimport.RustImportWizard"
             id="org.baksia.rustycage.importWizards.RustImportWizard">
@@ -46,7 +46,7 @@
       <wizard
             category="org.baksia.rustycage.fileimport.rustCategory"
             class="org.baksia.rustycage.fileimport.RustImportProjectWizard"
-            icon="icons/rust_16x16.png"
+            icon="icons/rustyrust.png"
             id="org.baksia.rustycage.fileimport.RustProjectImportWizard   "
             name="Import Rust Project ">
          <description>
@@ -65,7 +65,7 @@
                 category="RustyCage"
             class="org.baksia.rustycage.wizards.RustNewFileWizard"
             finalPerspective="org.baksia.rustycage.perspective"
-            icon="icons/rust_16x16.png"
+            icon="icons/rustyrust.png"
             id="org.baksia.rustycage.wizards.RustNewFileWizard"
                 name="Rust file"
                 project="true">
@@ -75,7 +75,7 @@
             class="org.baksia.rustycage.wizards.RustProjectWizard"
             descriptionImage="$nl$/icons/rust.png"
             finalPerspective="org.baksia.rustycage.perspective"
-            icon="icons/rust_16x16.png"
+            icon="icons/rustyrust.png"
             id="org.baksia.rustycage.wizards.RustProjectWizard"
             name="Rust Project"
             project="true">
@@ -101,7 +101,7 @@
       <perspective
             class="org.baksia.rustycage.PerspectiveFactory"
             fixed="false"
-            icon="icons/rust_16x16.png"
+            icon="icons/rustyrust.png"
             id="org.baksia.rustycage.perspective"
             name="Rust">
          <description>
@@ -249,7 +249,7 @@
       <wizard
             category="org.baksia.rustycage.export.rustCategory"
             class="org.baksia.rustycage.packagetool.RustExportPackage"
-            icon="icons/rust_16x16.png"
+            icon="icons/rustyrust.png"
             id="RustyCage.export.package.wizard"
             name="Package">
       </wizard>
