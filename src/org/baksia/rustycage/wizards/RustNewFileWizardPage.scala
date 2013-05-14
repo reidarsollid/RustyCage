@@ -55,8 +55,7 @@ class RustNewFileWizardPage(selection: ISelection) extends WizardPage("New file 
     label = new Label(container, SWT.NULL)
     label.setText("&File name:")
 
-    fileText = new Text(container, SWT.BORDER | SWT.SINGLE)
-    //gd = new GridData(GridData.FILL_HORIZONTAL);
+    fileText = new Text(container, SWT.BORDER | SWT.SINGLE)    
     fileText.setLayoutData(gd)
     fileText.addModifyListener(new ModifyListener() {
       def modifyText(e: ModifyEvent) {

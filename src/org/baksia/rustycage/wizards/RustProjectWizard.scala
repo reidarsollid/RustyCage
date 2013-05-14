@@ -13,15 +13,15 @@ class RustProjectWizard extends Wizard with INewWizard {
   setNeedsProgressMonitor(true)
 
   override def addPages() {
-    rustProjectPage = new RustProjectPage(selection);
-    addPage(rustProjectPage);
+    rustProjectPage = new RustProjectPage(selection)
+    addPage(rustProjectPage)
   }
 
   override def init(workbench: IWorkbench, selection: IStructuredSelection) {
-    RustProjectWizard.this.selection = selection;
+    RustProjectWizard.this.selection = selection
   }
 
-  override def performFinish(): Boolean = rustProjectPage.createProject();
+  override def performFinish(): Boolean = rustProjectPage.createProject()
 
   private var rustProjectPage: RustProjectPage = _
   private var selection: ISelection = _

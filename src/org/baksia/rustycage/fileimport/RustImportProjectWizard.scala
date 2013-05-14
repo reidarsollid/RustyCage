@@ -7,16 +7,16 @@ import org.eclipse.ui.IWorkbench
 
 class RustImportProjectWizard extends Wizard with IImportWizard {
   val rustImportProjectPage: RustImportProjectPage = new RustImportProjectPage()
+  setWindowTitle("Rust Project Import Wizard")
+  setNeedsProgressMonitor(true)
 
   def init(workbench: IWorkbench, selection: IStructuredSelection) {
-    setWindowTitle("Rust Project Import Wizard")
-    setNeedsProgressMonitor(true)
+
   }
 
-  def performFinish(): Boolean = false
+  def performFinish(): Boolean = true
 
   override def addPages() {
-    super.addPages()
     addPage(rustImportProjectPage)
   }
 }

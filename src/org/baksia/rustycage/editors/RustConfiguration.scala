@@ -8,7 +8,7 @@ import org.eclipse.jface.text.presentation.PresentationReconciler
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer
 import org.eclipse.jface.text.IDocument
 import org.eclipse.jface.text.IAutoEditStrategy
-import org.eclipse.jface.text.IInformationControlCreator;
+
 import org.eclipse.jface.text.formatter.IContentFormatter
 import org.eclipse.jface.text.ITextHover
 import org.eclipse.jface.text.contentassist.IContentAssistant
@@ -19,10 +19,10 @@ class RustConfiguration extends SourceViewerConfiguration {
   lazy val doubleClickStrategy: RustDoubleClickStrategy = new RustDoubleClickStrategy
 
   override def getPresentationReconciler(sourceViewer: ISourceViewer): IPresentationReconciler = {
-    val presentationReconciler = new PresentationReconciler();
-    val damagerRepairer = new DefaultDamagerRepairer(new RustScanner());
-    presentationReconciler.setRepairer(damagerRepairer, IDocument.DEFAULT_CONTENT_TYPE);
-    presentationReconciler.setDamager(damagerRepairer, IDocument.DEFAULT_CONTENT_TYPE);
+    val presentationReconciler = new PresentationReconciler()
+    val damagerRepairer = new DefaultDamagerRepairer(new RustScanner())
+    presentationReconciler.setRepairer(damagerRepairer, IDocument.DEFAULT_CONTENT_TYPE)
+    presentationReconciler.setDamager(damagerRepairer, IDocument.DEFAULT_CONTENT_TYPE)
     presentationReconciler;
   }
 
@@ -31,23 +31,24 @@ class RustConfiguration extends SourceViewerConfiguration {
   }
 
   override def getContentAssistant(sourceViewer: ISourceViewer): IContentAssistant = {
-    val contentAssistant = new ContentAssistant();
-    val contentAssistProcessor = new RustContentAssistProcessor();
-    contentAssistant.setContentAssistProcessor(contentAssistProcessor, IDocument.DEFAULT_CONTENT_TYPE);
-    contentAssistant.setInformationControlCreator(getInformationControlCreator(sourceViewer));
-    contentAssistant.enableAutoActivation(true);
-    contentAssistant.setAutoActivationDelay(500);
-    contentAssistant.setProposalPopupOrientation(IContentAssistant.PROPOSAL_OVERLAY);
-    contentAssistant.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_ABOVE);
-    contentAssistant.setContextInformationPopupBackground(RustColorConstants.CONTENT_ASSIST);
+    val contentAssistant = new ContentAssistant()
+    val contentAssistProcessor = new RustContentAssistProcessor()
+    contentAssistant.setContentAssistProcessor(contentAssistProcessor, IDocument.DEFAULT_CONTENT_TYPE)
+    contentAssistant.setInformationControlCreator(getInformationControlCreator(sourceViewer))
+    contentAssistant.enableAutoActivation(true)
+    contentAssistant.setAutoActivationDelay(500)
+    contentAssistant.setProposalPopupOrientation(IContentAssistant.PROPOSAL_OVERLAY)
+    contentAssistant.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_ABOVE)
+    contentAssistant.setContextInformationPopupBackground(RustColorConstants.CONTENT_ASSIST)
 
-    contentAssistant;
+    contentAssistant
   }
 
   override def getTextHover(sourceViewer: ISourceViewer, contentType: String): ITextHover = new RustTextHover()
 
   //http://wiki.eclipse.org/FAQ_How_do_I_support_formatting_in_my_editor%3F    
   override def getContentFormatter(sourceViewer: ISourceViewer): IContentFormatter = super.getContentFormatter(sourceViewer)
+
   //new RustContentFormatter(sourceViewer);
 
   override def getTabWidth(sourceViewer: ISourceViewer): Int = 2

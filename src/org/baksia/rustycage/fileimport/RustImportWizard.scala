@@ -6,7 +6,7 @@ import org.eclipse.jface.viewers.IStructuredSelection
 import org.eclipse.ui.IWorkbench
 
 class RustImportWizard extends Wizard with IImportWizard {
-  var mainPage: RustImportWizardPage = null
+  var mainPage: RustImportWizardPage = _
 
   def performFinish(): Boolean = {
     val file = mainPage.createNewFile()

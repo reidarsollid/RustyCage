@@ -11,19 +11,12 @@ import org.eclipse.swt.events.ModifyEvent
 import org.eclipse.core.runtime.Path
 import org.baksia.rustycage.RustPlugin
 import org.eclipse.core.resources.ResourcesPlugin
-import org.eclipse.ui.handlers.HandlerUtil
-import java.io.File
-import org.eclipse.jface.viewers.IStructuredSelection
 import org.eclipse.ui.IWorkbench
-import org.eclipse.core.resources.IResource
-import org.eclipse.ui.ide.ResourceUtil
-import org.eclipse.core.internal.utils.FileUtil
 
 class RustExportPackageWizardPage(workBench: IWorkbench) extends WizardPage("Export Package Wizard") {
   setTitle("Select crate file")
   
   override def createControl(parent: Composite) {
-    
     val fileSelectionArea = new Composite(parent, SWT.NONE)
     val fileSelectionData = new GridData(GridData.GRAB_HORIZONTAL | GridData.FILL_HORIZONTAL)
     fileSelectionArea.setLayoutData(fileSelectionData)
@@ -34,8 +27,7 @@ class RustExportPackageWizardPage(workBench: IWorkbench) extends WizardPage("Exp
     fileSelectionLayout.marginWidth = 0
     fileSelectionLayout.marginHeight = 0
     fileSelectionArea.setLayout(fileSelectionLayout)
-    //ResourceUtil.
-    //FileUtil.
+
     val projectName = RustPlugin.prefStore.getString("ProjectName")
     val editor = new FileFieldEditor("fileSelect", "Select crate: ", false, fileSelectionArea)
     val workspaceRoot = ResourcesPlugin.getWorkspace.getRoot

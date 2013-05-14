@@ -249,8 +249,11 @@
             category="org.baksia.rustycage.export.rustCategory"
             class="org.baksia.rustycage.packagetool.RustExportPackage"
             icon="icons/rust_16x16.png"
-            id="RustyCage.export.package.wizard"
+            id="org.baksia.export.package.wizard.RustExportPackage"
             name="Package">
+         <description>
+            Build a Rust pkg from the selected Crate
+         </description>         
       </wizard>
    </extension>
 

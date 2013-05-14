@@ -94,7 +94,6 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
     loop(offset - 2, document.getChar(offset - 1), new StringBuilder)
   }
 
-  //TODO : Need to activate from ::, look at CDT ?
   def getCompletionProposalAutoActivationCharacters: Array[Char] = Array[Char](':', ':')
 
   def getContextInformationAutoActivationCharacters = Array[Char](':', ':')
