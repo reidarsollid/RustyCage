@@ -16,11 +16,12 @@ object RustyCageCompile {
 
   import scala.sys.process._
 
-  def compile(crate: IResource, argument: String, monitor: IProgressMonitor): Boolean = {
+  def compile(crate: IResource, argument: String, monitor: IProgressMonitor, project: IProject): Boolean = {
     try {
       val preferenceStore: IPreferenceStore = RustPlugin.prefStore
       val rustPath: String = preferenceStore.getString(PreferenceConstants.RUST_C)
-      val projectName: String = preferenceStore.getString("ProjectName")
+      
+      val projectName: String = project.getName()
       val rawPath: String = crate.getRawLocationURI.getRawPath
       val srcPath: IPath = crate.getFullPath
       
@@ -64,14 +65,4 @@ object RustyCageCompile {
     }
   }
   
-  def findCrate(dir: String): IResource = {
-    val root: IWorkspaceRoot = ResourcesPlugin.getWorkspace.getRoot
-    val container: IContainer = root.findMember(new Path("test")).asInstanceOf[IContainer]
-    val crates = container.members().filter(r => r.getFileExtension() == "rc")
-    if(crates.length > 1) 
-      throw new RuntimeException
-      else 
-        crates(0)
-  }
-
 }
