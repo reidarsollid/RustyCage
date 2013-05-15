@@ -21,7 +21,7 @@ object RustyCageCompile {
       val preferenceStore: IPreferenceStore = RustPlugin.prefStore
       val rustPath: String = preferenceStore.getString(PreferenceConstants.RUST_C)
       
-      val projectName: String = project.getName()
+      val projectName: String = project.getName
       val rawPath: String = crate.getRawLocationURI.getRawPath
       val srcPath: IPath = crate.getFullPath
       

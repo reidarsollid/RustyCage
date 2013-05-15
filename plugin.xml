@@ -84,7 +84,7 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            name="Rust Preferences"
+            name="Rust"
             class="org.baksia.rustycage.preferences.RustPreferencePage"
             id="org.baksia.rustycage.preferences.RustPreferencePage">
       </page>
@@ -184,7 +184,7 @@
             <command
                   commandId="RustyCage.commands.compileCommand"
                   icon="icons/Compile.gif"
-                  id="RustyCage.toolbars.sampleCommand"
+                  id="RustyCage.toolbars.compileCommand"
                   label="Compile"
                   style="push">
             </command>
@@ -195,6 +195,23 @@
                   style="push">
             </command>
          </toolbar>
+      </menuContribution>
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:#TextEditorContext?after=additions">
+         <command
+               commandId="RustyCage.commands.compileCommand"
+               icon="icons/Compile.gif"
+               id="RustyCage.toolbars.compileCommand"
+               label="Rust Compile"
+               style="pulldown">
+         </command>
+         <command
+               commandId="RustyCage.commands.runCommand"
+               icon="icons/Run.gif"
+               label="Rust Run"
+               style="pulldown">
+         </command>
       </menuContribution>
    </extension>
    <extension
@@ -255,6 +272,42 @@
             Build a Rust pkg from the selected Crate
          </description>         
       </wizard>
+   </extension>
+   <extension
+         id="rustBuilder"
+         name="Rust Project Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true"
+            isConfigurable="false">
+         <run
+               class="org.baksia.rustycage.builder.RustBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         id="rustNature"
+         name="Rust Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.baksia.rustycage.builder.RustNature">
+         </run>
+      </runtime>
+      <builder
+            id="org.baksia.rustycage.rustBuilder">
+      </builder>
+   </extension>
+   <extension
+         id="xmlProblem"
+         name="XML Problem"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
    </extension>
 
 </plugin>

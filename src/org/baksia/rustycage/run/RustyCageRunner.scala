@@ -24,6 +24,7 @@ object RustyCageRunner {
 
   }
 
+  //Move this function out a trait CrateFinder or in RustPlugin ??
   def findCrate(dir: IContainer): IResource = {
     val crates = dir.members().filter(r => r.getFileExtension == "rc")
     if(crates.length > 1)
