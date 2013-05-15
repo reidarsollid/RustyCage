@@ -116,13 +116,20 @@ class RustNewFileWizard extends Wizard with INewWizard {
     """/******
       | * This file is generated with RustyCage
       | */
+      |
       |fn main() {
-      | io::println("Hello world");
-      |}""".stripMargin
+      |  task::spawn(hello);
+      |}
+      |
+      |fn hello() {
+      |  io::println("Hello world");
+      |}
+      |""".stripMargin
 
   private val TEMPLATE_LIB =
     """/******
       | * This file is generated with RustyCage
-      | */""".stripMargin
+      | */
+      | """.stripMargin
 
 }

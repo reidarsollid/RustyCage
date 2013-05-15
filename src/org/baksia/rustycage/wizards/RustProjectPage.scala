@@ -130,7 +130,7 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
 
   private def dialogChanged() {
     if (getProjectName.isEmpty) {
-      return;
+      return
     }
     project = ResourcesPlugin.getWorkspace.getRoot
       .getProject(getProjectName)
