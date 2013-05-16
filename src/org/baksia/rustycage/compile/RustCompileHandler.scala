@@ -1,7 +1,6 @@
 package org.baksia.rustycage.compile
 
 import org.eclipse.core.commands.{ExecutionEvent, AbstractHandler}
-import org.baksia.rustycage.RustPlugin
 import org.eclipse.ui.texteditor.ITextEditor
 import org.eclipse.ui.handlers.HandlerUtil
 import org.baksia.rustycage.editors.RustEditor

@@ -60,9 +60,9 @@ class RustNewFileWizard extends Wizard with INewWizard {
     }
     
     val file = container.getFile(new Path(fileName))
-    val preferenceStore = RustPlugin.prefStore
-    val projectName = preferenceStore.getString("ProjectName")
-    val crateFile = container.getFile(new Path(s"$projectName.rc"))
+
+    val crateFile = findCrate(container).asInstanceOf[IFile]
+
     val stream: InputStream = openContentStream()
     val crateStream: InputStream = openCrateContentStream(fileName)
     if (file.exists()) {
@@ -98,14 +98,21 @@ class RustNewFileWizard extends Wizard with INewWizard {
     if (RustPlugin.prefStore.getBoolean("IsLib")) new ByteArrayInputStream(TEMPLATE_LIB.getBytes)
     else
       new ByteArrayInputStream(TEMPLATE_MAIN.getBytes)
-
-
   }
 
   private def throwCoreException(message: String) = {
     val status =
       new Status(IStatus.ERROR, "RustyCage", IStatus.OK, message, null)
     throw new CoreException(status)
+  }
+
+  //Move this function out a trait CrateFinder or in RustPlugin ??
+  def findCrate(dir: IContainer): IResource = {
+    val crates = dir.members().filter(r => r.getFileExtension == "rc")
+    if (crates.length > 1)
+      throw new RuntimeException
+    else
+      crates(0)
   }
 
   private var pageFile: RustNewFileWizardPage = _

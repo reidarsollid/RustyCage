@@ -78,6 +78,7 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
     projectText.setText("rust_project")
   }
 
+
   def createProject(): Boolean = {
     if (project != null) {
       //TODO: Change to project preferences
@@ -94,14 +95,22 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
         if (!src.exists()) {
           src.create(false, true, null)
         }
+        val test = project.getFolder("test")
+        if (!test.exists()) {
+          test.create(false, true, null)
+        }
         val bin = project.getFolder("bin")
         if (!bin.exists()) {
           bin.create(false, true, null)
         }
         bin.setHidden(true)
-        val file = src.getFile(project.getName + ".rc")
-        if (!file.exists()) {
-          file.create(openContentStream(), true, null)
+        val srcCrate = src.getFile(project.getName + ".rc")
+        if (!srcCrate.exists()) {
+          srcCrate.create(openContentStream(), true, null)
+        }
+        val testCrate = test.getFile("test_" + project.getName + ".rc")
+        if (!testCrate.exists()) {
+          testCrate.create(openTestContentStream(), true, null)
         }
       } catch {
         case e: CoreException =>
@@ -124,7 +133,19 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
     if (isLib.getSelection) {
       contentBuilder.append("#[crate_type = \"lib\"];")
     }
+    new ByteArrayInputStream(contentBuilder.toString().getBytes)
+  }
 
+  def openTestContentStream() : InputStream = {
+    val contentBuilder = new StringBuilder()
+    contentBuilder.append("#[link(name = \"")
+      .append(project.getName)
+      .append("\", vers = \"")
+      .append(version.getText)
+      .append("\", author = \"")
+      .append(author.getText)
+      .append("\")];\n")
+    contentBuilder.append("#[crate_type = \"test\"];")
     new ByteArrayInputStream(contentBuilder.toString().getBytes)
   }
 

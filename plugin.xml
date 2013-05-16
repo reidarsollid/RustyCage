@@ -186,12 +186,14 @@
                   icon="icons/Compile.gif"
                   id="RustyCage.toolbars.compileCommand"
                   label="Compile"
+                  mnemonic="M1+C"
                   style="push">
             </command>
             <command
                   commandId="RustyCage.commands.runCommand"
                   icon="icons/Run.gif"
                   label="Run"
+                  mnemonic="M1+M2+R"
                   style="push">
             </command>
          </toolbar>
