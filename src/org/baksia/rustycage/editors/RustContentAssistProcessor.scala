@@ -48,9 +48,9 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
 
         val line = newLine.trim()
 
-        if (line.startsWith("fn") && line.contains(word) && !line.contains("test")) {
+        if (line.startsWith("pub fn") && line.contains(word) && !line.contains("test")) {
 
-          val token = line.replace("fn", "")
+          val token = line.replace("pub fn", "")
 
           if (token.contains("(")) {
             val info = new ContextInformation(token, lib)
