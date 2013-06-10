@@ -1,7 +1,7 @@
 package org.baksia.rustycage.editors
 
-import org.eclipse.jface.text.contentassist.{ CompletionProposal, ICompletionProposal, IContentAssistProcessor }
-import org.eclipse.jface.text.{ IDocument, ITextViewer }
+import org.eclipse.jface.text.contentassist.{CompletionProposal, ICompletionProposal, IContentAssistProcessor}
+import org.eclipse.jface.text.{IDocument, ITextViewer}
 import scala.collection.mutable.ArrayBuffer
 import org.eclipse.jface.text.contentassist.IContextInformation
 import scala.annotation.tailrec
@@ -28,6 +28,26 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
       val libWord = typedString.splitToTuple("::")
       fetchLibProposals(typedString, proposalBuffer, offset, libWord)
     } else {
+      //Add proposals from src/core/prelude
+      val preferenceStore = RustPlugin.prefStore
+      val preludePath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcore/prelude.rs"
+      Source.fromFile(preludePath, "UTF-8").getLines().toList.foreach(newLine => {
+        val line = newLine.trim()
+        if (line.startsWith("pub use") && line.contains(typedString) && !line.contains("test")) {
+          val token = line.replace("pub use", "")
+          val props = token.split("::")(2).split(",")
+          props.foreach(word => {
+            //TODO:: Remove "{" and "};"
+            if(word.startsWith(typedString)){
+              proposalBuffer += new CompletionProposal(word.trim(), offset - typedString.length(), typedString.length(), word.length())
+            }
+          })
+          //proposalBuffer += new CompletionProposal(token.trim(), offset - typedString.length(), typedString.length(), token.length())
+        }
+      }
+
+      )
+
       RustParser.Keywords.foreach(keyword =>
         if (keyword.startsWith(typedString))
           proposalBuffer += new CompletionProposal(keyword.trim(), offset - typedString.length(), typedString.length(), keyword.length()))
@@ -42,7 +62,7 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
     val rustPathStd = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libstd"
     val word = libWord._2
     val lib = libWord._1
-    val list = findFiles(lib , rustPath, rustPathStd)
+    val list = findFiles(lib, rustPath, rustPathStd)
     if (!list.isEmpty) {
       Source.fromFile(list(0), "UTF-8").getLines().toList.foreach(newLine => {
 
