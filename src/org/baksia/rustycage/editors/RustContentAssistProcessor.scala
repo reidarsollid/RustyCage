@@ -31,26 +31,27 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
       //Add proposals from src/core/prelude
       val preferenceStore = RustPlugin.prefStore
       val preludePath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcore/prelude.rs"
+
+      RustParser.Keywords.foreach(keyword =>
+        if (keyword.startsWith(typedString))
+          proposalBuffer += new CompletionProposal(keyword.trim(), offset - typedString.length(), typedString.length(), keyword.length()))
+
       Source.fromFile(preludePath, "UTF-8").getLines().toList.foreach(newLine => {
         val line = newLine.trim()
         if (line.startsWith("pub use") && line.contains(typedString) && !line.contains("test")) {
           val token = line.replace("pub use", "")
-          val props = token.split("::")(2).split(",")
+          //TODO: Fix token not containing "::" 
+          val props = token.split("::")(1).split(",")
+          
           props.foreach(word => {
             //TODO:: Remove "{" and "};"
-            if(word.startsWith(typedString)){
+            if (word.startsWith(typedString)) {
               proposalBuffer += new CompletionProposal(word.trim(), offset - typedString.length(), typedString.length(), word.length())
             }
           })
           //proposalBuffer += new CompletionProposal(token.trim(), offset - typedString.length(), typedString.length(), token.length())
         }
-      }
-
-      )
-
-      RustParser.Keywords.foreach(keyword =>
-        if (keyword.startsWith(typedString))
-          proposalBuffer += new CompletionProposal(keyword.trim(), offset - typedString.length(), typedString.length(), keyword.length()))
+      })
     }
 
     proposalBuffer.toArray
