@@ -51,14 +51,11 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
               }
             })
           } else {
-           // if (token.startsWith(typedString)) {
-              proposalBuffer += new CompletionProposal(token.trim(), offset - typedString.length(), typedString.length(), token.length())
-            //}
+            proposalBuffer += new CompletionProposal(token.trim(), offset - typedString.length(), typedString.length(), token.length())
           }
         }
       })
     }
-
     proposalBuffer.toArray
   }
 
@@ -96,7 +93,7 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
   }
 
   def rustFileSearch(startPath: File, fileBuffer: ListBuffer[File], word: String): List[File] = {
-    fileBuffer ++= startPath.listFiles.filter(f => !f.isDirectory && (f.getName.endsWith(word + ".rs")))
+    fileBuffer ++= startPath.listFiles.filter(f => !f.isDirectory && f.getName.endsWith(word + ".rs"))
     if (!fileBuffer.isEmpty) fileBuffer
     else
       startPath.listFiles.filter(_.isDirectory).foreach(d => rustFileSearch(d, fileBuffer, word))
