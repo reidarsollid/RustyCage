@@ -40,18 +40,18 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
         val line = newLine.trim()
         if (line.startsWith("pub use") && line.contains(typedString) && !line.contains("test")) {
           val token = line.replace("pub use", "")
-          //TODO: Fix token not containing "::"
           if (token.contains("::")) {
             val props = token.split("::")(1).split(",")
 
             props.foreach(word => {
-              //TODO:: Remove "{" and "};"
               if (word.startsWith(typedString)) {
-                proposalBuffer += new CompletionProposal(word.trim(), offset - typedString.length(), typedString.length(), word.length())
+                val proposal = word.replace("{", "").replace("}", "").replace(";", "")
+                proposalBuffer += new CompletionProposal(proposal.trim(), offset - typedString.length(), typedString.length(), proposal.length())
               }
             })
           } else {
-            proposalBuffer += new CompletionProposal(token.trim(), offset - typedString.length(), typedString.length(), token.length())
+            val proposal = token.replace(";", "")
+            proposalBuffer += new CompletionProposal(proposal.trim(), offset - typedString.length(), typedString.length(), proposal.length())
           }
         }
       })
