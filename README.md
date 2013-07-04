@@ -1,6 +1,10 @@
 Rusty Cage is my favorite song by Soundgarden and RustyCage is a rust-lang plugin for Eclipse.
 "I'm gonna break my rusty cage and run"
 
+I do not have a Windows system, so RustyCage is not tested on Windows. OS X and Linux Mint is what I test on.
+
+Eclipse Kepler is not supported jet.
+
 Update site
 http://reidarsollid.github.io/RustyCage/updatesite/site.xml
 
