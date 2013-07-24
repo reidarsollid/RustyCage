@@ -22,6 +22,7 @@ class RustEditStrategy extends IAutoEditStrategy {
         configureCaret(command)
         
       case _ => 
+        
     }
   }
 

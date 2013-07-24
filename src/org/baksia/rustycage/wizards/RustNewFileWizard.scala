@@ -123,13 +123,13 @@ class RustNewFileWizard extends Wizard with INewWizard {
     """/******
       | * This file is generated with RustyCage
       | */
-      |
-      |fn main() {
-      |  task::spawn(hello);
+      |#[main]
+      |fn run() {
+      |  spawn(hello);
       |}
       |
       |fn hello() {
-      |  io::println("Hello world");
+      |  println("Hello world");
       |}
       |""".stripMargin
 

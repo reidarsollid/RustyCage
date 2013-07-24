@@ -3,10 +3,8 @@ Rusty Cage is my favorite song by Soundgarden and RustyCage is a rust-lang plugi
 
 I do not have a Windows system, so RustyCage is not tested on Windows. OS X and Linux Mint is what I test on.
 
-Eclipse Kepler is not supported jet.
-
 Update site
-http://reidarsollid.github.io/RustyCage/updatesite/site.xml
+http://sourceforge.net/projects/rustycageupdatesite/files/updatesite/
 
 Introduction
 http://reidarsollid.com/2012/03/27/rustycage-a-rust-lang-ide-plugin-for-eclipse/
