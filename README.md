@@ -4,7 +4,7 @@ Rusty Cage is my favorite song by Soundgarden and RustyCage is a rust-lang plugi
 I do not have a Windows system, so RustyCage is not tested on Windows. OS X and Linux Mint is what I test on.
 
 Update site
-http://sourceforge.net/projects/rustycageupdatesite/files/updatesite/
+https://sourceforge.net/projects/rustycage/files/updatesite/
 
 Introduction
 http://reidarsollid.com/2012/03/27/rustycage-a-rust-lang-ide-plugin-for-eclipse/
