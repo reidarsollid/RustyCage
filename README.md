@@ -6,6 +6,9 @@ I do not have a Windows system, so RustyCage is not tested on Windows. OS X and 
 Update site
 https://sourceforge.net/projects/rustycage/files/updatesite/
 
+RustyCage is written in Scala and needs Scala compiler for installation
+http://download.scala-ide.org/sdk/e38/scala210/stable/site
+
 Introduction
 http://reidarsollid.com/2012/03/27/rustycage-a-rust-lang-ide-plugin-for-eclipse/
 
