@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="RustyCage update site" url="http://reidarsollid.github.com/RustyCage/updatesite/site.xml">
+      A Rust IDE plugin
+   </description>
+   <feature url="features/rustycage-feature_1.0.1.qualifier.jar" id="rustycage-feature" version="1.0.2.qualifier">
+      <category name="Language IDE"/>
+   </feature>
+   <category-def name="Language IDE" label="Rust"/>
+</site>

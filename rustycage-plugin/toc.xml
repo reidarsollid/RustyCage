@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Rust Table of Contents">
+	<topic label="Main Topic"  href="html/maintopic.html"> 
+		<topic label="Basic Syntax" href="html/subtopic.html"/> 
+	</topic>
+	<topic label="RustyCage">
+    <topic label="New Project">
+    </topic>
+ </topic>
+ <topic label="Topic">
+ </topic>
+</toc>

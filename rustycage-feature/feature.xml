@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="rustycage-feature"
+      label="RustyCage"
+      version="1.0.2.qualifier"
+      provider-name="org.baksia">
+
+   <description url="http://www.example.com/description">
+      An IDE for Rust development
+   </description>
+
+  <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <discovery label="Rust-lang" url="http://www.rust-lang.org/"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.scala-ide.scala.library"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.debug.ui"/>
+      <import plugin="org.eclipse.help"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.jdt.debug.ui"/>
+      <import plugin="org.eclipse.jdt.junit"/>
+      <import plugin="org.eclipse.jdt.launching"/>
+      <import plugin="org.eclipse.ui.forms"/>
+      <import plugin="org.scala-ide.scala.compiler"/>
+      <import plugin="org.scala-ide.sdt.core"/>
+      <import plugin="scalariform"/>
+      <import plugin="org.eclipse.core.filesystem"/>
+   </requires>
+
+   <plugin
+         id="rustycage-plugin"
+         download-size="0"
+         install-size="0"
+         version="1.0.2.qualifier"/>
+   <plugin
+		 id="org.scala-ide.scala.compiler"
+         download-size="0"
+         install-size="0"
+         version="2.10.2.v20130530-074427-VFINAL-60d462ef6e"
+         unpack="false"/>
+</feature>

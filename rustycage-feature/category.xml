@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.baksia.rustycage.feature_1.1.0.qualifier.jar" id="org.baksia.rustycage.feature" version="1.1.0.qualifier">
+      <category name="org.baksia"/>
+   </feature>
+   <category-def name="org.baksia" label="rustycage"/>
+</site>
