@@ -5,7 +5,7 @@
  	<parent>
 		<artifactId>rustycage</artifactId>
 		<groupId>org.baksia.rustycage</groupId>
-		<version>1.0.1-SNAPSHOT</version>
+		<version>1.0.2-SNAPSHOT</version>
 	</parent>
   <artifactId>rustycage-plugin</artifactId>
   <version>1.0.2-SNAPSHOT</version>
