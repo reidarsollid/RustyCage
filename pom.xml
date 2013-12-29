@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.baksia.rustycage</groupId>
   <artifactId>rustycage</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.3-SNAPSHOT</version>
   <packaging>pom</packaging>
   <modules>
     <module>rustycage-plugin</module>
@@ -13,7 +13,7 @@
   </modules>
   <properties>
     <tycho.version>0.18.1</tycho.version>
-    <scala.version>2.10.2</scala.version>
+    <scala.version>2.10.3</scala.version>
 	<encoding>UTF-8</encoding>
   </properties>
   <dependencies>
@@ -37,6 +37,7 @@
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>target-platform-configuration</artifactId>
         <version>${tycho.version}</version>
+          <!-- TODO: Fix this to p2 resolver plugin ?? -->
         <configuration>
           <resolver>p2</resolver>
         </configuration>
@@ -69,12 +70,12 @@
     <repository>
        <id>eclipse keppler</id>
        <layout>p2</layout>
-       <url>http://download.eclipse.org/releases/kepler</url>
+       <url>http://download.eclipse.org/releases/luna</url>
     </repository>
     <repository>
        <id>scala eclipse toolchain osgi</id>
        <layout>p2</layout>
-       <url>http://download.scala-ide.org/sdk/e38/scala210/stable/site</url>
+       <url>http://download.scala-ide.org/nightly-scala-ide-4.0.x-210x</url>
     </repository>
   </repositories>
 <pluginRepositories>

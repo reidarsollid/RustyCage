@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: rustycage-plugin
 Bundle-SymbolicName: rustycage-plugin;singleton:=true
-Bundle-Version: 1.0.2.qualifier
+Bundle-Version: 1.0.3.qualifier
 Bundle-Activator: org.baksia.rustycage.RustPlugin
 Bundle-Vendor: Baksia
 Require-Bundle: org.eclipse.ui,
@@ -12,7 +12,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jface.text,
  org.eclipse.ui.console,
  org.eclipse.jdt.ui,
- org.scala-ide.scala.library,
  org.eclipse.ui.editors,
  org.eclipse.core.runtime,
  org.eclipse.debug.ui,
@@ -28,11 +27,10 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.editors,
  org.eclipse.ui.forms,
  org.eclipse.ui.ide,
- org.scala-ide.scala.library,
- org.scala-ide.scala.compiler,
  org.scala-ide.sdt.core,
  org.eclipse.core.resources,
  scalariform,
- org.eclipse.core.filesystem
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+ org.eclipse.core.filesystem,
+ org.scala-lang.scala-library,
+ org.scala-ide.sbt.compiler.interface
 Bundle-ActivationPolicy: lazy

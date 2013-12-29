@@ -5,10 +5,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>rustycage-feature</artifactId>
 	<packaging>eclipse-feature</packaging>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.3-SNAPSHOT</version>
 	<parent>
 		<artifactId>rustycage</artifactId>
 		<groupId>org.baksia.rustycage</groupId>
-		<version>1.0.2-SNAPSHOT</version>
+		<version>1.0.3-SNAPSHOT</version>
 	</parent>
 </project>

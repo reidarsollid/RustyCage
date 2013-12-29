@@ -5,10 +5,10 @@
  	<parent>
 		<artifactId>rustycage</artifactId>
 		<groupId>org.baksia.rustycage</groupId>
-		<version>1.0.2-SNAPSHOT</version>
+		<version>1.0.3-SNAPSHOT</version>
 	</parent>
   <artifactId>rustycage-plugin</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.3-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
   <build>
     <plugins>
