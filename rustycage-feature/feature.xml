@@ -2,14 +2,14 @@
 <feature
       id="rustycage-feature"
       label="RustyCage"
-      version="1.0.2.qualifier"
+      version="1.0.3.qualifier"
       provider-name="org.baksia">
 
    <description url="http://www.example.com/description">
       An IDE for Rust development
    </description>
 
-  <copyright>
+   <copyright>
       %copyright
    </copyright>
 
@@ -29,7 +29,6 @@
       <import plugin="org.eclipse.jface.text"/>
       <import plugin="org.eclipse.ui.console"/>
       <import plugin="org.eclipse.jdt.ui"/>
-      <import plugin="org.scala-ide.scala.library"/>
       <import plugin="org.eclipse.ui.editors"/>
       <import plugin="org.eclipse.debug.ui"/>
       <import plugin="org.eclipse.help"/>
@@ -38,21 +37,24 @@
       <import plugin="org.eclipse.jdt.junit"/>
       <import plugin="org.eclipse.jdt.launching"/>
       <import plugin="org.eclipse.ui.forms"/>
-      <import plugin="org.scala-ide.scala.compiler"/>
       <import plugin="org.scala-ide.sdt.core"/>
       <import plugin="scalariform"/>
       <import plugin="org.eclipse.core.filesystem"/>
+      <import plugin="org.scala-lang.scala-library"/>
+      <import plugin="org.scala-ide.sbt.compiler.interface"/>
    </requires>
 
    <plugin
          id="rustycage-plugin"
          download-size="0"
          install-size="0"
-         version="1.0.2.qualifier"/>
+         version="1.0.3.qualifier"/>
+
    <plugin
-		 id="org.scala-ide.scala.compiler"
+         id="org.eclipse.core.runtime"
          download-size="0"
          install-size="0"
-         version="2.10.2.v20130530-074427-VFINAL-60d462ef6e"
+         version="3.9.0.v20130326-1255"
          unpack="false"/>
+
 </feature>

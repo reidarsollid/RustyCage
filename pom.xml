@@ -10,9 +10,10 @@
     <module>rustycage-plugin</module>
     <module>rustycage-feature</module>
     <module>rustycage-updatesite</module>
+    <module>rustycage-product</module>
   </modules>
   <properties>
-    <tycho.version>0.18.1</tycho.version>
+    <tycho.version>0.19.0</tycho.version>
     <scala.version>2.10.3</scala.version>
 	<encoding>UTF-8</encoding>
   </properties>
@@ -33,49 +34,46 @@
         <version>${tycho.version}</version>
         <extensions>true</extensions>
       </plugin>
-      <plugin>
+     <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>target-platform-configuration</artifactId>
-        <version>${tycho.version}</version>
-          <!-- TODO: Fix this to p2 resolver plugin ?? -->
         <configuration>
-          <resolver>p2</resolver>
+          <environments>
+            <environment>
+              <os>linux</os>
+              <ws>gtk</ws>
+              <arch>x86</arch>
+            </environment>
+            <environment>
+              <os>linux</os>
+              <ws>gtk</ws>
+              <arch>x86_64</arch>
+            </environment>            
+            <environment>
+              <os>macosx</os>
+              <ws>cocoa</ws>
+              <arch>x86_64</arch>
+            </environment>
+            <environment>
+              <os>solaris</os>
+              <ws>gtk</ws>
+              <arch>sparc</arch>
+            </environment>
+          </environments>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>net.alchim31.maven</groupId>
-        <artifactId>scala-maven-plugin</artifactId>
-        <version>3.1.3</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>add-source</goal>
-              <goal>compile</goal>
-              <goal>testCompile</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <scalaVersion>${scala.version}</scalaVersion>
-        </configuration>
-      </plugin>
-	  <plugin>
-            <groupId>com.googlecode</groupId>
-            <artifactId>maven-idea-plugin</artifactId>
-            <version>1.6.1</version>
-      </plugin>
+      </plugin>      	 
     </plugins>
   </build>
   <repositories>
     <repository>
-       <id>eclipse keppler</id>
+       <id>eclipse-kepler</id>
        <layout>p2</layout>
-       <url>http://download.eclipse.org/releases/luna</url>
+       <url>http://download.eclipse.org/releases/kepler</url>
     </repository>
     <repository>
        <id>scala eclipse toolchain osgi</id>
        <layout>p2</layout>
-       <url>http://download.scala-ide.org/nightly-scala-ide-4.0.x-210x</url>
+       <url>http://download.scala-ide.org/sdk/e38/scala210/dev/site</url>
     </repository>
   </repositories>
 <pluginRepositories>

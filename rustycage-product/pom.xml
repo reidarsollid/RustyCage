@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>rustycage</artifactId>
+		<groupId>org.baksia.rustycage</groupId>
+		<version>1.0.3-SNAPSHOT</version>
+	</parent>
+	<groupId>org.baksia.rustycage-product</groupId>
+	<artifactId>rustycage-product</artifactId>
+	<version>1.0.3-SNAPSHOT</version>
+	<packaging>eclipse-repository</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-director-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<includeAllDependencies>true</includeAllDependencies>
+					<products>
+						<product>
+							<id>rustycage</id>
+							<!-- optional parameters (with default values) -->
+							<rootFolder>rustycage</rootFolder>
+							<rootFolders>
+								<macosx></macosx>
+								<!-- solaris></solaris -->
+								<linux></linux>
+							</rootFolders>
+						</product>
+					</products>
+					<!-- global optional parameters (with default values) -->
+					<installFeatures>true</installFeatures>
+					<profile>DefaultProfile</profile>
+				</configuration>
+				<executions>
+					<execution>
+						<id>materialize-products</id>
+						<goals>
+							<goal>materialize-products</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>archive-products</id>
+						<goals>
+							<goal>archive-products</goal>
+						</goals>
+					</execution>
+				</executions>
+
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<executions>
+					<execution>
+						<id>attached-p2-metadata</id>
+						<phase>package</phase>
+						<goals>
+							<goal>p2-metadata</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

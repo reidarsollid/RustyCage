@@ -311,5 +311,29 @@
             value="true">
       </persistent>
    </extension>
+   <extension
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="rustycage.product"
+            description="Rust IDE"
+            name="RustyCage">
+      </product>
+   </extension>
+   <extension
+         id="rustycage"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.ui.ide.workbench"
+            name="RustyCage">
+         <property
+               name="startupProgressRect"
+               value="5,275,445,15">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+      </product>
+   </extension>
 
 </plugin>
