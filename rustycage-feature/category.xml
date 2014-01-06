@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
    <bundle id="rustycage-plugin" version="1.0.3.qualifier">
-      <category name="org.baksia"/>
+      <category name="org.rustycage"/>
    </bundle>
    <category-def name="org.rustycage" label="rustycage"/>
 </site>

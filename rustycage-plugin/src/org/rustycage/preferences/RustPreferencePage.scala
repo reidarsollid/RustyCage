@@ -1,6 +1,8 @@
 package org.rustycage.preferences
 
 import org.rustycage.RustPlugin
+import org.eclipse.jface.preference.{DirectoryFieldEditor, FieldEditorPreferencePage}
+import org.eclipse.ui.{IWorkbench, IWorkbenchPreferencePage}
 
 class RustPreferencePage extends FieldEditorPreferencePage(FieldEditorPreferencePage.GRID) with IWorkbenchPreferencePage {
 	

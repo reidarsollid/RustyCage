@@ -1,5 +1,9 @@
 package org.rustycage.fileimport
 
+import org.eclipse.jface.wizard.Wizard
+import org.eclipse.ui.{IWorkbench, IImportWizard}
+import org.eclipse.jface.viewers.IStructuredSelection
+
 
 class RustImportProjectWizard extends Wizard with IImportWizard {
   val rustImportProjectPage: RustImportProjectPage = new RustImportProjectPage()

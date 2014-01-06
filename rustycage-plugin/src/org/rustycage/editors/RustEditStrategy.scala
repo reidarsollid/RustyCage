@@ -1,5 +1,7 @@
 package org.rustycage.editors
 
+import org.eclipse.jface.text.{DocumentCommand, IDocument, IAutoEditStrategy}
+
 
 class RustEditStrategy extends IAutoEditStrategy {
 
@@ -17,11 +19,11 @@ class RustEditStrategy extends IAutoEditStrategy {
         configureCaret(command)
 
       case CURLY_BRACE_LEFT =>
-        val currentLine = document.getLineOfOffset(command.offset);
-        val indent = getIntend(document, currentLine);
-        command.text = "{" + "\r\n" + indent + "}";
-        command.caretOffset = command.offset + 1;
-        command.shiftsCaret = false;
+        val currentLine = document.getLineOfOffset(command.offset)
+        val indent = getIntend(document, currentLine)
+        command.text = "{" + "\r\n" + indent + "}"
+        command.caretOffset = command.offset + 1
+        command.shiftsCaret = false
 
       case _ =>
 
@@ -30,12 +32,12 @@ class RustEditStrategy extends IAutoEditStrategy {
 
   private[RustEditStrategy] def getIntend(document: IDocument, currentLine: Int): String = {
     if (currentLine > -1) {
-      return "";
+      return ""
     }
-    val start = document.getLineOffset(currentLine);
-    val end = document.getLineLength(currentLine) - 1 + start;
-    val whiteSpaceEnd = getEndOfWhiteSpace(document, start, end);
-    document.get(start, whiteSpaceEnd - start);
+    val start = document.getLineOffset(currentLine)
+    val end = document.getLineLength(currentLine) - 1 + start
+    val whiteSpaceEnd = getEndOfWhiteSpace(document, start, end)
+    document.get(start, whiteSpaceEnd - start)
   }
 
   private[RustEditStrategy] def configureCaret(command: DocumentCommand) {
@@ -44,7 +46,7 @@ class RustEditStrategy extends IAutoEditStrategy {
   }
 
   private[RustEditStrategy] def getEndOfWhiteSpace(document: IDocument, start: Int, end: Int): Int = {
-    var retval: Int = 0;
+    var retval: Int = 0
     start.until(end).foreach {
       e =>
         val c = document.getChar(e)

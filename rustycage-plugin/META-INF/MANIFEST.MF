@@ -32,3 +32,11 @@ Require-Bundle: org.eclipse.ui,
  org.scala-lang.scala-library,
  org.scala-ide.sbt.compiler.interface
 Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .,
+ jdi.jar,
+ jdimodel.jar,
+ junit.jar,
+ sbt-interface.jar,
+ compiler-interface-precompiled.jar,
+ incremental-compiler.jar,
+ miglayout-3.7.4.jar

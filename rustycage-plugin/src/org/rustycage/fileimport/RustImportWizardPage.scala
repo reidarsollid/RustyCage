@@ -2,6 +2,14 @@ package org.rustycage.fileimport
 
 import com.codeminders.scalaws.helpers.io.SourceInputStream
 import scala.io._
+import org.eclipse.jface.viewers.IStructuredSelection
+import org.eclipse.ui.dialogs.WizardNewFileCreationPage
+import org.eclipse.jface.preference.FileFieldEditor
+import org.eclipse.swt.widgets.Composite
+import org.eclipse.swt.SWT
+import org.eclipse.swt.layout.{GridLayout, GridData}
+import org.eclipse.swt.events.{ModifyEvent, ModifyListener}
+import org.eclipse.core.runtime.{Status, IStatus, Path}
 
 class RustImportWizardPage(pageName: String, selection: IStructuredSelection) extends WizardNewFileCreationPage(pageName, selection) {
   protected var editor: FileFieldEditor = null

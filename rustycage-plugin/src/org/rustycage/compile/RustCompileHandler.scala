@@ -1,9 +1,12 @@
 package org.rustycage.compile
 
 import org.rustycage.editors.RustEditor
+import org.eclipse.core.commands.{AbstractHandler, ExecutionEvent}
+import org.eclipse.ui.handlers.HandlerUtil
+import org.eclipse.ui.texteditor.ITextEditor
+import org.eclipse.core.resources.{IContainer, IResource}
 
 class RustCompileHandler extends AbstractHandler {
-
 
   def execute(event: ExecutionEvent): Object = {
 
