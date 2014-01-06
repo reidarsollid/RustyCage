@@ -3,5 +3,5 @@
    <bundle id="rustycage-plugin" version="1.0.3.qualifier">
       <category name="org.baksia"/>
    </bundle>
-   <category-def name="org.baksia" label="rustycage"/>
+   <category-def name="org.rustycage" label="rustycage"/>
 </site>
