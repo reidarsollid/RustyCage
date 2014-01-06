@@ -1,7 +1,7 @@
 package org.rustycage.editors
 
-import org.eclipse.jface.text.contentassist.{CompletionProposal, ICompletionProposal, IContentAssistProcessor}
-import org.eclipse.jface.text.{IDocument, ITextViewer}
+import org.eclipse.jface.text.contentassist.{ CompletionProposal, ICompletionProposal, IContentAssistProcessor }
+import org.eclipse.jface.text.{ IDocument, ITextViewer }
 import scala.collection.mutable.ArrayBuffer
 import org.eclipse.jface.text.contentassist.IContextInformation
 import scala.annotation.tailrec
@@ -30,7 +30,7 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
     } else {
       //Add proposals from src/core/prelude
       val preferenceStore = RustPlugin.prefStore
-      val preludePath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcore/prelude.rs"
+      val preludePath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libstd/prelude.rs"
 
       RustParser.Keywords.foreach(keyword =>
         if (keyword.startsWith(typedString))
@@ -38,6 +38,7 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
 
       Source.fromFile(preludePath, "UTF-8").getLines().toList.foreach(newLine => {
         val line = newLine.trim()
+        
         if (line.startsWith("pub use") && line.contains(typedString) && !line.contains("test")) {
           val token = line.replace("pub use", "")
           if (token.contains("::")) {
@@ -61,7 +62,7 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
 
   private def fetchLibProposals(typedString: String, proposalsdBuffer: ArrayBuffer[ICompletionProposal], offset: Int, libWord: (String, String)) {
     val preferenceStore = RustPlugin.prefStore
-    val rustPath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcore"
+    val rustPath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libextra"
     val rustPathStd = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libstd"
     val word = libWord._2
     val lib = libWord._1

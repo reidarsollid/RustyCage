@@ -1,9 +1,5 @@
 package org.rustycage.fileimport
 
-import org.eclipse.jface.wizard.Wizard
-import org.eclipse.ui.IImportWizard
-import org.eclipse.jface.viewers.IStructuredSelection
-import org.eclipse.ui.IWorkbench
 
 class RustImportWizard extends Wizard with IImportWizard {
   var mainPage: RustImportWizardPage = _

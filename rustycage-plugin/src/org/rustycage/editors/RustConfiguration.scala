@@ -8,12 +8,12 @@ import org.eclipse.jface.text.presentation.PresentationReconciler
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer
 import org.eclipse.jface.text.IDocument
 import org.eclipse.jface.text.IAutoEditStrategy
-
 import org.eclipse.jface.text.formatter.IContentFormatter
 import org.eclipse.jface.text.ITextHover
 import org.eclipse.jface.text.contentassist.IContentAssistant
 import org.eclipse.jface.text.contentassist.ContentAssistant
 import org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy
+import org.eclipse.jface.text.formatter.MultiPassContentFormatter
 
 class RustConfiguration extends SourceViewerConfiguration {
   lazy val doubleClickStrategy: RustDoubleClickStrategy = new RustDoubleClickStrategy
@@ -46,8 +46,14 @@ class RustConfiguration extends SourceViewerConfiguration {
 
   override def getTextHover(sourceViewer: ISourceViewer, contentType: String): ITextHover = new RustTextHover()
 
-  //http://wiki.eclipse.org/FAQ_How_do_I_support_formatting_in_my_editor%3F    
-  override def getContentFormatter(sourceViewer: ISourceViewer): IContentFormatter = super.getContentFormatter(sourceViewer)
+  //http://www.ibm.com/developerworks/opensource/tutorials/os-ecl-commplgin3/section5.html
+  override def getContentFormatter(sourceViewer: ISourceViewer): IContentFormatter = {
+    val formatter = new MultiPassContentFormatter(getConfiguredDocumentPartitioning(sourceViewer),
+      IDocument.DEFAULT_CONTENT_TYPE);
+    //formatter.setMasterStrategy(new MasterFormattingStrategy());
+    //formatter.setSlaveStrategy( new CommentFormattingStrategy(),  IMyPartitions.COMMENTS); 
+    formatter
+  }
 
   //new RustContentFormatter(sourceViewer);
 

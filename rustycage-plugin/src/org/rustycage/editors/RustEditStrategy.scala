@@ -7,7 +7,7 @@ class RustEditStrategy extends IAutoEditStrategy {
 
   //TODO : Is this annoying or a good thing? Should at least be configurable
   override def customizeDocumentCommand(document: IDocument, command: DocumentCommand) {
-     command.text match {
+    command.text match {
       case CHAR_FNUT =>
         command.text = CHAR_FNUT + CHAR_FNUT
         configureCaret(command)
@@ -17,17 +17,42 @@ class RustEditStrategy extends IAutoEditStrategy {
         configureCaret(command)
 
       case CURLY_BRACE_LEFT =>
-        command.text = CURLY_BRACE_LEFT + CURLY_BRACE_RIGHT
-        configureCaret(command)
-        
-      case _ => 
-        
+        val currentLine = document.getLineOfOffset(command.offset);
+        val indent = getIntend(document, currentLine);
+        command.text = "{" + "\r\n" + indent + "}";
+        command.caretOffset = command.offset + 1;
+        command.shiftsCaret = false;
+
+      case _ =>
+
     }
+  }
+
+  private[RustEditStrategy] def getIntend(document: IDocument, currentLine: Int): String = {
+    if (currentLine > -1) {
+      return "";
+    }
+    val start = document.getLineOffset(currentLine);
+    val end = document.getLineLength(currentLine) - 1 + start;
+    val whiteSpaceEnd = getEndOfWhiteSpace(document, start, end);
+    document.get(start, whiteSpaceEnd - start);
   }
 
   private[RustEditStrategy] def configureCaret(command: DocumentCommand) {
     command.caretOffset = command.offset + 1
     command.shiftsCaret = false
+  }
+
+  private[RustEditStrategy] def getEndOfWhiteSpace(document: IDocument, start: Int, end: Int): Int = {
+    var retval: Int = 0;
+    start.until(end).foreach {
+      e =>
+        val c = document.getChar(e)
+        if (c != ' ' || c != '\t') {
+          retval = e
+        }
+    }
+    retval
   }
 }
 

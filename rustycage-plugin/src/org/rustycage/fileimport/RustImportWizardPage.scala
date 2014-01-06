@@ -1,15 +1,5 @@
 package org.rustycage.fileimport
 
-import org.eclipse.ui.dialogs.WizardNewFileCreationPage
-import org.eclipse.jface.viewers.IStructuredSelection
-import org.eclipse.swt.SWT
-import org.eclipse.core.runtime.Status
-import org.eclipse.swt.widgets.Composite
-import org.eclipse.swt.layout.GridData
-import org.eclipse.swt.layout.GridLayout
-import org.eclipse.jface.preference.FileFieldEditor
-import org.eclipse.core.runtime.{IStatus, Path}
-import org.eclipse.swt.events.{ModifyListener, ModifyEvent}
 import com.codeminders.scalaws.helpers.io.SourceInputStream
 import scala.io._
 

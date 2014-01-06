@@ -1,5 +1,6 @@
 package org.rustycage.editors
 
+import org.eclipse.jface.text.rules._
 
 class RustPartitionScanner extends RuleBasedPartitionScanner {
   val comment = new Token("__rust_comment")

@@ -1,5 +1,8 @@
 package org.rustycage.editors
 
+import org.eclipse.jface.text.rules._
+import org.eclipse.jface.text.TextAttribute
+import org.eclipse.swt.SWT
 
 class RustScanner extends RuleBasedScanner {
   val rule: WordRule = new WordRule(new IWordDetector() {

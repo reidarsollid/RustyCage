@@ -4,12 +4,12 @@
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            class="org.baksia.rustycage.editors.RustEditor"
+            class="org.rustycage.editors.RustEditor"
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             default="true"
             extensions="rs, rc"
             icon="icons/rustyrust.png"
-            id="org.baksia.rustycage.editors.RustEditor"
+            id="org.rustycage.editors.RustEditor"
             name="Rust Editor">
          <contentTypeBinding
                contentTypeId="RustyCage.contentType.rust">
@@ -31,23 +31,23 @@
          point="org.eclipse.ui.importWizards">
       <category
             name="Rust"
-            id="org.baksia.rustycage.fileimport.rustCategory">
+            id="org.rustycage.fileimport.rustCategory">
       </category>
       <wizard
             name="Import Rust File"
             icon="icons/rustyrust.png"
-            category="org.baksia.rustycage.fileimport.rustCategory"
-            class="org.baksia.rustycage.fileimport.RustImportWizard"
-            id="org.baksia.rustycage.importWizards.RustImportWizard">
+            category="org.rustycage.fileimport.rustCategory"
+            class="org.rustycage.fileimport.RustImportWizard"
+            id="org.rustycage.importWizards.RustImportWizard">
          <description>
             Import a file from the local file system into the workspace.
          </description>
       </wizard>
       <wizard
-            category="org.baksia.rustycage.fileimport.rustCategory"
-            class="org.baksia.rustycage.fileimport.RustImportProjectWizard"
+            category="org.rustycage.fileimport.rustCategory"
+            class="org.rustycage.fileimport.RustImportProjectWizard"
             icon="icons/rustyrust.png"
-            id="org.baksia.rustycage.fileimport.RustProjectImportWizard   "
+            id="org.rustycage.fileimport.RustProjectImportWizard   "
             name="Import Rust Project ">
          <description>
             Import Rust Project from the local file system (Not implemented)
@@ -63,20 +63,20 @@
       </category>
       <wizard
                 category="RustyCage"
-            class="org.baksia.rustycage.wizards.RustNewFileWizard"
-            finalPerspective="org.baksia.rustycage.perspective"
+            class="org.rustycage.wizards.RustNewFileWizard"
+            finalPerspective="org.rustycage.perspective"
             icon="icons/rustyrust.png"
-            id="org.baksia.rustycage.wizards.RustNewFileWizard"
+            id="org.rustycage.wizards.RustNewFileWizard"
                 name="Rust file"
                 project="true">
       </wizard>
       <wizard
               category="RustyCage"
-            class="org.baksia.rustycage.wizards.RustProjectWizard"
+            class="org.rustycage.wizards.RustProjectWizard"
               descriptionImage="$nl$/icons/rust.png"
-            finalPerspective="org.baksia.rustycage.perspective"
+            finalPerspective="org.rustycage.perspective"
             icon="icons/rustyrust.png"
-            id="org.baksia.rustycage.wizards.RustProjectWizard"
+            id="org.rustycage.wizards.RustProjectWizard"
             name="Rust Project">
               project="true">
       </wizard>
@@ -85,23 +85,23 @@
          point="org.eclipse.ui.preferencePages">
       <page
             name="Rust"
-            class="org.baksia.rustycage.preferences.RustPreferencePage"
-            id="org.baksia.rustycage.preferences.RustPreferencePage">
+            class="org.rustycage.preferences.RustPreferencePage"
+            id="org.rustycage.preferences.RustPreferencePage">
       </page>
    </extension>
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="org.baksia.rustycage.preferences.PreferenceInitializer">
+            class="org.rustycage.preferences.PreferenceInitializer">
       </initializer>
    </extension>
    <extension
          point="org.eclipse.ui.perspectives">
       <perspective
-            class="org.baksia.rustycage.PerspectiveFactory"
+            class="org.rustycage.PerspectiveFactory"
             fixed="false"
             icon="icons/rustyrust.png"
-            id="org.baksia.rustycage.perspective"
+            id="org.rustycage.perspective"
             name="Rust">
          <description>
             Rust perspective for Rust development
@@ -112,19 +112,19 @@
             point="org.eclipse.ui.navigator.navigatorContent">
         <commonWizard
                 type="new"
-                wizardId="org.baksia.rustycage.wizards.RustNewFileWizard">
+                wizardId="org.rustycage.wizards.RustNewFileWizard">
             <enablement></enablement>
         </commonWizard>
         <commonWizard
                 type="new"
-                wizardId="org.baksia.rustycage.wizards.RustProjectWizard">
+                wizardId="org.rustycage.wizards.RustProjectWizard">
             <enablement></enablement>
         </commonWizard>
     </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
-            targetID="org.baksia.rustycage.perspective">
+            targetID="org.rustycage.perspective">
          <view
                closeable="false"
                id="org.eclipse.ui.navigator.ProjectExplorer"
@@ -224,7 +224,7 @@
             file-names="Rust files">
       </file-association>
       <content-type
-            describer="org.baksia.rustycage.RustContentDescriber"
+            describer="org.rustycage.RustContentDescriber"
             id="RustyCage.contentType.rust"
             name="Rust file"
             priority="high">
@@ -250,23 +250,23 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="org.baksia.rustycage.compile.RustCompileHandler"
+            class="org.rustycage.compile.RustCompileHandler"
             commandId="RustyCage.commands.compileCommand">
       </handler>
       <handler
-            class="org.baksia.rustycage.run.RustRunner"
+            class="org.rustycage.run.RustRunner"
             commandId="RustyCage.commands.runCommand">
       </handler>
    </extension>
    <extension
          point="org.eclipse.ui.exportWizards">
       <category
-            id="org.baksia.rustycage.export.rustCategory"
+            id="org.rustycage.export.rustCategory"
             name="Rust">
       </category>
       <wizard
-            category="org.baksia.rustycage.export.rustCategory"
-            class="org.baksia.rustycage.packagetool.RustExportPackage"
+            category="org.rustycage.export.rustCategory"
+            class="org.rustycage.packagetool.RustExportPackage"
             icon="icons/rustyrust.png"
             id="RustyCage.export.package.wizard"
             name="Package">
@@ -283,7 +283,7 @@
             hasNature="true"
             isConfigurable="false">
          <run
-               class="org.baksia.rustycage.builder.RustBuilder">
+               class="org.rustycage.builder.RustBuilder">
          </run>
       </builder>
    </extension>
@@ -293,11 +293,11 @@
          point="org.eclipse.core.resources.natures">
       <runtime>
          <run
-               class="org.baksia.rustycage.builder.RustNature">
+               class="org.rustycage.builder.RustNature">
          </run>
       </runtime>
       <builder
-            id="org.baksia.rustycage.rustBuilder">
+            id="org.rustycage.rustBuilder">
       </builder>
    </extension>
    <extension

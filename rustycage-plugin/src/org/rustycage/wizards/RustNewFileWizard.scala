@@ -1,6 +1,14 @@
 package org.rustycage.wizards
 
 import org.rustycage.RustPlugin
+import org.eclipse.core.resources._
+import org.eclipse.core.runtime._
+import org.eclipse.jface.operation.IRunnableWithProgress
+import org.eclipse.jface.viewers.ISelection
+import org.eclipse.jface.viewers.IStructuredSelection
+import org.eclipse.jface.wizard.Wizard
+import org.eclipse.ui._
+import org.eclipse.ui.ide.IDE
 
 import java.io.{ByteArrayInputStream, InputStream}
 import java.lang.reflect.InvocationTargetException
@@ -115,13 +123,13 @@ class RustNewFileWizard extends Wizard with INewWizard {
     """/******
       | * This file is generated with RustyCage
       | */
-      |
-      |fn main() {
-      |  task::spawn(hello);
+      |#[main]
+      |fn run() {
+      |  spawn(hello);
       |}
       |
       |fn hello() {
-      |  io::println("Hello world");
+      |  println("Hello world");
       |}
       |""".stripMargin
 
