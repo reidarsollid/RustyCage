@@ -1,4 +1,4 @@
-package org.rustycage.wizards
+package org.baksia.rustycage.wizards
 
 import org.eclipse.jface.wizard.Wizard
 import org.eclipse.jface.dialogs.IDialogSettings
