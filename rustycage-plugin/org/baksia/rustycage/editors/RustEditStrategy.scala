@@ -1,6 +1,5 @@
-package org.baksia.rustycage.editors
+package org.rustycage.editors
 
-import org.eclipse.jface.text.{IDocument, DocumentCommand, IAutoEditStrategy}
 
 class RustEditStrategy extends IAutoEditStrategy {
 

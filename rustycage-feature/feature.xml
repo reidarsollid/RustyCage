@@ -3,7 +3,7 @@
       id="rustycage-feature"
       label="RustyCage"
       version="1.0.3.qualifier"
-      provider-name="org.baksia">
+      provider-name="org.rustycage">
 
    <description url="http://www.example.com/description">
       An IDE for Rust development

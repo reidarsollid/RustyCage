@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>rustycage</artifactId>
-		<groupId>org.baksia.rustycage</groupId>
+		<groupId>org.rustycage</groupId>
 		<version>1.0.3-SNAPSHOT</version>
 	</parent>
-	<groupId>org.baksia.rustycage-product</groupId>
+	<groupId>org.rustycage-product</groupId>
 	<artifactId>rustycage-product</artifactId>
 	<version>1.0.3-SNAPSHOT</version>
 	<packaging>eclipse-repository</packaging>

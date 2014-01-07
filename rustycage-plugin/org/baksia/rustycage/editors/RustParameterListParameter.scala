@@ -1,8 +1,6 @@
-package org.baksia.rustycage.editors
+package org.rustycage.editors
 
-import org.eclipse.jface.text.contentassist.{IContextInformation, IContextInformationPresenter, IContextInformationValidator}
 import java.lang.Math
-import org.eclipse.jface.text.{TextPresentation, ITextViewer}
 
 class RustParameterListParameter extends IContextInformationValidator with IContextInformationPresenter {
   var fInstallOffset: Int = 0

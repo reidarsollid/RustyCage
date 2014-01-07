@@ -1,16 +1,9 @@
-package org.baksia.rustycage.compile
+package org.rustycage.compile
 
-import org.eclipse.jface.preference.IPreferenceStore
-import org.baksia.rustycage.RustPlugin
-import org.baksia.rustycage.preferences.PreferenceConstants
+import org.rustycage.RustPlugin
+import org.rustycage.preferences.PreferenceConstants
 import java.io.IOException
-import org.eclipse.core.resources.{IProject, IFolder, ResourcesPlugin, IFile}
-import org.eclipse.core.runtime.{IPath, IProgressMonitor, CoreException}
-import org.baksia.rustycage.run.MessageConsoleScala
-import org.eclipse.core.resources.IWorkspaceRoot
-import org.eclipse.core.resources.IContainer
-import org.eclipse.core.runtime.Path
-import org.eclipse.core.resources.IResource
+import org.rustycage.run.MessageConsoleScala
 
 object RustyCageCompile {
 

@@ -1,14 +1,6 @@
-package org.baksia.rustycage.wizards
+package org.rustycage.wizards
 
-import org.baksia.rustycage.RustPlugin
-import org.eclipse.core.resources._
-import org.eclipse.core.runtime._
-import org.eclipse.jface.operation.IRunnableWithProgress
-import org.eclipse.jface.viewers.ISelection
-import org.eclipse.jface.viewers.IStructuredSelection
-import org.eclipse.jface.wizard.Wizard
-import org.eclipse.ui._
-import org.eclipse.ui.ide.IDE
+import org.rustycage.RustPlugin
 
 import java.io.{ByteArrayInputStream, InputStream}
 import java.lang.reflect.InvocationTargetException

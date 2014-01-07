@@ -1,4 +1,4 @@
-package org.baksia.rustycage.fileimport
+package org.rustycage.fileimport
 
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage
 import org.eclipse.jface.viewers.IStructuredSelection

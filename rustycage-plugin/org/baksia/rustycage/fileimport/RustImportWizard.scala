@@ -1,4 +1,4 @@
-package org.baksia.rustycage.fileimport
+package org.rustycage.fileimport
 
 import org.eclipse.jface.wizard.Wizard
 import org.eclipse.ui.IImportWizard

@@ -29,9 +29,8 @@ Require-Bundle: org.eclipse.ui,
  org.scala-ide.sdt.core,
  scalariform,
  org.eclipse.core.filesystem,
- org.scala-refactoring.library;bundle-version="0.6.2",
- org.scala-ide.scala.compiler;bundle-version="2.10.2",
- org.scala-ide.scala.library
+ org.scala-lang.scala-library,
+ org.scala-ide.sbt.compiler.interface
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 

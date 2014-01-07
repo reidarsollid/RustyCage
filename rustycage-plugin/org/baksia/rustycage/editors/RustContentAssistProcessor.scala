@@ -1,12 +1,12 @@
-package org.baksia.rustycage.editors
+package org.rustycage.editors
 
 import org.eclipse.jface.text.contentassist.{CompletionProposal, ICompletionProposal, IContentAssistProcessor}
 import org.eclipse.jface.text.{IDocument, ITextViewer}
 import scala.collection.mutable.ArrayBuffer
 import org.eclipse.jface.text.contentassist.IContextInformation
 import scala.annotation.tailrec
-import org.baksia.rustycage.preferences.PreferenceConstants
-import org.baksia.rustycage.RustPlugin
+import org.rustycage.preferences.PreferenceConstants
+import org.rustycage.RustPlugin
 import java.io.File
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
