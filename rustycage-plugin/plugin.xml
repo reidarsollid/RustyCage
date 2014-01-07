@@ -276,7 +276,7 @@
       </wizard>
    </extension>
    <extension
-         id="rustBuilder"
+         id="org.rustycage.rustBuilder"
          name="Rust Project Builder"
          point="org.eclipse.core.resources.builders">
       <builder

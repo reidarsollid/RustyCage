@@ -29,8 +29,17 @@ Require-Bundle: org.eclipse.ui,
  org.scala-ide.sdt.core,
  scalariform,
  org.eclipse.core.filesystem,
- org.scala-lang.scala-library,
- org.scala-ide.sbt.compiler.interface
+ org.scala-ide.scala.library
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: com.codeminders.scalaws.helpers.io,
+ org.rustycage,
+ org.rustycage.builder,
+ org.rustycage.compile,
+ org.rustycage.editors,
+ org.rustycage.fileimport,
+ org.rustycage.packagetool,
+ org.rustycage.preferences,
+ org.rustycage.run,
+ org.rustycage.wizards
 
