@@ -32,21 +32,23 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
       val preferenceStore = RustPlugin.prefStore
       val preludePath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libstd/prelude.rs"
 
-      RustParser.Keywords.foreach(keyword =>
+   /*   RustParser.Keywords.foreach(keyword =>
         if (keyword.startsWith(typedString))
           proposalBuffer += new CompletionProposal(keyword.trim(), offset - typedString.length(), typedString.length(), keyword.length()))
-
+  */
       Source.fromFile(preludePath, "UTF-8").getLines().toList.foreach(newLine => {
         val line = newLine.trim()
         
         if (line.startsWith("pub use") && line.contains(typedString) && !line.contains("test")) {
           val token = line.replace("pub use", "")
           if (token.contains("::")) {
-            val props = token.split("::")(1).split(",")
+            val cleanToken = token.replace("{", "").replace("}", "")
+            val props = cleanToken.split("::").last.split(",")
 
-            props.foreach(word => {
+            props.foreach(wordDirty => {
+              val word = wordDirty.trim
               if (word.startsWith(typedString)) {
-                val proposal = word.replace("{", "").replace("}", "").replace(";", "")
+                val proposal = word.replace(";", "")
                 proposalBuffer += new CompletionProposal(proposal.trim(), offset - typedString.length(), typedString.length(), proposal.length())
               }
             })

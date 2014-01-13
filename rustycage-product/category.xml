@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/rustycage-feature_1.0.3.qualifier.jar" id="rustycage-feature" version="1.0.3.qualifier">
-      <category name="Rust"/>
-   </feature>
+   <bundle id="rustycage-plugin" version="1.0.3.qualifier"/>
    <category-def name="Rust" label="rustycage"/>
 </site>
