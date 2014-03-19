@@ -57,17 +57,6 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
         dialogChanged()
       }
     })
-    val lblAuthor = new Label(container, SWT.NULL)
-    lblAuthor.setText("&Author:")
-
-    author = new Text(container, SWT.BORDER | SWT.SINGLE)
-    author.setLayoutData(gd)
-    author.addModifyListener(new ModifyListener() {
-
-      override def modifyText(e: ModifyEvent) {
-        dialogChanged()
-      }
-    })
 
     initialize()
     dialogChanged()
@@ -123,13 +112,11 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
 
   private def openContentStream(): InputStream = {
     val contentBuilder = new StringBuilder()
-    contentBuilder.append("#[link(name = \"")
+    contentBuilder.append("#[crate_id = \"")
       .append(project.getName)
-      .append("\", vers = \"")
+      .append("#")
       .append(version.getText)
-      .append("\", author = \"")
-      .append(author.getText)
-      .append("\")];\n")
+      .append("\"];\n")
     if (isLib.getSelection) {
       contentBuilder.append("#[crate_type = \"lib\"];")
     }
@@ -138,13 +125,11 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
 
   def openTestContentStream() : InputStream = {
     val contentBuilder = new StringBuilder()
-    contentBuilder.append("#[link(name = \"")
+    contentBuilder.append("#[crate_id = \"")
       .append(project.getName)
-      .append("\", vers = \"")
+      .append("#")
       .append(version.getText)
-      .append("\", author = \"")
-      .append(author.getText)
-      .append("\")];\n")
+      .append("\"];\n")
     contentBuilder.append("#[crate_type = \"test\"];")
     new ByteArrayInputStream(contentBuilder.toString().getBytes)
   }
