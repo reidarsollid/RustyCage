@@ -1,18 +1,25 @@
 package org.rustycage.compile
 
-import org.rustycage.editors.RustEditor
 import org.eclipse.core.commands.{AbstractHandler, ExecutionEvent}
 import org.eclipse.ui.handlers.HandlerUtil
 import org.eclipse.ui.texteditor.ITextEditor
 import org.eclipse.core.resources.{IContainer, IResource}
+import org.eclipse.ui.actions.ActionFactory
+import org.eclipse.ui.IWorkbenchWindow
+import org.rustycage.editors.RustEditor
+import org.rustycage.RustPlugin
 
 class RustCompileHandler extends AbstractHandler {
 
   def execute(event: ExecutionEvent): Object = {
 
-    val window = HandlerUtil.getActiveWorkbenchWindowChecked(event)
+    val window: IWorkbenchWindow = HandlerUtil.getActiveWorkbenchWindowChecked(event)
+    //TODO: Add progressmonitor ??     //rustEditor.doSave(progressmonitor)
+    import org.rustycage.preferences.PreferenceConstants.SAVE_BEFORE_COMPILE
+    if(RustPlugin.prefStore.getBoolean(SAVE_BEFORE_COMPILE))
+      ActionFactory.SAVE_ALL.create(window).run()
 
-    val rustEditor = window.getActivePage.getActiveEditor.getAdapter(classOf[ITextEditor]).asInstanceOf[RustEditor]
+    val rustEditor: RustEditor = window.getActivePage.getActiveEditor.getAdapter(classOf[ITextEditor]).asInstanceOf[RustEditor]
 
     if (rustEditor != null) {
       val iResource = rustEditor.getEditorInput.getAdapter(classOf[IResource]).asInstanceOf[IResource]

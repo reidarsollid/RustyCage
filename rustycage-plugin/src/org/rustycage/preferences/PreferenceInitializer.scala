@@ -7,6 +7,7 @@ class PreferenceInitializer extends AbstractPreferenceInitializer {
   protected def initializeDefaultPreferences() {
     import PreferenceConstants._
     val store = RustPlugin.prefStore
+    store.setDefault(SAVE_BEFORE_COMPILE, true)
     store.setDefault(P_BOOLEAN, true)
     store.setDefault(P_CHOICE, "choice2")
     store.setDefault(P_STRING, "Default value")
