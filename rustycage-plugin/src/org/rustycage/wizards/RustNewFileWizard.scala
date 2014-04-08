@@ -129,7 +129,7 @@ class RustNewFileWizard extends Wizard with INewWizard {
       |}
       |
       |fn hello() {
-      |  println("Hello world");
+      |  println!("Hello world");
       |}
       |""".stripMargin
 

@@ -112,24 +112,24 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
 
   private def openContentStream(): InputStream = {
     val contentBuilder = new StringBuilder()
-    contentBuilder.append("#[crate_id = \"")
+    contentBuilder.append("#![crate_id = \"")
       .append(project.getName)
       .append("#")
       .append(version.getText)
-      .append("\"];\n")
+      .append("\"]\n")
     if (isLib.getSelection) {
-      contentBuilder.append("#[crate_type = \"lib\"];")
+      contentBuilder.append("#![crate_type = \"lib\"]")
     }
     new ByteArrayInputStream(contentBuilder.toString().getBytes)
   }
 
   def openTestContentStream() : InputStream = {
     val contentBuilder = new StringBuilder()
-    contentBuilder.append("#[crate_id = \"")
+    contentBuilder.append("#![crate_id = \"")
       .append(project.getName)
       .append("#")
       .append(version.getText)
-      .append("\"];\n")
+      .append("\"]\n")
     contentBuilder.append("#[crate_type = \"test\"];")
     new ByteArrayInputStream(contentBuilder.toString().getBytes)
   }
@@ -157,7 +157,6 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
 
   private var projectText: Text = _
   private var version: Text = _
-  private var author: Text = _
   private var project: IProject = _
   private var isLib: Button = _
 

@@ -175,6 +175,11 @@
                   label="Run"
                   style="push">
             </command>
+            <command
+                  commandId="RustyCage.commands.cleanCommand"
+                  icon="icons/Trash.png"
+                  style="push">
+            </command>
          </menu>
       </menuContribution>
       <menuContribution
@@ -196,6 +201,12 @@
                   mnemonic="M1+M2+R"
                   style="push">
             </command>
+            <command
+                  commandId="RustyCage.commands.cleanCommand"
+                  icon="icons/Trash.png"
+                  label="Clean"
+                  style="push">
+            </command>
          </toolbar>
       </menuContribution>
       <menuContribution
@@ -212,6 +223,12 @@
                commandId="RustyCage.commands.runCommand"
                icon="icons/Run.gif"
                label="Rust Run"
+               style="pulldown">
+         </command>
+         <command
+               commandId="RustyCage.commands.cleanCommand"
+               icon="icons/Trash.png"
+               label="Clean"
                style="pulldown">
          </command>
       </menuContribution>
@@ -256,6 +273,10 @@
       <handler
             class="org.rustycage.run.RustRunner"
             commandId="RustyCage.commands.runCommand">
+      </handler>
+      <handler
+            class="org.rustycage.clean.CleanHandler"
+            commandId="RustyCage.commands.cleanCommand">
       </handler>
    </extension>
    <extension
