@@ -10,7 +10,6 @@ class PreferenceInitializer extends AbstractPreferenceInitializer {
     store.setDefault(SAVE_BEFORE_COMPILE, true)
     store.setDefault(P_BOOLEAN, true)
     store.setDefault(P_CHOICE, "choice2")
-    store.setDefault(P_STRING, "Default value")
 
     store.setDefault(RUST_C, "/usr/local/bin/")
     store.setDefault(P_PATH, "")
