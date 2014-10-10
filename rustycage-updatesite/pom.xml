@@ -8,8 +8,6 @@
 		<groupId>org.rustycage</groupId>
 		<version>1.0.3-SNAPSHOT</version>
 	</parent>
-  <groupId>org.rustycage</groupId>
   <artifactId>rustycage-updatesite</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
   <packaging>eclipse-repository</packaging>
 </project>
