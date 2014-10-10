@@ -27,8 +27,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.forms,
  org.eclipse.ui.ide,
  org.scala-ide.sdt.core,
- org.scala-ide.scala.library,
- org.scala-ide.scala.compiler,
  scalariform,
  org.eclipse.core.filesystem
 Bundle-ActivationPolicy: lazy
