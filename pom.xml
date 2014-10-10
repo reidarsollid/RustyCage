@@ -13,8 +13,8 @@
     <!--module>rustycage-product</module-->
   </modules>
   <properties>
-    <tycho.version>0.19.0</tycho.version>
-    <scala.version>2.10.3</scala.version>
+    <tycho.version>0.21.0</tycho.version>
+    <scala.version>2.11.2</scala.version>
 	<encoding>UTF-8</encoding>
   </properties>
   <dependencies>
