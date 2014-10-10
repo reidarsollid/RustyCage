@@ -28,4 +28,4 @@ Demo
 For building the project run:
 mvn clean install
 
-and you will get your own update site under rustycage-updatesite/target/site
+and you will get your own update site under RustyCage/rustycage-updatesite/target/repository/
