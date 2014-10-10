@@ -74,7 +74,7 @@
     <repository>
        <id>scala eclipse toolchain osgi</id>
        <layout>p2</layout>
-       <url>http://download.scala-ide.org/sdk/37/scala210/dev/site</url>
+       <url>http://download.scala-ide.org/sdk/38/scala210/dev/site</url>
     </repository>
   </repositories>
 <pluginRepositories>
