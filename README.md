@@ -1,7 +1,7 @@
 Rusty Cage is my favorite song by Soundgarden and RustyCage is a rust-lang plugin for Eclipse.
 "I'm gonna break my rusty cage and run"
 
-The supported Eclipse version is Kepler (4.3).
+The supported Eclipse version is Luna (4.4).
 I do not have a Windows system, so RustyCage is not tested on Windows. OS X and Linux Mint is what I test on.
 
 RustyCage on Sourceforge
@@ -10,8 +10,11 @@ https://sourceforge.net/projects/rustycage/
 Update site
 https://sourceforge.net/projects/rustycage/files/updatesite/
 
+Travis site
+https://travis-ci.org/reidarsollid/RustyCage
+
 RustyCage is written in Scala and needs Scala compiler for installation
-http://download.scala-ide.org/sdk/e38/scala210/stable/site
+http://download.scala-ide.org/sdk/lithium/e44/scala211/dev/site
 
 Introduction
 http://reidarsollid.com/2012/03/27/rustycage-a-rust-lang-ide-plugin-for-eclipse/
