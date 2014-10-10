@@ -22,7 +22,6 @@
    </url>
 
    <requires>
-      <import plugin="org.scala-ide.scala.library" version="2.10.3" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.105.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.osgi" version="3.7.0" match="compatible"/>
       <import plugin="org.eclipse.equinox.common" version="3.6.100" match="compatible"/>
@@ -31,6 +30,7 @@
       <import plugin="org.eclipse.equinox.preferences" version="3.4.0" match="compatible"/>
       <import plugin="org.eclipse.core.contenttype" version="3.3.0" match="compatible"/>
       <import plugin="org.eclipse.equinox.app" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.scala-lang.scala-library"/>
    </requires>
 
    <plugin
@@ -43,7 +43,7 @@
          id="org.eclipse.core.runtime"
          download-size="0"
          install-size="0"
-         version="3.9.0.v20130326-1255"
+         version="3.10.0.v20140318-2214"
          unpack="false"/>
 
 </feature>

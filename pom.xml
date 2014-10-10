@@ -67,14 +67,14 @@
   </build>
   <repositories>
     <repository>
-       <id>eclipse-kepler</id>
+       <id>eclipse-luna</id>
        <layout>p2</layout>
-       <url>http://download.eclipse.org/releases/kepler</url>
+       <url>http://download.eclipse.org/releases/luna</url>
     </repository>
     <repository>
        <id>scala eclipse toolchain osgi</id>
        <layout>p2</layout>
-       <url>http://download.scala-ide.org/sdk/e38/scala210/dev/site</url>
+       <url>http://download.scala-ide.org/sdk/lithium/e44/scala211/dev/site</url>
     </repository>
   </repositories>
 <pluginRepositories>

@@ -1,11 +1,6 @@
 package org.rustycage.editors
 
 object RustParser {
-  // Added 'move' keyword, as it was added in Rust 0.12.
-  /* 
-  *`move` has been added as a keyword, for indicating closures
-  * that capture by value.
-  */
   val Keywords: Array[String] =
     Array("as",
       "break",
