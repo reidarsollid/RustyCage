@@ -36,7 +36,7 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
     projectText.setLayoutData(gd)
     projectText.addModifyListener(new ModifyListener() {
 
-      override def modifyText(e: ModifyEvent) {
+    override def modifyText(e: ModifyEvent) {
         dialogChanged()
       }
     })
@@ -65,46 +65,49 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
 
   private def initialize() {
     projectText.setText("rust_project")
+    version.setText("1.0.0")
   }
 
 
   def createProject(): Boolean = {
     if (project != null) {
-      //TODO: Change to project preferences
-      val preferenceStore = RustPlugin.prefStore
-      preferenceStore.setValue("ProjectName", project.getName)
-      preferenceStore.setValue("IsLib", isLib.getSelection)
-      val desc = project.getWorkspace.newProjectDescription(project.getName)
-      try {
-        project.create(desc, null)
-        if (!project.isOpen) {
-          project.open(null)
+      if(!version.getText().isEmpty()) {
+        //TODO: Change to project preferences
+        val preferenceStore = RustPlugin.prefStore
+        preferenceStore.setValue("ProjectName", project.getName)
+        preferenceStore.setValue("IsLib", isLib.getSelection)
+        val desc = project.getWorkspace.newProjectDescription(project.getName)
+        try {
+          project.create(desc, null)
+          if (!project.isOpen) {
+            project.open(null)
+          }
+          val src = project.getFolder("src")
+          if (!src.exists()) {
+            src.create(false, true, null)
+          }
+          val test = project.getFolder("test")
+          if (!test.exists()) {
+            test.create(false, true, null)
+          }
+          val bin = project.getFolder("bin")
+          if (!bin.exists()) {
+            bin.create(false, true, null)
+          }
+          bin.setHidden(true)
+          val srcCrate = src.getFile(project.getName + ".rc")
+          if (!srcCrate.exists()) {
+            srcCrate.create(openContentStream(), true, null)
+          }
+          val testCrate = test.getFile("test_" + project.getName + ".rc")
+          if (!testCrate.exists()) {
+            testCrate.create(openTestContentStream(), true, null)
+          }
+        } catch {
+          case e: CoreException =>
+            updateStatus(e.getMessage)
+            false
         }
-        val src = project.getFolder("src")
-        if (!src.exists()) {
-          src.create(false, true, null)
-        }
-        val test = project.getFolder("test")
-        if (!test.exists()) {
-          test.create(false, true, null)
-        }
-        val bin = project.getFolder("bin")
-        if (!bin.exists()) {
-          bin.create(false, true, null)
-        }
-        bin.setHidden(true)
-        val srcCrate = src.getFile(project.getName + ".rc")
-        if (!srcCrate.exists()) {
-          srcCrate.create(openContentStream(), true, null)
-        }
-        val testCrate = test.getFile("test_" + project.getName + ".rc")
-        if (!testCrate.exists()) {
-          testCrate.create(openTestContentStream(), true, null)
-        }
-      } catch {
-        case e: CoreException =>
-          updateStatus(e.getMessage)
-          false
       }
     }
     true
