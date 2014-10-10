@@ -34,7 +34,7 @@
         <version>${tycho.version}</version>
         <extensions>true</extensions>
       </plugin>
-     <plugin>
+      <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>target-platform-configuration</artifactId>
         <version>${tycho.version}</version>
@@ -74,7 +74,7 @@
     <repository>
        <id>scala eclipse toolchain osgi</id>
        <layout>p2</layout>
-       <url>http://download.scala-ide.org/sdk/e38/scala210/dev/site</url>
+       <url>http://download.scala-ide.org/sdk/38/scala210/dev/site</url>
     </repository>
   </repositories>
 <pluginRepositories>

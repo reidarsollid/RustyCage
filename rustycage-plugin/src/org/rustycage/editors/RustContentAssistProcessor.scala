@@ -63,31 +63,39 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
   }
 
   private def fetchLibProposals(typedString: String, proposalsdBuffer: ArrayBuffer[ICompletionProposal], offset: Int, libWord: (String, String)) {
-    val preferenceStore = RustPlugin.prefStore
+    
+	// Removed deprectated libraries that were moved in the Rust 0.12 update.
+	/*
+	*Minor libraries have been moved out-of-tree to the rust-lang org
+    *   on GitHub: uuid, semver, glob, num, hexfloat, fourcc. They can
+    *   be installed with Cargo.
+	*Rust-url was moved to servo/rust-url.
+	*/
+	
+	val preferenceStore = RustPlugin.prefStore
     val rustPathCollections = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcollections"
     val rustPathRand = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/librand"
     val rustPathLog = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/liblog"
-    val rustPathNum = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libnum"
+    //val rustPathNum = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libnum"
     val rustPathArena = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libarena"
     val rustPathFlate = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libflate"
     val rustPathGetOpts = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libgetopts"
-    val rustPathGlob = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libglob"
-    val rustPathSemver = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libsemver"
+    //val rustPathGlob = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libglob"
+    //val rustPathSemver = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libsemver"
     val rustPathSerializer = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libserialize"
     val rustPathSync = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libsync"
     val rustPathLibTerm = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libterm"
     val rustPathLibTest = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libtest"
     val rustPathLibTime = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libtime"
-    val rustPathLibUuid = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libuuid"
-    val rustPathLibUrl = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/liburl"
+    //val rustPathLibUuid = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libuuid"
+    //val rustPathLibUrl = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/liburl"
     val rustPathLibWorkCache = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libworkcache"
     val rustPathStd = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libstd"
     val word = libWord._2
     val lib = libWord._1
-    val list = findFiles(lib, rustPathCollections, rustPathStd, rustPathRand, rustPathNum, rustPathArena
-    ,rustPathFlate, rustPathGetOpts, rustPathGlob, rustPathSemver, rustPathSerializer, rustPathSync,
-      rustPathLibTerm, rustPathLog, rustPathLibTest, rustPathLibTime, rustPathLibUuid, rustPathLibUrl
-    , rustPathLibWorkCache)
+    val list = findFiles(lib, rustPathCollections, rustPathStd, rustPathRand, rustPathArena
+    ,rustPathFlate, rustPathGetOpts, rustPathSerializer, rustPathSync,
+      rustPathLibTerm, rustPathLog, rustPathLibTest, rustPathLibTime, rustPathLibWorkCache)
     if (!list.isEmpty) {
       Source.fromFile(list(0), "UTF-8").getLines().toList.foreach(newLine => {
 
