@@ -1,19 +1,11 @@
 package org.rustycage.editors
 
-import org.eclipse.jface.text.source.SourceViewerConfiguration
-import org.eclipse.jface.text.source.ISourceViewer
-import org.eclipse.jface.text.ITextDoubleClickStrategy
-import org.eclipse.jface.text.presentation.IPresentationReconciler
-import org.eclipse.jface.text.presentation.PresentationReconciler
+import org.eclipse.jface.text.{DefaultIndentLineAutoEditStrategy, IAutoEditStrategy, IDocument, ITextDoubleClickStrategy, ITextHover}
+import org.eclipse.jface.text.contentassist.{ContentAssistant, IContentAssistant}
+import org.eclipse.jface.text.formatter.{IContentFormatter, MultiPassContentFormatter}
+import org.eclipse.jface.text.presentation.{IPresentationReconciler, PresentationReconciler}
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer
-import org.eclipse.jface.text.IDocument
-import org.eclipse.jface.text.IAutoEditStrategy
-import org.eclipse.jface.text.formatter.IContentFormatter
-import org.eclipse.jface.text.ITextHover
-import org.eclipse.jface.text.contentassist.IContentAssistant
-import org.eclipse.jface.text.contentassist.ContentAssistant
-import org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy
-import org.eclipse.jface.text.formatter.MultiPassContentFormatter
+import org.eclipse.jface.text.source.{ISourceViewer, SourceViewerConfiguration}
 
 class RustConfiguration extends SourceViewerConfiguration {
   lazy val doubleClickStrategy: RustDoubleClickStrategy = new RustDoubleClickStrategy
@@ -23,7 +15,7 @@ class RustConfiguration extends SourceViewerConfiguration {
     val damagerRepairer = new DefaultDamagerRepairer(new RustScanner())
     presentationReconciler.setRepairer(damagerRepairer, IDocument.DEFAULT_CONTENT_TYPE)
     presentationReconciler.setDamager(damagerRepairer, IDocument.DEFAULT_CONTENT_TYPE)
-    presentationReconciler;
+    presentationReconciler
   }
 
   override def getDoubleClickStrategy(sourceViewer: ISourceViewer, contentType: String): ITextDoubleClickStrategy = {
@@ -49,7 +41,7 @@ class RustConfiguration extends SourceViewerConfiguration {
   //http://www.ibm.com/developerworks/opensource/tutorials/os-ecl-commplgin3/section5.html
   override def getContentFormatter(sourceViewer: ISourceViewer): IContentFormatter = {
     val formatter = new MultiPassContentFormatter(getConfiguredDocumentPartitioning(sourceViewer),
-      IDocument.DEFAULT_CONTENT_TYPE);
+      IDocument.DEFAULT_CONTENT_TYPE)
     //formatter.setMasterStrategy(new MasterFormattingStrategy());
     //formatter.setSlaveStrategy( new CommentFormattingStrategy(),  IMyPartitions.COMMENTS); 
     formatter
