@@ -99,48 +99,29 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
             bin.create(false, true, null)
           }
           bin.setHidden(true)
-          val srcCrate = src.getFile(project.getName + ".rc")
-          if (!srcCrate.exists()) {
-            srcCrate.create(openContentStream(), true, null)
+          val mainFile = src.getFile("main.rs")
+          if(!mainFile.exists()) {
+            mainFile.create(createBasicRustFile(), true, null)
           }
-          val testCrate = test.getFile("test_" + project.getName + ".rc")
-          if (!testCrate.exists()) {
-            testCrate.create(openTestContentStream(), true, null)
-          }
-        } catch {
-          case e: CoreException =>
-            updateStatus(e.getMessage)
-            false
-        }
+          
+         } catch {
+           case e: CoreException =>
+             updateStatus(e.getMessage)
+             false
+         }
       }
     }
     true
   }
-
-  //Remove
-  private def openContentStream(): InputStream = {
+      
+  private def createBasicRustFile(): InputStream = {
     val contentBuilder = new StringBuilder()
-    contentBuilder.append("#![crate_id = \"")
-      .append(project.getName)
-      .append("#")
-      .append(version.getText)
-      .append("\"]\n")
-    if (isLib.getSelection) {
-      contentBuilder.append("#![crate_type = \"lib\"]")
-    }
-    new ByteArrayInputStream(contentBuilder.toString().getBytes)
-  }
-
-  //Remove
-  def openTestContentStream() : InputStream = {
-    val contentBuilder = new StringBuilder()
-    contentBuilder.append("#![crate_id = \"")
-      .append(project.getName)
-      .append("#")
-      .append(version.getText)
-      .append("\"]\n")
-    contentBuilder.append("#[crate_type = \"test\"];")
-    new ByteArrayInputStream(contentBuilder.toString().getBytes)
+                      .append("mod main;")
+                      .append(System.getProperty("line.separator"))
+                      .append("fn main() {")
+                      .append("    println!(\"Hello, World!\")")
+                      .append("}")
+    new ByteArrayInputStream(contentBuilder.toString.getBytes)
   }
 
   private def dialogChanged() {
