@@ -12,8 +12,6 @@ import scala.annotation.tailrec
 trait ProblemMarker extends MessageConsoleScala {
   val MARKER_TYPE = "org.eclipse.core.resources.problemmarker"
 
-  if (file.getFileExtension() == "rc") clearAllMarkers(file) else clearMarkers(file)
-
   override def errorMessage(message: String) {
     super.errorMessage(message)
     addProblemMarkers(message)
@@ -28,7 +26,6 @@ trait ProblemMarker extends MessageConsoleScala {
   }
 
   private[compile] def parseProblemSecondLine(errorString: String, file: IFile) {
-    val theFile = findCorrectFile(errorString, file)
     if (errorString.contains(".rs")) {
       val tokens: Array[String] = errorString.split(":")
       val markerString: String = tokens(tokens.length - 1) + ": " + tokens(tokens.length - 2)
@@ -40,12 +37,11 @@ trait ProblemMarker extends MessageConsoleScala {
           lineNumber = 0
         }
       }
-      addMarker(theFile, markerString, lineNumber, IMarker.SEVERITY_ERROR)
+      addMarker(file, markerString, lineNumber, IMarker.SEVERITY_ERROR)
     }
   }
 
   private[compile] def parseProblemFirstLine(errorString: String, file: IFile) {
-    val theFile = findCorrectFile(errorString, file)
     if (errorString.contains(".rs") && errorString.contains("error")) {
       val tokens: Array[String] = errorString.split(":")
       val markerString: String = tokens(tokens.length - 1) + ": " + tokens(tokens.length - 2)
@@ -57,7 +53,7 @@ trait ProblemMarker extends MessageConsoleScala {
           lineNumber = 0
         }
       }
-      addMarker(theFile, markerString, lineNumber, IMarker.SEVERITY_ERROR)
+      addMarker(file, markerString, lineNumber, IMarker.SEVERITY_ERROR)
     }
   }
 
@@ -92,22 +88,4 @@ trait ProblemMarker extends MessageConsoleScala {
   def clearAllMarkers(file: IFile) {
     file.getParent.members.foreach(file => file.deleteMarkers(MARKER_TYPE, false, IResource.DEPTH_ZERO))
   }
-
-  private def findCorrectFile(firstLine: String, file: IFile): IFile = {
-    if (file.getFileExtension == "rc") {
-      val resources: Array[IResource] = file.getParent.members
-      for (resource <- resources) {
-        if (firstLine.contains(resource.getName)) {
-          return resource.asInstanceOf[IFile]
-        }
-      }
-    }
-    file
-  }
-  /*private[compile] def findCorrectFile(firstLine: String, file: IFile): IFile = {
-    if (file.getFileExtension == "rc") {
-      for (resource <- file.getParent.members; if firstLine.contains(resource.getName)) yield resource.asInstanceOf[IFile]
-    }
-    file
-  }*/
 }

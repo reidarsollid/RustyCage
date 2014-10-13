@@ -8,7 +8,6 @@ import org.eclipse.core.resources.{IProject, IFolder, ResourcesPlugin, IFile}
 import org.eclipse.core.runtime.{IPath, IProgressMonitor, CoreException}
 import org.rustycage.run.MessageConsoleScala
 import org.eclipse.core.resources.IWorkspaceRoot
-import org.eclipse.core.resources.IContainer
 import org.eclipse.core.runtime.Path
 import org.eclipse.core.resources.IResource
 
@@ -28,7 +27,7 @@ object RustyCageCompile {
       var bin: IFolder = project.getFolder("bin")
       
       val execCompile = rustPath + "rustc " + findMainFile(src) + " " + arguments + " " + bin
-      val messageConsole = new MessageConsoleScala(findMainFile(src).asInstanceOf[IFile], "Compile : ") with ProblemMarker
+      val messageConsole = new MessageConsoleScala(findMainFile(src), "Compile : ") with ProblemMarker
       messageConsole.message("Compiling")
       val logger = ProcessLogger(
         (o: String) => messageConsole.message(o),
@@ -47,7 +46,7 @@ object RustyCageCompile {
     }
   }
   
-  def findMainFile(dir: IFolder): String = {
+  def findMainFile(dir: IFolder): IFile = {
     val main = dir.getFile("main.rs")
     if(main.exists()) {
       main
