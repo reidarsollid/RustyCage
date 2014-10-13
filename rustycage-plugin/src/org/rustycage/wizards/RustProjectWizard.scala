@@ -14,10 +14,6 @@ class RustProjectWizard extends Wizard with INewWizard {
 
   override def addPages() {
     rustProjectPage = new RustProjectPage(selection)
-    
-    rustProjectPage.setDescription("Create a new Rust project")
-    rustProjectPage.setTitle("New Rust project");
-    
     addPage(rustProjectPage)
   }
 

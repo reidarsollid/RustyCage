@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.Path
 
 class RustNewFileWizardPage(selection: ISelection) extends WizardPage("New file wizard") {
   setTitle("Rust File")
-  setDescription("This wizard creates a new file with *.rs and *.rc extension that can be opened by a Rust editor.")
+  setDescription("This wizard creates a new file with *.rs extension that can be opened by a Rust editor.")
 
   override def createControl(parent: Composite) {
     val container = new Composite(parent, SWT.NULL)
