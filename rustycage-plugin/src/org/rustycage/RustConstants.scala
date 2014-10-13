@@ -8,9 +8,10 @@ import org.eclipse.jface.text.TextAttribute
 import org.eclipse.jface.text.rules.Token
 
 object RustOSConstants {
-  val windowsRustPath = ""
-  val linuxRustPath = ""
-  val macRustPath = ""
+  val windowsRustPath = "C:/Program_Files(x86)/Rust/bin/"
+  val windowsRustHome = "C:/Program_Files(x86)/Rust/"
+  val macRustPath = "/usr/local/bin/"
+
 }
 
 object RustColorConstants {
