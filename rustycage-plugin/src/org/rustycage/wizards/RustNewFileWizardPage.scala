@@ -129,12 +129,12 @@ class RustNewFileWizardPage(selection: ISelection) extends WizardPage("New file 
     val dotLoc = fileName.lastIndexOf('.')
     if (dotLoc != -1) {
       val ext = fileName.substring(dotLoc + 1)
-      if (!ext.equalsIgnoreCase("rs") && !ext.equalsIgnoreCase("rc")) {
-        updateStatus("File extension must be \"rs\" or \"rc\"")
+      if (!ext.equalsIgnoreCase("rs")) {
+        updateStatus("File extension must be \"rs\"")
         return
       }
     } else {
-      updateStatus("File extension missing \"rs\" or \"rc\"")
+      updateStatus("File extension missing \"rs\"")
       return
     }
     updateStatus(null)

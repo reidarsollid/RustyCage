@@ -17,6 +17,24 @@ class RustExportPackageWizardPage(workBench: IWorkbench) extends WizardPage("Exp
   setTitle("Select crate file")
   
   override def createControl(parent: Composite) {
+    
+    val fileSelectionArea = new Composite(parent, SWT.NONE)
+    val fileSelectionData = new GridData(GridData.GRAB_HORIZONTAL | GridData.FILL_HORIZONTAL)
+    fileSelectionArea.setLayoutData(fileSelectionData)
+
+    val fileSelectionLayout = new GridLayout()
+    fileSelectionLayout.numColumns = 3
+    fileSelectionLayout.makeColumnsEqualWidth = false
+    fileSelectionLayout.marginWidth = 0
+    fileSelectionLayout.marginHeight = 0
+    fileSelectionArea.setLayout(fileSelectionLayout)
+    
+  }
+  
+  //Rust hasn't supported .rc files in a long while, there for this code is very unnecessary and needs to be re-written.
+  //More about it: https://github.com/brson/rust/commit/be6613e048c889a0aeaff056131c2406259f1fb4
+  
+  /*override def createControl(parent: Composite) {
     val fileSelectionArea = new Composite(parent, SWT.NONE)
     val fileSelectionData = new GridData(GridData.GRAB_HORIZONTAL | GridData.FILL_HORIZONTAL)
     fileSelectionArea.setLayoutData(fileSelectionData)
@@ -49,5 +67,5 @@ class RustExportPackageWizardPage(workBench: IWorkbench) extends WizardPage("Exp
     editor.setFileExtensions(extensions)
     fileSelectionArea.moveAbove(null)
     setControl(fileSelectionArea)
-  }
+  }*/
 }
