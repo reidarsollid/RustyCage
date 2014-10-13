@@ -7,7 +7,7 @@
             class="org.rustycage.editors.RustEditor"
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             default="true"
-            extensions="rs, rc"
+            extensions="rs"
             icon="icons/rustyrust.png"
             id="org.rustycage.editors.RustEditor"
             name="Rust Editor">
@@ -153,39 +153,10 @@
             type="org.eclipse.core.resources.textmarker">
       </super>
    </extension>
-   <extension
-         point="org.eclipse.ui.menus">
-      <menuContribution
-            allPopups="false"
-            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
-         <menu
-               id="rustycage.actions.compileActions"
-               label="Rust"
-               mnemonic="M">
-            <command
-                  commandId="RustyCage.commands.compileCommand"
-                  icon="icons/Compile.gif"
-                  label="Compile"
-                  style="push"
-                  tooltip="Compiles rust files and crates">
-            </command>
-            <command
-                  commandId="RustyCage.commands.runCommand"
-                  icon="icons/Run.gif"
-                  label="Run"
-                  style="push">
-            </command>
-            <command
-                  commandId="RustyCage.commands.cleanCommand"
-                  icon="icons/Trash.png"
-                  style="push">
-            </command>
-         </menu>
-      </menuContribution>
+   <extension point="org.eclipse.ui.menus">
       <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
-         <toolbar
-               id="RustyCage.toolbars.rustToolbar">
+         <toolbar id="RustyCage.toolbars.rustToolbar">
             <command
                   commandId="RustyCage.commands.compileCommand"
                   icon="icons/Compile.gif"
@@ -237,7 +208,7 @@
          point="org.eclipse.core.contenttype.contentTypes">
       <file-association
             content-type="RustyCage.rust"
-            file-extensions="rs,rc"
+            file-extensions="rs"
             file-names="Rust files">
       </file-association>
       <content-type
