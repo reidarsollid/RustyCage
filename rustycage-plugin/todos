@@ -1,2 +1,6 @@
 Rewrite most of the wizards to not use .rc file extensions
 Cargo support
+Rewrite the following:
+ - Preferences
+ - File and Project wizards
+ - Most of the UI
