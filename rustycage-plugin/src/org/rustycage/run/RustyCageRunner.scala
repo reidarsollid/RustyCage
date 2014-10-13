@@ -22,13 +22,4 @@ object RustyCageRunner {
 
   }
 
-  def findMainFile(dir: IContainer): IResource = {
-    val files = dir.members().filter(r => r.getFileExtension == "rs")
-    files.foreach(file => {
-      if(file.getName() == "main.rs")
-        file
-    })
-    throw new RuntimeException
-  }
-
 }

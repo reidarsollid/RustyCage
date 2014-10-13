@@ -51,10 +51,8 @@ object RustyCageCompile {
     val main = dir.getFile("main.rs")
     if(main.exists()) {
       main
-    } else {
-      throw new RuntimeException("No main file found")
     }
-    throw new RuntimeException
+    throw new RuntimeException("No main file found")
   }
 
   
