@@ -36,7 +36,7 @@ class RustCompileHandler extends AbstractHandler {
         //TODO: Make this correct  rustc --test -L ../bin hello_test.rc
         argument = "--test -L ../bin "
       }
-      RustyCageCompile.compile(crate, argument, null, project)
+      RustyCageCompile.compile(argument, null, project)
     }
 
     null

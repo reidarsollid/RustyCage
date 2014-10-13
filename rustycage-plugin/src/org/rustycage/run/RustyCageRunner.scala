@@ -9,10 +9,8 @@ object RustyCageRunner {
 
   import scala.sys.process._
   def run(iFile: IFile, progressService: IProgressService) {
-    val crate = findCrate(iFile.getParent)
-    val rawPath = crate.getRawLocationURI.getRawPath
-    val file: String = rawPath.substring(0, rawPath.lastIndexOf(".")).replaceFirst("/src", "/bin").replaceFirst("/test", "/bin")
-
+    val file: String = "/bin/main.exe"
+    
     val messageConsole = new MessageConsoleScala(iFile, "Run : ")
     messageConsole.message("Running: " + file)
     val logger = ProcessLogger(
@@ -24,12 +22,13 @@ object RustyCageRunner {
 
   }
 
-  //Move this function out a trait CrateFinder or in RustPlugin ??
-  def findCrate(dir: IContainer): IResource = {
-    val crates = dir.members().filter(r => r.getFileExtension == "rc")
-    if(crates.length > 1)
-      throw new RuntimeException
-    else
-      crates(0)
+  def findMainFile(dir: IContainer): IResource = {
+    val files = dir.members().filter(r => r.getFileExtension == "rs")
+    files.foreach(file => {
+      if(file.getName() == "main.rs")
+        file
+    })
+    throw new RuntimeException
   }
+
 }

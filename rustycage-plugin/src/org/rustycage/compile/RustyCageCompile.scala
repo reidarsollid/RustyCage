@@ -15,45 +15,21 @@ import org.eclipse.core.resources.IResource
 object RustyCageCompile {
 
   import scala.sys.process._
-
-  //Used to get whether or not the project is compiled with Cargo or rustc
-  def getProjectType(): String = {
-    
-    return "";
-  }
   
-  def compile(crate: IResource, argument: String, monitor: IProgressMonitor, project: IProject): Boolean = {
+  def compile(argument: String, monitor: IProgressMonitor, project: IProject): Boolean = {
     try {
       val preferenceStore: IPreferenceStore = RustPlugin.prefStore
       val rustPath: String = preferenceStore.getString(RustPreferenceConstants.RUST_C)
       
       val projectName: String = project.getName
-      val rawPath: String = crate.getRawLocationURI.getRawPath
-      val srcPath: IPath = crate.getFullPath
+      val rawPath: String = project.getRawLocationURI().getPath()
       
-     /// val cratePath = fullPath.removeFileExtension().removeFirstSegments(1).append(projectName).addFileExtension("rc")
-      val endIndex: Int = rawPath.indexOf(projectName)
-      var src: String = ""
-      var bin: String = ""
-      if (endIndex != -1) {
-        val home: String = rawPath.substring(0, endIndex)
-        bin = home + projectName + "/bin"
-        //TODO : Fix me path and name
-        src = " -L " + home + projectName + "/bin"
-      }
-     /* val project: IProject = file.getProject
-      if (!project.isOpen) {
-        project.open(null)
-      }
-      val binFolder: IFolder = project.getFolder("bin")
-      if (!binFolder.exists()) {
-        binFolder.create(false, true, null)
-      }
-      binFolder.setHidden(true)*/
-      //rustc --test -L ../bin hello_test.rc
-      val execCompile = rustPath + "rustc " + argument + rawPath + src + " --out-dir " + bin
-      val messageConsole = new MessageConsoleScala(crate.asInstanceOf[IFile], "Compile : ") with ProblemMarker
-      messageConsole.message("Compiling: " + crate)	
+      var src: IFolder = project.getFolder("src")
+      var bin: IFolder = project.getFolder("bin")
+      
+      val execCompile = rustPath + "rustc " + findMainFile(src) + " --out-dir " + bin
+      val messageConsole = new MessageConsoleScala(findMainFile(src).asInstanceOf[IFile], "Compile : ") with ProblemMarker
+      messageConsole.message("Compiling")
       val logger = ProcessLogger(
         (o: String) => messageConsole.message(o),
         (e: String) => messageConsole.errorMessage(e))
@@ -70,5 +46,16 @@ object RustyCageCompile {
       }
     }
   }
+  
+  def findMainFile(dir: IFolder): String = {
+    val main = dir.getFile("main.rs")
+    if(main.exists()) {
+      main
+    } else {
+      throw new RuntimeException("No main file found")
+    }
+    throw new RuntimeException
+  }
+
   
 }
