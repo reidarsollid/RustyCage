@@ -5,7 +5,7 @@ import java.io.File
 import org.eclipse.jface.text.contentassist.{CompletionProposal, ContextInformation, ICompletionProposal, IContentAssistProcessor, IContextInformation}
 import org.eclipse.jface.text.{IDocument, ITextViewer}
 import org.rustycage.RustPlugin
-import org.rustycage.PreferenceConstants
+import org.rustycage.RustPreferenceConstants
 
 import scala.annotation.tailrec
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
@@ -29,7 +29,7 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
     } else {
       //Add proposals from src/core/prelude
       val preferenceStore = RustPlugin.prefStore
-      val preludePath = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libstd/prelude.rs"
+      val preludePath = preferenceStore.getString(RustPreferenceConstants.P_PATH) + "/src/libstd/prelude.rs"
 
       /*   RustParser.Keywords.foreach(keyword =>
            if (keyword.startsWith(typedString))
@@ -64,19 +64,19 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
   private def fetchLibProposals(typedString: String, proposalsdBuffer: ArrayBuffer[ICompletionProposal], offset: Int, libWord: (String, String)) {
 
     val preferenceStore = RustPlugin.prefStore
-    val rustPathCollections = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libcollections"
-    val rustPathRand = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/librand"
-    val rustPathLog = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/liblog"
-    val rustPathArena = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libarena"
-    val rustPathFlate = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libflate"
-    val rustPathGetOpts = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libgetopts"
-    val rustPathSerializer = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libserialize"
-    val rustPathSync = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libsync"
-    val rustPathLibTerm = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libterm"
-    val rustPathLibTest = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libtest"
-    val rustPathLibTime = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libtime"
-    val rustPathLibWorkCache = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libworkcache"
-    val rustPathStd = preferenceStore.getString(PreferenceConstants.P_PATH) + "/src/libstd"
+    val rustPathCollections = preferenceStore.getString(RustPreferenceConstants.P_PATH) + "/src/libcollections"
+    val rustPathRand = preferenceStore.getString(RustPreferenceConstants.P_PATH) + "/src/librand"
+    val rustPathLog = preferenceStore.getString(RustPreferenceConstants.P_PATH) + "/src/liblog"
+    val rustPathArena = preferenceStore.getString(RustPreferenceConstants.P_PATH) + "/src/libarena"
+    val rustPathFlate = preferenceStore.getString(RustPreferenceConstants.P_PATH) + "/src/libflate"
+    val rustPathGetOpts = preferenceStore.getString(RustPreferenceConstants.P_PATH) + "/src/libgetopts"
+    val rustPathSerializer = preferenceStore.getString(RustPreferenceConstants.P_PATH) + "/src/libserialize"
+    val rustPathSync = preferenceStore.getString(RustPreferenceConstants.P_PATH) + "/src/libsync"
+    val rustPathLibTerm = preferenceStore.getString(RustPreferenceConstants.P_PATH) + "/src/libterm"
+    val rustPathLibTest = preferenceStore.getString(RustPreferenceConstants.P_PATH) + "/src/libtest"
+    val rustPathLibTime = preferenceStore.getString(RustPreferenceConstants.P_PATH) + "/src/libtime"
+    val rustPathLibWorkCache = preferenceStore.getString(RustPreferenceConstants.P_PATH) + "/src/libworkcache"
+    val rustPathStd = preferenceStore.getString(RustPreferenceConstants.P_PATH) + "/src/libstd"
     val word = libWord._2
     val lib = libWord._1
     val list = findFiles(lib, rustPathCollections, rustPathStd, rustPathRand, rustPathArena

@@ -10,7 +10,7 @@ import org.eclipse.ui.IWorkbenchWindow
 
 import org.rustycage.editors.RustEditor
 import org.rustycage.RustPlugin
-import org.rustycage.PreferenceConstants
+import org.rustycage.RustPreferenceConstants
 
 class RustCompileHandler extends AbstractHandler {
 
@@ -18,7 +18,7 @@ class RustCompileHandler extends AbstractHandler {
 
     val window: IWorkbenchWindow = HandlerUtil.getActiveWorkbenchWindowChecked(event)
     //TODO: Add progressmonitor ??     //rustEditor.doSave(progressmonitor)
-    import PreferenceConstants.SAVE_BEFORE_COMPILE
+    import RustPreferenceConstants.SAVE_BEFORE_COMPILE
     if(RustPlugin.prefStore.getBoolean(SAVE_BEFORE_COMPILE))
       ActionFactory.SAVE_ALL.create(window).run()
 

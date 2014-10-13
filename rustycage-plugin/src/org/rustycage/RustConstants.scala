@@ -34,7 +34,12 @@ object RustTextConstants {
   val pointer = new Token(new TextAttribute(RustColorConstants.POINTER))
 }
 
-object PreferenceConstants {
+object CargoPreferenceConstants {
+  final val VERBOSE_COMPILING: String = "verboseCompiling"
+  final val CARGO_HOME: String = "cargoHome"
+}
+
+object RustPreferenceConstants {
   final val SAVE_BEFORE_COMPILE: String = "saveBeforeCompile"
   final val RUST_C: String = "pathRustCompiler"
   final val P_PATH: String = "pathPreference"

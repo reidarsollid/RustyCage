@@ -1,7 +1,7 @@
 package org.rustycage.preferences
 
 import org.rustycage.RustPlugin
-import org.rustycage.PreferenceConstants
+import org.rustycage.RustPreferenceConstants
 import org.eclipse.jface.preference.{BooleanFieldEditor, DirectoryFieldEditor, FieldEditorPreferencePage}
 import org.eclipse.ui.{IWorkbench, IWorkbenchPreferencePage}
 
@@ -11,7 +11,7 @@ class RustPreferencePage extends FieldEditorPreferencePage(FieldEditorPreference
   
   setDescription("Rust preferences page")
 
-  import PreferenceConstants._
+  import RustPreferenceConstants._
   override def createFieldEditors() {
     addField(new DirectoryFieldEditor(RUST_C, "&Rust compiler:", getFieldEditorParent))
     addField(new DirectoryFieldEditor(P_PATH, "Rust home:", getFieldEditorParent))

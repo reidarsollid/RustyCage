@@ -2,7 +2,7 @@ package org.rustycage.compile
 
 import org.eclipse.jface.preference.IPreferenceStore
 import org.rustycage.RustPlugin
-import org.rustycage.PreferenceConstants
+import org.rustycage.RustPreferenceConstants
 import java.io.IOException
 import org.eclipse.core.resources.{IProject, IFolder, ResourcesPlugin, IFile}
 import org.eclipse.core.runtime.{IPath, IProgressMonitor, CoreException}
@@ -25,7 +25,7 @@ object RustyCageCompile {
   def compile(crate: IResource, argument: String, monitor: IProgressMonitor, project: IProject): Boolean = {
     try {
       val preferenceStore: IPreferenceStore = RustPlugin.prefStore
-      val rustPath: String = preferenceStore.getString(PreferenceConstants.RUST_C)
+      val rustPath: String = preferenceStore.getString(RustPreferenceConstants.RUST_C)
       
       val projectName: String = project.getName
       val rawPath: String = crate.getRawLocationURI.getRawPath
