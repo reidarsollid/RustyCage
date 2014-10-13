@@ -18,6 +18,10 @@ class RustNewFileWizard extends Wizard with INewWizard {
 
   override def addPages() {
     pageFile = new RustNewFileWizardPage(selection)
+    
+    pageFile.setDescription("Create a new file for an existing project");
+    pageFile.setTitle("New Rust file")
+    
     addPage(pageFile)
   }
 

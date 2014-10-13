@@ -17,8 +17,6 @@ class RustPreferencePage extends FieldEditorPreferencePage(FieldEditorPreference
     addField(new BooleanFieldEditor(SAVE_BEFORE_COMPILE, "Save before compile", getFieldEditorParent))
   }
 
-
-
   override def init(workbench: IWorkbench) {
     
   }
