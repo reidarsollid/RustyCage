@@ -16,7 +16,7 @@ object RustyCageCompile {
 
   import scala.sys.process._
   
-  def compile(argument: String, monitor: IProgressMonitor, project: IProject): Boolean = {
+  def compile(arguments: String, monitor: IProgressMonitor, project: IProject): Boolean = {
     try {
       val preferenceStore: IPreferenceStore = RustPlugin.prefStore
       val rustPath: String = preferenceStore.getString(RustPreferenceConstants.RUST_C)
@@ -27,7 +27,7 @@ object RustyCageCompile {
       var src: IFolder = project.getFolder("src")
       var bin: IFolder = project.getFolder("bin")
       
-      val execCompile = rustPath + "rustc " + findMainFile(src) + " --out-dir " + bin
+      val execCompile = rustPath + "rustc " + findMainFile(src) + " " + arguments + " " + bin
       val messageConsole = new MessageConsoleScala(findMainFile(src).asInstanceOf[IFile], "Compile : ") with ProblemMarker
       messageConsole.message("Compiling")
       val logger = ProcessLogger(

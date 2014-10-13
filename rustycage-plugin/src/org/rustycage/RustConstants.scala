@@ -46,6 +46,7 @@ object RustPreferenceConstants {
   final val P_BOOLEAN: String = "booleanPreference"
   final val P_CHOICE: String = "choicePreference"
   final val CARGO_LOCATION: String = "cargoLocation"
+  final val RUNTIME_ARGS: String = "runtimeArguments"
 }
 
 object RustConstants {
