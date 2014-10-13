@@ -88,6 +88,12 @@
             class="org.rustycage.preferences.RustPreferencePage"
             id="org.rustycage.preferences.RustPreferencePage">
       </page>
+      <page
+      		name="Cargo"
+      		class="org.rustycage.preferences.CargoPreferencePage"
+      		id="org.rustycage.preferences.CargoPreferencePage"
+      		category="org.rustycage.preferences.RustPreferencePage">
+      </page>
    </extension>
    <extension
          point="org.eclipse.core.runtime.preferences">

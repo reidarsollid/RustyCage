@@ -63,10 +63,10 @@ object RustyCageCompile {
     }
     catch {
       case e: IOException => {
-        return false
+        false
       }
       case e: CoreException => {
-        return false
+        false
       }
     }
   }
