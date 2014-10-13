@@ -1,1 +1,2 @@
-fix installation error
+Rewrite most of the wizards to not use .rc file extensions
+Cargo support
