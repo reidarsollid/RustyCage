@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Text
 import org.eclipse.core.resources.ResourcesPlugin
 import org.rustycage.RustPlugin
 import org.eclipse.core.runtime.CoreException
+import org.eclipse.core.resources.IFile
 
 class RustNewCargoProjectPage (selection: ISelection) extends WizardPage("New cargo project wizard") {
     setTitle("New Cargo project");
@@ -127,6 +128,10 @@ class RustNewCargoProjectPage (selection: ISelection) extends WizardPage("New ca
         if(!cargoFile.exists) {
           cargoFile.create(createTomlFile(), true, null)
         }
+        mainFile = src.getFile("main.rs")
+        if(!mainFile.exists()) {
+          mainFile.create(createBasicRustFile(), true, null)
+        }
         
         } catch {
           case e: CoreException =>
@@ -135,6 +140,16 @@ class RustNewCargoProjectPage (selection: ISelection) extends WizardPage("New ca
         }
       }
       false
+    }
+    
+    private def createBasicRustFile(): InputStream = {
+      val contentBuilder = new StringBuilder()
+                        .append("mod main;")
+                        .append(System.getProperty("line.separator"))
+                        .append("fn main() {")
+                        .append("    println!(\"Hello, World!\")")
+                        .append("}")
+      new ByteArrayInputStream(contentBuilder.toString.getBytes)
     }
     
     def createTomlFile() : InputStream =  {
@@ -172,7 +187,7 @@ class RustNewCargoProjectPage (selection: ISelection) extends WizardPage("New ca
       new ByteArrayInputStream(contentBuilder.toString().getBytes)
     }
     
-    var mainFile: File = _
+    var mainFile: IFile = _
     
     var project: IProject = _
     var projectName: Text = _
