@@ -17,6 +17,8 @@ import org.eclipse.swt.events.ModifyListener
 import org.eclipse.swt.events.ModifyEvent
 import org.eclipse.swt.widgets.Text
 import org.eclipse.core.resources.ResourcesPlugin
+import org.rustycage.RustPlugin
+import org.eclipse.core.runtime.CoreException
 
 class RustNewCargoProjectPage (selection: ISelection) extends WizardPage("New cargo project wizard") {
     setTitle("New Cargo project");
@@ -109,9 +111,30 @@ class RustNewCargoProjectPage (selection: ISelection) extends WizardPage("New ca
     
     def createProject() : Boolean = {
       if(project != null) {
+        val prefStore = RustPlugin.prefStore
+        prefStore.setValue("ProjectName", projectName.getText)
+        val desc = project.getWorkspace().newProjectDescription(project.getName)
+        try {
+        project.create(desc, null)
+        if(!project.isOpen()) {    
+          project.open(null)
+        }
+        val src = project.getFolder("src")
+        if(!src.exists()) {
+          src.create(false, true, null)
+        }
+        val cargoFile = project.getFile("Cargo.toml")
+        if(!cargoFile.exists) {
+          cargoFile.create(createTomlFile(), true, null)
+        }
         
+        } catch {
+          case e: CoreException =>
+            updateStatus(e.getMessage)
+            false
+        }
       }
-      return false;
+      false
     }
     
     def createTomlFile() : InputStream =  {
