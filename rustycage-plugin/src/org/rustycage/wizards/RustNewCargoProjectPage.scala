@@ -25,16 +25,18 @@ class RustNewCargoProjectPage (selection: ISelection) extends WizardPage("New ca
     override def createControl(parent: Composite) {
       val container = new Composite(parent, SWT.NULL)
       val layout = new GridLayout()
-      val label = new Label(container, SWT.NULL)
       val gd = new GridData(GridData.FILL_HORIZONTAL)
      
       /* I think this needs refining */
       container.setLayout(layout)
       layout.numColumns = 5
       layout.verticalSpacing = 9
-      label.setText("&Project name:")
+      
+      val projectLabel = new Label(container, SWT.NULL)
+      projectLabel.setText("&Project name: ")
       
       /* Initialize Text objects */
+      
       projectName = new Text(container, SWT.BORDER | SWT.SINGLE)
       projectName.setLayoutData(gd)
       projectName.addModifyListener(new ModifyListener() {
@@ -42,6 +44,10 @@ class RustNewCargoProjectPage (selection: ISelection) extends WizardPage("New ca
           dialogChanged(projectName)
         }
       })
+      
+      val versionLabel = new Label(container, SWT.NULL)
+      versionLabel.setText("&Version: ")
+      
       version = new Text(container, SWT.BORDER | SWT.SINGLE)
       version.setLayoutData(gd)
       version.addModifyListener(new ModifyListener() {
@@ -49,6 +55,10 @@ class RustNewCargoProjectPage (selection: ISelection) extends WizardPage("New ca
           dialogChanged(version)
         }
       })
+      
+      val authorsLabel = new Label(container, SWT.NULL)
+      authorsLabel.setText("&Authors: ")
+      
       authors = new Text(container, SWT.BORDER | SWT.SINGLE)
       authors.setLayoutData(gd)
       version.addModifyListener(new ModifyListener() {
@@ -56,6 +66,15 @@ class RustNewCargoProjectPage (selection: ISelection) extends WizardPage("New ca
           dialogChanged(version)
         }
       })
+      
+      initialize()
+      setControl(container)
+    }
+    
+    def initialize() {
+      projectName.setText("project_name")
+      version.setText("0.0.1")
+      authors.setText("Example Name <example@email.com>")
     }
     
     def dialogChanged(text: Text) {
@@ -88,10 +107,11 @@ class RustNewCargoProjectPage (selection: ISelection) extends WizardPage("New ca
       setPageComplete(message == null)
     }
     
-    def createProject() {
+    def createProject() : Boolean = {
       if(project != null) {
         
       }
+      return false;
     }
     
     def createTomlFile() : InputStream =  {
