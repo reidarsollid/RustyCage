@@ -15,6 +15,8 @@ import org.eclipse.jface.text.contentassist.ContentAssistant
 import org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy
 import org.eclipse.jface.text.formatter.MultiPassContentFormatter
 
+import org.rustycage.RustColorConstants
+
 class RustConfiguration extends SourceViewerConfiguration {
   lazy val doubleClickStrategy: RustDoubleClickStrategy = new RustDoubleClickStrategy
 

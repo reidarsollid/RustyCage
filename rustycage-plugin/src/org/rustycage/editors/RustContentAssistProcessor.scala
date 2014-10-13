@@ -5,7 +5,7 @@ import java.io.File
 import org.eclipse.jface.text.contentassist.{CompletionProposal, ContextInformation, ICompletionProposal, IContentAssistProcessor, IContextInformation}
 import org.eclipse.jface.text.{IDocument, ITextViewer}
 import org.rustycage.RustPlugin
-import org.rustycage.preferences.PreferenceConstants
+import org.rustycage.PreferenceConstants
 
 import scala.annotation.tailrec
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}

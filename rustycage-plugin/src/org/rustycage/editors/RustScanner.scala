@@ -4,6 +4,9 @@ import org.eclipse.jface.text.rules._
 import org.eclipse.jface.text.TextAttribute
 import org.eclipse.swt.SWT
 
+import org.rustycage.RustTextConstants
+import org.rustycage.RustConstants
+
 class RustScanner extends RuleBasedScanner {
   val rule: WordRule = new WordRule(new IWordDetector() {
 
@@ -13,20 +16,12 @@ class RustScanner extends RuleBasedScanner {
 
   }, Token.WHITESPACE)
 
-  val comment = new Token(new TextAttribute(RustColorConstants.COMMENT))
-  val string = new Token(new TextAttribute(RustColorConstants.STRING))
-  val chars = new Token(new TextAttribute(RustColorConstants.CHAR))
-  val keywordToken = new Token(new TextAttribute(RustColorConstants.KEYWORD, null, SWT.BOLD))
-  val file = new Token(new TextAttribute(RustColorConstants.NEW_FILE, null, SWT.ITALIC))
-  val numbers = new Token(new TextAttribute(RustColorConstants.NUMBERS))
-  val pointer = new Token(new TextAttribute(RustColorConstants.POINTER))
-
-  RustParser.Keywords.foreach(keyword =>
-    rule.addWord(keyword, keywordToken)
+  RustConstants.Keywords.foreach(keyword =>
+    rule.addWord(keyword, RustTextConstants.keywordToken)
   )
 
-  RustParser.NewFile.foreach(newFile =>
-    rule.addWord(newFile, file)
+  RustConstants.NewFile.foreach(newFile =>
+    rule.addWord(newFile, RustTextConstants.file)
   )
 
   def whiteSpaceRule = new WhitespaceRule(new IWhitespaceDetector() {
@@ -34,12 +29,12 @@ class RustScanner extends RuleBasedScanner {
   })
 
   val rules = Array[IRule](rule,
-    new RustPointerRule(pointer),
-    new NumberRule(numbers),
-    new EndOfLineRule("//", comment, '\\'),
-    new SingleLineRule("\"", "\"", string, '\\'),
-    new SingleLineRule("\'", "\'", chars, '\\'),
-    new MultiLineRule("/*", "*/", comment, '\\'),
+    new RustPointerRule(RustTextConstants.pointer),
+    new NumberRule(RustTextConstants.numbers),
+    new EndOfLineRule("//", RustTextConstants.comment, '\\'),
+    new SingleLineRule("\"", "\"", RustTextConstants.string, '\\'),
+    new SingleLineRule("\'", "\'", RustTextConstants.chars, '\\'),
+    new MultiLineRule("/*", "*/", RustTextConstants.comment, '\\'),
     whiteSpaceRule)
     
     setRules(rules)

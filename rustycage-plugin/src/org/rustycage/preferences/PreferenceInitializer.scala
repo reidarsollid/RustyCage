@@ -1,7 +1,9 @@
 package org.rustycage.preferences
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer
+
 import org.rustycage.RustPlugin
+import org.rustycage.PreferenceConstants
 
 class PreferenceInitializer extends AbstractPreferenceInitializer {
   protected def initializeDefaultPreferences() {

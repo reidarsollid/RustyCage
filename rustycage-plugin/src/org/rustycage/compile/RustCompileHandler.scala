@@ -1,13 +1,16 @@
 package org.rustycage.compile
 
 import org.eclipse.core.commands.{AbstractHandler, ExecutionEvent}
+import org.eclipse.core.resources.{IContainer, IResource}
+
 import org.eclipse.ui.handlers.HandlerUtil
 import org.eclipse.ui.texteditor.ITextEditor
-import org.eclipse.core.resources.{IContainer, IResource}
 import org.eclipse.ui.actions.ActionFactory
 import org.eclipse.ui.IWorkbenchWindow
+
 import org.rustycage.editors.RustEditor
 import org.rustycage.RustPlugin
+import org.rustycage.PreferenceConstants
 
 class RustCompileHandler extends AbstractHandler {
 
@@ -15,7 +18,7 @@ class RustCompileHandler extends AbstractHandler {
 
     val window: IWorkbenchWindow = HandlerUtil.getActiveWorkbenchWindowChecked(event)
     //TODO: Add progressmonitor ??     //rustEditor.doSave(progressmonitor)
-    import org.rustycage.preferences.PreferenceConstants.SAVE_BEFORE_COMPILE
+    import PreferenceConstants.SAVE_BEFORE_COMPILE
     if(RustPlugin.prefStore.getBoolean(SAVE_BEFORE_COMPILE))
       ActionFactory.SAVE_ALL.create(window).run()
 

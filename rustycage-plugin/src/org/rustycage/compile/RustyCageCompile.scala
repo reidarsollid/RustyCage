@@ -2,7 +2,7 @@ package org.rustycage.compile
 
 import org.eclipse.jface.preference.IPreferenceStore
 import org.rustycage.RustPlugin
-import org.rustycage.preferences.PreferenceConstants
+import org.rustycage.PreferenceConstants
 import java.io.IOException
 import org.eclipse.core.resources.{IProject, IFolder, ResourcesPlugin, IFile}
 import org.eclipse.core.runtime.{IPath, IProgressMonitor, CoreException}
@@ -16,6 +16,12 @@ object RustyCageCompile {
 
   import scala.sys.process._
 
+  //Used to get whether or not the project is compiled with Cargo or rustc
+  def getProjectType(): String = {
+    
+    return "";
+  }
+  
   def compile(crate: IResource, argument: String, monitor: IProgressMonitor, project: IProject): Boolean = {
     try {
       val preferenceStore: IPreferenceStore = RustPlugin.prefStore
