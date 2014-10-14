@@ -7,12 +7,16 @@ import org.eclipse.core.resources.{IFile, IContainer, IProject}
 import org.rustycage.editors.RustEditor
 import org.eclipse.jface.preference.IPreferenceStore
 import org.rustycage.RustPlugin
+import org.eclipse.ui.internal.Workbench
+import org.eclipse.jface.viewers.IStructuredSelection
+import org.eclipse.core.resources.IResource
+import org.eclipse.jface.text.ITextSelection
 
 
 class RustRunner extends AbstractHandler {
 
   override def execute(event: ExecutionEvent): AnyRef = {
-    run()
+    run(getActiveProject)
     
     null
   }
@@ -31,6 +35,24 @@ class RustRunner extends AbstractHandler {
 
   }
 
+  def getActiveProject(): IProject = {
+    val selectionService = Workbench.getInstance().getActiveWorkbenchWindow().getSelectionService()
+    val selection = selectionService.getSelection()
+    
+    if(selection.isInstanceOf[IStructuredSelection]) {
+      val element: Object = selection.asInstanceOf[IStructuredSelection].getFirstElement()
+      
+      if(element.isInstanceOf[IResource]) {
+        val project = element.asInstanceOf[IResource].getProject()
+        project
+      } else {
+        throw new RuntimeException("No project could be found!")
+      }
+      
+    }
+    null
+  }
+  
   def findExecutable(dir: IContainer, project: IProject): IFile = {
     val prefStore: IPreferenceStore = RustPlugin.prefStore
     
