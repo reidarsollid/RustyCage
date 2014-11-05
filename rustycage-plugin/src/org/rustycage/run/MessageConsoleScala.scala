@@ -1,9 +1,9 @@
 package org.rustycage.run
 
-import org.eclipse.ui.console.{ MessageConsole, ConsolePlugin, IConsole }
-import org.eclipse.swt.widgets.Display
-import org.eclipse.swt.SWT
 import org.eclipse.core.resources.IFile
+import org.eclipse.swt.SWT
+import org.eclipse.swt.widgets.Display
+import org.eclipse.ui.console.{ConsolePlugin, IConsole, MessageConsole}
 
 class MessageConsoleScala(val file: IFile, val operation: String) {
   val messageConsole = new MessageConsole("Rust " + operation + file, null)
@@ -13,7 +13,7 @@ class MessageConsoleScala(val file: IFile, val operation: String) {
 
   ConsolePlugin.getDefault.getConsoleManager.addConsoles(
     Array[IConsole](messageConsole))
-   messageConsole.activate()
+  messageConsole.activate()
 
   def message(message: String) {
     messageConsoleStream.setColor(black)

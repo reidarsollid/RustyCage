@@ -25,7 +25,6 @@ object RustyCageCompile {
       val rawPath: String = crate.getRawLocationURI.getRawPath
       val srcPath: IPath = crate.getFullPath
       
-     /// val cratePath = fullPath.removeFileExtension().removeFirstSegments(1).append(projectName).addFileExtension("rc")
       val endIndex: Int = rawPath.indexOf(projectName)
       var src: String = ""
       var bin: String = ""
@@ -35,22 +34,9 @@ object RustyCageCompile {
         //TODO : Fix me path and name
         src = " -L " + home + projectName + "/bin"
       }
-     /* val project: IProject = file.getProject
-      if (!project.isOpen) {
-        project.open(null)
-      }
-      val binFolder: IFolder = project.getFolder("bin")
-      if (!binFolder.exists()) {
-        binFolder.create(false, true, null)
-      }
-      binFolder.setHidden(true)*/
       //rustc --test -L ../bin hello_test.rc
       val execCompile = rustPath + "rustc " + argument + rawPath + src + " --out-dir " + bin
-      val messageConsole = new MessageConsoleScala(crate.asInstanceOf[IFile], "Compile : ") with ProblemMarker
-      messageConsole.message("Compiling: " + crate)	
-      val logger = ProcessLogger(
-        (o: String) => messageConsole.message(o),
-        (e: String) => messageConsole.errorMessage(e))
+      val logger: ProcessLogger = writeResultToMessageConsole(crate)
 
       execCompile ! logger
       true
@@ -64,5 +50,13 @@ object RustyCageCompile {
       }
     }
   }
-  
+
+  def writeResultToMessageConsole(crate: IResource): ProcessLogger = {
+    val messageConsole = new MessageConsoleScala(crate.asInstanceOf[IFile], "Compile : ") with ProblemMarker
+    messageConsole.message("Compiling: " + crate)
+    val logger = ProcessLogger(
+      (o: String) => messageConsole.message(o),
+      (e: String) => messageConsole.errorMessage(e))
+    logger
+  }
 }

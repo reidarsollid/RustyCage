@@ -1,17 +1,16 @@
 package org.rustycage.wizards
 
-import org.rustycage.RustPlugin
+import java.io.{ByteArrayInputStream, InputStream}
+import java.lang.reflect.InvocationTargetException
+
 import org.eclipse.core.resources._
 import org.eclipse.core.runtime._
 import org.eclipse.jface.operation.IRunnableWithProgress
-import org.eclipse.jface.viewers.ISelection
-import org.eclipse.jface.viewers.IStructuredSelection
+import org.eclipse.jface.viewers.{ISelection, IStructuredSelection}
 import org.eclipse.jface.wizard.Wizard
 import org.eclipse.ui._
 import org.eclipse.ui.ide.IDE
-
-import java.io.{ByteArrayInputStream, InputStream}
-import java.lang.reflect.InvocationTargetException
+import org.rustycage.RustPlugin
 
 class RustNewFileWizard extends Wizard with INewWizard {
   setNeedsProgressMonitor(true)
@@ -58,7 +57,7 @@ class RustNewFileWizard extends Wizard with INewWizard {
     if (!container.exists()) {
       throwCoreException(s"Container \'$containerName\' does not exist.")
     }
-    
+
     val file = container.getFile(new Path(fileName))
 
     val crateFile = findCrate(container).asInstanceOf[IFile]
@@ -131,7 +130,7 @@ class RustNewFileWizard extends Wizard with INewWizard {
       |fn hello() {
       |  println!("Hello world");
       |}
-      |""".stripMargin
+      | """.stripMargin
 
   private val TEMPLATE_LIB =
     """/******

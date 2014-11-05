@@ -1,7 +1,6 @@
 package org.rustycage
 
-import org.eclipse.ui.IPerspectiveFactory
-import org.eclipse.ui.IPageLayout
+import org.eclipse.ui.{IPageLayout, IPerspectiveFactory}
 import org.eclipse.ui.console.IConsoleConstants
 
 //import org.eclipse.search.ui.NewSearchUI
@@ -10,10 +9,12 @@ import org.eclipse.ui.progress.IProgressConstants
 
 class PerspectiveFactory extends IPerspectiveFactory {
 
-  import PerspectiveConstants._
+  import org.rustycage.PerspectiveConstants._
 
   def createInitialLayout(pageLayout: IPageLayout) {
     val editorArea = pageLayout.getEditorArea
+    //TODO: Rust buttons only to be visible for this perspective
+    //TODO: Figure out what I am doing here and refactor to functions with good function names
     val folder = pageLayout.createFolder("left", IPageLayout.LEFT, 0.25F, editorArea)
     folder.addView(IPageLayout.ID_PROJECT_EXPLORER)
     folder.addView(IPageLayout.ID_RES_NAV)
@@ -43,25 +44,32 @@ class PerspectiveFactory extends IPerspectiveFactory {
     pageLayout.addShowViewShortcut(IPageLayout.ID_PROBLEM_VIEW)
     pageLayout.addShowViewShortcut(IConsoleConstants.ID_CONSOLE_VIEW)
 
-    // views - standard workbench
-    pageLayout.addShowViewShortcut(IPageLayout.ID_OUTLINE)
-    pageLayout.addShowViewShortcut(IPageLayout.ID_PROBLEM_VIEW)
-    pageLayout.addShowViewShortcut(IPageLayout.ID_RES_NAV)
-    pageLayout.addShowViewShortcut(IPageLayout.ID_TASK_LIST)
-    pageLayout.addShowViewShortcut(IProgressConstants.PROGRESS_VIEW_ID)
-    pageLayout.addShowViewShortcut(ID_PROJECT_EXPLORER)
+    createStandardWorkbench(pageLayout)
 
 
-    // new actions - Rust project creation wizard
+    createRustProjectCreationWizard(pageLayout)
+  }
+
+  def createRustProjectCreationWizard(pageLayout: IPageLayout) {
     pageLayout.addNewWizardShortcut(RUST_PROJECT_WIZARD)
     pageLayout.addNewWizardShortcut(RUST_NEW_FILE_WIZARD)
     pageLayout.addNewWizardShortcut(NEW_FOLDER)
     pageLayout.addNewWizardShortcut(NEW_FILE)
     pageLayout.addNewWizardShortcut(UNTITLED_TEXT_FILE_WIZARD)
   }
+
+  def createStandardWorkbench(pageLayout: IPageLayout) {
+    pageLayout.addShowViewShortcut(IPageLayout.ID_OUTLINE)
+    pageLayout.addShowViewShortcut(IPageLayout.ID_PROBLEM_VIEW)
+    pageLayout.addShowViewShortcut(IPageLayout.ID_RES_NAV)
+    pageLayout.addShowViewShortcut(IPageLayout.ID_TASK_LIST)
+    pageLayout.addShowViewShortcut(IProgressConstants.PROGRESS_VIEW_ID)
+    pageLayout.addShowViewShortcut(ID_PROJECT_EXPLORER)
+  }
 }
 
 object PerspectiveConstants {
+  //val MENUE_ITEMS = "rustycage.actions.compileActions"
   val ID_PROJECT_EXPLORER = "org.eclipse.ui.navigator.ProjectExplorer"
   val RUST_PROJECT_WIZARD = "org.rustycage.wizards.RustProjectWizard"
   val RUST_NEW_FILE_WIZARD = "org.rustycage.wizards.RustNewFileWizard"

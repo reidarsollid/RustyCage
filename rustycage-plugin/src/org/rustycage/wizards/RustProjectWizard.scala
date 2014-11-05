@@ -1,13 +1,8 @@
 package org.rustycage.wizards
 
+import org.eclipse.jface.viewers.{ISelection, IStructuredSelection}
 import org.eclipse.jface.wizard.Wizard
-import org.eclipse.jface.dialogs.IDialogSettings
-import org.eclipse.jface.viewers.IStructuredSelection
-import org.eclipse.ui.INewWizard
-import org.eclipse.swt.graphics.Image
-import org.eclipse.swt.widgets.Composite
-import org.eclipse.ui.IWorkbench
-import org.eclipse.jface.viewers.ISelection
+import org.eclipse.ui.{INewWizard, IWorkbench}
 
 class RustProjectWizard extends Wizard with INewWizard {
   setNeedsProgressMonitor(true)

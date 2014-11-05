@@ -20,7 +20,7 @@ class RustEditor extends TextEditor {
     super.setFocus()
   }
 
-  def getFilePath() : IResource = {
+  def getFilePath: IResource = {
     getEditorInput.getAdapter(classOf[IResource]).asInstanceOf[IResource]
   }
 

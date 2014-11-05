@@ -1,9 +1,9 @@
 package org.rustycage.run
 
-import org.eclipse.core.commands.{ExecutionEvent, AbstractHandler}
+import org.eclipse.core.commands.{AbstractHandler, ExecutionEvent}
+import org.eclipse.core.resources.IFile
 import org.eclipse.ui.handlers.HandlerUtil
 import org.eclipse.ui.texteditor.ITextEditor
-import org.eclipse.core.resources.IFile
 import org.rustycage.editors.RustEditor
 
 

@@ -1,22 +1,16 @@
 package org.rustycage.wizards
 
-import org.eclipse.jface.wizard.WizardPage
-import org.eclipse.swt.widgets.Composite
-import org.eclipse.swt.widgets.Text
-import org.eclipse.core.resources.IProject
-import org.eclipse.core.resources.ResourcesPlugin
-import java.io.InputStream
-import java.io.ByteArrayInputStream
-import org.rustycage.RustPlugin
+import java.io.{ByteArrayInputStream, InputStream}
+
+import org.eclipse.core.resources.{IProject, ResourcesPlugin}
 import org.eclipse.core.runtime.CoreException
-import org.eclipse.swt.SWT
-import org.eclipse.swt.layout.GridLayout
-import org.eclipse.swt.widgets.Label
-import org.eclipse.swt.layout.GridData
-import org.eclipse.swt.events.ModifyListener
-import org.eclipse.swt.events.ModifyEvent
-import org.eclipse.swt.widgets.Button
 import org.eclipse.jface.viewers.ISelection
+import org.eclipse.jface.wizard.WizardPage
+import org.eclipse.swt.SWT
+import org.eclipse.swt.events.{ModifyEvent, ModifyListener}
+import org.eclipse.swt.layout.{GridData, GridLayout}
+import org.eclipse.swt.widgets.{Button, Composite, Label, Text}
+import org.rustycage.RustPlugin
 
 class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wizard") {
   setTitle("Rust project wizard")
@@ -123,7 +117,7 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
     new ByteArrayInputStream(contentBuilder.toString().getBytes)
   }
 
-  def openTestContentStream() : InputStream = {
+  def openTestContentStream(): InputStream = {
     val contentBuilder = new StringBuilder()
     contentBuilder.append("#![crate_id = \"")
       .append(project.getName)
