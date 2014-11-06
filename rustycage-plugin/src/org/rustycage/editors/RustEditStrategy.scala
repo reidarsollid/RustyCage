@@ -46,15 +46,15 @@ class RustEditStrategy extends IAutoEditStrategy {
   }
 
   private[RustEditStrategy] def getEndOfWhiteSpace(document: IDocument, start: Int, end: Int): Int = {
-    var retval: Int = 0
+    var endOfWhiteSpace: Int = 0
     start.until(end).foreach {
       e =>
         val c = document.getChar(e)
         if (c != ' ' || c != '\t') {
-          retval = e
+          endOfWhiteSpace = e
         }
     }
-    retval
+    endOfWhiteSpace
   }
 }
 

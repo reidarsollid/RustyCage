@@ -5,7 +5,7 @@ class StringSplitToTuple(s: String) {
     s.split(regex) match {
       case Array(str1, str2) => (str1, str2)
       case Array(str1) => (str1, "")
-      case _ => error("too many colons in splitToTuple")
+      case _ => sys.error("too many colons in splitToTuple")
     }
   }
 

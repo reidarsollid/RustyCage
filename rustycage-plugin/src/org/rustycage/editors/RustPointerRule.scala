@@ -12,16 +12,16 @@ class RustPointerRule(token: IToken) extends IRule {
 
   override def evaluate(charScanner: ICharacterScanner): IToken = {
     var character: Char = charScanner.read.toChar
-    var retval: IToken = Token.UNDEFINED
+    var isPointerChar: IToken = Token.UNDEFINED
     if (!Character.isDigit(character)) {
       if (isPointer(character)) {
-        retval = token
+        isPointerChar = token
         do {
           character = charScanner.read.toChar
         } while (isPointer(character))
       }
     }
-    charScanner.unread()
-    retval
+    charScanner.unread
+    isPointerChar
   }
 }
