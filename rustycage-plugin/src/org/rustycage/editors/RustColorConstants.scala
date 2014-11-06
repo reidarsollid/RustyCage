@@ -1,8 +1,7 @@
 package org.rustycage.editors
 
-import org.eclipse.swt.graphics.Color
+import org.eclipse.swt.graphics.{Color, RGB}
 import org.eclipse.swt.widgets.Display
-import org.eclipse.swt.graphics.RGB
 
 object RustColorConstants {
   val KEYWORD = new Color(Display.getCurrent, new RGB(160, 82, 45))
