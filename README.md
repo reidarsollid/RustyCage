@@ -25,7 +25,7 @@ Import file
 http://reidarsollid.com/2013/04/23/import-rust-file-to-rustycage/
 
 Demo
-[![ScreenShot](http://reidarsollid.github.io/RustyCage/youtube.png)](http://www.youtube.com/watch?v=px7tVrY3QLg)]
+[![ScreenShot](http://reidarsollid.github.io/RustyCage/youtube.png)](http://www.youtube.com/watch?v=px7tVrY3QLg)
 
 For building the project run:
 mvn clean install
