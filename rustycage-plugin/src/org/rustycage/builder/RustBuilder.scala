@@ -1,13 +1,13 @@
 package org.rustycage.builder
 
-import org.eclipse.core.resources.{IResource, IContainer, IncrementalProjectBuilder, IProject}
 import java.util
+
+import org.eclipse.core.resources.{IContainer, IProject, IResource, IncrementalProjectBuilder}
 import org.eclipse.core.runtime.IProgressMonitor
-import org.rustycage.compile.RustyCageCompile
 
 class RustBuilder extends IncrementalProjectBuilder {
 
-  import IncrementalProjectBuilder._
+  import org.eclipse.core.resources.IncrementalProjectBuilder._
 
   def build(kind: Int, args: util.Map[String, String], monitor: IProgressMonitor): Array[IProject] = {
     kind match {

@@ -12,5 +12,5 @@ class StringSplitToTuple(s: String) {
 }
 
 object SplitToTuple {
-  implicit def splitToTuple(regex: String) = new StringSplitToTuple(regex)
+  implicit def splitToTuple(regex: String): StringSplitToTuple = new StringSplitToTuple(regex)
 }

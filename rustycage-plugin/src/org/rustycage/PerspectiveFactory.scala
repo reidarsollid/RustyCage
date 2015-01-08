@@ -2,9 +2,6 @@ package org.rustycage
 
 import org.eclipse.ui.{IPageLayout, IPerspectiveFactory}
 import org.eclipse.ui.console.IConsoleConstants
-
-//import org.eclipse.search.ui.NewSearchUI
-
 import org.eclipse.ui.progress.IProgressConstants
 
 class PerspectiveFactory extends IPerspectiveFactory {
@@ -24,7 +21,6 @@ class PerspectiveFactory extends IPerspectiveFactory {
     val outputFolder = pageLayout.createFolder("bottom", IPageLayout.BOTTOM, 0.75F, editorArea)
     outputFolder.addView(IPageLayout.ID_PROBLEM_VIEW)
     outputFolder.addView(IConsoleConstants.ID_CONSOLE_VIEW)
-    //      outputfolder.addPlaceholder(NewSearchUI.SEARCH_VIEW_ID)
     outputFolder.addPlaceholder(IConsoleConstants.ID_CONSOLE_VIEW)
     outputFolder.addPlaceholder(IPageLayout.ID_PROBLEM_VIEW)
     outputFolder.addPlaceholder(IPageLayout.ID_BOOKMARKS)
@@ -35,11 +31,6 @@ class PerspectiveFactory extends IPerspectiveFactory {
 
 
     pageLayout.addActionSet(IPageLayout.ID_NAVIGATE_ACTION_SET)
-
-
-    // views - search
-    //     pageLayout.addShowViewShortcut(NewSearchUI.SEARCH_VIEW_ID)
-
 
     pageLayout.addShowViewShortcut(IPageLayout.ID_PROBLEM_VIEW)
     pageLayout.addShowViewShortcut(IConsoleConstants.ID_CONSOLE_VIEW)
@@ -69,7 +60,6 @@ class PerspectiveFactory extends IPerspectiveFactory {
 }
 
 object PerspectiveConstants {
-  //val MENUE_ITEMS = "rustycage.actions.compileActions"
   val ID_PROJECT_EXPLORER = "org.eclipse.ui.navigator.ProjectExplorer"
   val RUST_PROJECT_WIZARD = "org.rustycage.wizards.RustProjectWizard"
   val RUST_NEW_FILE_WIZARD = "org.rustycage.wizards.RustNewFileWizard"

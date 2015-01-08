@@ -10,13 +10,12 @@ class ToggleRustNature extends IObjectActionDelegate {
   def run(action: IAction) {
     selection match {
       case selections: IStructuredSelection =>
-        selections.toArray.foreach(element =>
-          element match {
-            case project: IProject =>
-              toggleNature(project)
-            case adaptable: IAdaptable =>
-              toggleNature(adaptable.getAdapter(classOf[IProject]).asInstanceOf[IProject])
-          })
+        selections.toArray.foreach {
+          case project: IProject =>
+            toggleNature(project)
+          case adaptable: IAdaptable =>
+            toggleNature(adaptable.getAdapter(classOf[IProject]).asInstanceOf[IProject])
+        }
     }
   }
 

@@ -8,9 +8,6 @@ class PreferenceInitializer extends AbstractPreferenceInitializer {
     import PreferenceConstants._
     val store = RustPlugin.prefStore
     store.setDefault(SAVE_BEFORE_COMPILE, true)
-    store.setDefault(P_BOOLEAN, true)
-    store.setDefault(P_CHOICE, "choice2")
-
     store.setDefault(RUST_C, "/usr/local/bin/rustc")
     store.setDefault(RUST_HOME, "")
   }
