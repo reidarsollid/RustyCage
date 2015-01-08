@@ -128,7 +128,7 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
 
   def rustFileSearch(startPath: File, fileBuffer: ListBuffer[File], word: String): List[File] = {
     fileBuffer ++= startPath.listFiles.filter(f => !f.isDirectory && f.getName.endsWith(word + ".rs"))
-    if (fileBuffer.nonEmpty) fileBuffer
+    if (fileBuffer.nonEmpty) return fileBuffer.toList
     else
       startPath.listFiles.filter(_.isDirectory).foreach(d => rustFileSearch(d, fileBuffer, word))
     fileBuffer.toList

@@ -42,7 +42,7 @@ class RustNewFileWizard extends Wizard with INewWizard {
       getContainer.run(true, false, op)
     } catch {
       case _: Exception =>
-        false
+        return false
     }
     true
   }

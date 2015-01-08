@@ -1,18 +1,14 @@
 package org.rustycage.compile
 
-import org.rustycage.run.MessageConsoleScala
-import org.eclipse.core.runtime.CoreException
+import org.eclipse.core.resources.{IFile, IMarker, IResource}
+import org.eclipse.core.runtime.{CoreException, IStatus}
 import org.rustycage.RustPlugin
-import org.eclipse.core.resources.{ IFile, IMarker }
-import org.eclipse.core.resources.IResource
-import org.eclipse.core.runtime.Status
-import org.eclipse.core.runtime.IStatus
-import scala.annotation.tailrec
+import org.rustycage.run.MessageConsoleScala
 
 trait ProblemMarker extends MessageConsoleScala {
   val MARKER_TYPE = "org.eclipse.core.resources.problemmarker"
 
-  if (file.getFileExtension() == "rc") clearAllMarkers(file) else clearMarkers(file)
+  if (file.getFileExtension == "rc") clearAllMarkers(file) else clearMarkers(file)
 
   override def errorMessage(message: String) {
     super.errorMessage(message)
@@ -36,9 +32,8 @@ trait ProblemMarker extends MessageConsoleScala {
       try {
         lineNumber = Integer.parseInt(tokens(1).replaceAll("[^\\d]", ""))
       } catch {
-        case exception: NumberFormatException => {
+        case exception: NumberFormatException =>
           lineNumber = 0
-        }
       }
       addMarker(theFile, markerString, lineNumber, IMarker.SEVERITY_ERROR)
     }
@@ -53,9 +48,8 @@ trait ProblemMarker extends MessageConsoleScala {
       try {
         lineNumber = Integer.parseInt(tokens(1))
       } catch {
-        case exception: NumberFormatException => {
+        case exception: NumberFormatException =>
           lineNumber = 0
-        }
       }
       addMarker(theFile, markerString, lineNumber, IMarker.SEVERITY_ERROR)
     }
@@ -83,9 +77,8 @@ trait ProblemMarker extends MessageConsoleScala {
     try {
       file.deleteMarkers(MARKER_TYPE, false, IResource.DEPTH_ZERO)
     } catch {
-      case e: CoreException => {
+      case e: CoreException =>
         RustPlugin.log(IStatus.ERROR, RustPlugin.PluginId, e)
-      }
     }
   }
 

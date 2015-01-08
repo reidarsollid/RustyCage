@@ -21,7 +21,7 @@ class RustPointerRule(token: IToken) extends IRule {
         } while (isPointer(character))
       }
     }
-    charScanner.unread
+    charScanner.unread()
     isPointerChar
   }
 }
