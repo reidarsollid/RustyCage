@@ -123,7 +123,7 @@ class RustContentAssistProcessor extends IContentAssistProcessor {
   }
 
   def getRustSourceFullPath(preferenceStore: IPreferenceStore, path: String): String = {
-    preferenceStore.getString(PreferenceConstants.P_PATH) + path
+    preferenceStore.getString(PreferenceConstants.RUST_HOME) + path
   }
 
   def rustFileSearch(startPath: File, fileBuffer: ListBuffer[File], word: String): List[File] = {

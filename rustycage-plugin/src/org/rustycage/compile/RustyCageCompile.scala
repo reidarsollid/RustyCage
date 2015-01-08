@@ -23,7 +23,7 @@ object RustyCageCompile {
       
       val projectName: String = project.getName
       val rawPath: String = crate.getRawLocationURI.getRawPath
-      val srcPath: IPath = crate.getFullPath
+     // val srcPath: IPath = crate.getFullPath
       
       val endIndex: Int = rawPath.indexOf(projectName)
       var src: String = ""
@@ -35,19 +35,17 @@ object RustyCageCompile {
         src = " -L " + home + projectName + "/bin"
       }
       //rustc --test -L ../bin hello_test.rc
-      val execCompile = rustPath + "rustc " + argument + rawPath + src + " --out-dir " + bin
+      val execCompile = rustPath + argument + rawPath + src + " --out-dir " + bin
       val logger: ProcessLogger = writeResultToMessageConsole(crate)
 
       execCompile ! logger
       true
     }
     catch {
-      case e: IOException => {
-        return false
-      }
-      case e: CoreException => {
-        return false
-      }
+      case e: IOException =>
+        false
+      case e: CoreException =>
+        false
     }
   }
 

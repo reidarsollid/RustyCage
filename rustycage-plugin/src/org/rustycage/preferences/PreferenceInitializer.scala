@@ -11,7 +11,7 @@ class PreferenceInitializer extends AbstractPreferenceInitializer {
     store.setDefault(P_BOOLEAN, true)
     store.setDefault(P_CHOICE, "choice2")
 
-    store.setDefault(RUST_C, "/usr/local/bin/")
-    store.setDefault(P_PATH, "")
+    store.setDefault(RUST_C, "/usr/local/bin/rustc")
+    store.setDefault(RUST_HOME, "")
   }
 }

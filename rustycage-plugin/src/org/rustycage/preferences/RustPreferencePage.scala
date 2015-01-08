@@ -14,7 +14,7 @@ class RustPreferencePage extends FieldEditorPreferencePage(FieldEditorPreference
 
   override def createFieldEditors() {
     addField(new DirectoryFieldEditor(RUST_C, "&Rust compiler:", getFieldEditorParent))
-    addField(new DirectoryFieldEditor(P_PATH, "Rust home:", getFieldEditorParent))
+    addField(new DirectoryFieldEditor(RUST_HOME, "Rust home:", getFieldEditorParent))
     addField(new BooleanFieldEditor(SAVE_BEFORE_COMPILE, "Save before compile", getFieldEditorParent))
   }
 
