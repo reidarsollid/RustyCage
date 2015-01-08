@@ -66,8 +66,8 @@
               <arch>x86</arch>
             </environment>
             <environment>
-              <os>win64</os>
-              <ws>win64</ws>
+              <os>win32</os>
+              <ws>win32</ws>
               <arch>x86_64</arch>
             </environment>
             <environment>
