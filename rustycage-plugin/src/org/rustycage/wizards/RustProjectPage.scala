@@ -98,7 +98,7 @@ class RustProjectPage(selection: ISelection) extends WizardPage("Rust project wi
       } catch {
         case e: CoreException =>
           updateStatus(e.getMessage)
-          false
+          return false
       }
     }
     true
