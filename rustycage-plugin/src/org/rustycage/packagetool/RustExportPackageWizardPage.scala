@@ -1,6 +1,5 @@
 package org.rustycage.packagetool
 
-import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.runtime.Path
 import org.eclipse.jface.preference.FileFieldEditor
 import org.eclipse.jface.wizard.WizardPage
@@ -9,7 +8,6 @@ import org.eclipse.swt.events.{ModifyEvent, ModifyListener}
 import org.eclipse.swt.layout.{GridData, GridLayout}
 import org.eclipse.swt.widgets.Composite
 import org.eclipse.ui.IWorkbench
-import org.rustycage.RustPlugin
 
 class RustExportPackageWizardPage(workBench: IWorkbench) extends WizardPage("Export Package Wizard") {
   setTitle("Select crate file")
@@ -26,14 +24,7 @@ class RustExportPackageWizardPage(workBench: IWorkbench) extends WizardPage("Exp
     fileSelectionLayout.marginHeight = 0
     fileSelectionArea.setLayout(fileSelectionLayout)
 
-    val projectName = RustPlugin.prefStore.getString("ProjectName")
     val editor = new FileFieldEditor("fileSelect", "Select crate: ", false, fileSelectionArea)
-    val workspaceRoot = ResourcesPlugin.getWorkspace.getRoot
-    val projectURI = workspaceRoot.getLocationURI.getPath
-    val projects = workspaceRoot.getProjects
-    val srcFolders = projects.foreach(project =>
-      project.getFolder("src")
-    )
     editor.getTextControl(fileSelectionArea).addModifyListener(new ModifyListener() {
       def modifyText(e: ModifyEvent) {
         val path = new Path(editor.getStringValue)
