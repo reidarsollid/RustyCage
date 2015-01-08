@@ -1,16 +1,13 @@
 package org.rustycage.compile
 
+import java.io.IOException
+
+import org.eclipse.core.resources.{IFile, IProject, IResource}
+import org.eclipse.core.runtime.{CoreException, IProgressMonitor}
 import org.eclipse.jface.preference.IPreferenceStore
 import org.rustycage.RustPlugin
 import org.rustycage.preferences.PreferenceConstants
-import java.io.IOException
-import org.eclipse.core.resources.{IProject, IFolder, ResourcesPlugin, IFile}
-import org.eclipse.core.runtime.{IPath, IProgressMonitor, CoreException}
 import org.rustycage.run.MessageConsoleScala
-import org.eclipse.core.resources.IWorkspaceRoot
-import org.eclipse.core.resources.IContainer
-import org.eclipse.core.runtime.Path
-import org.eclipse.core.resources.IResource
 
 object RustyCageCompile {
 
@@ -23,8 +20,7 @@ object RustyCageCompile {
       
       val projectName: String = project.getName
       val rawPath: String = crate.getRawLocationURI.getRawPath
-     // val srcPath: IPath = crate.getFullPath
-      
+
       val endIndex: Int = rawPath.indexOf(projectName)
       var src: String = ""
       var bin: String = ""
@@ -34,7 +30,6 @@ object RustyCageCompile {
         //TODO : Fix me path and name
         src = " -L " + home + projectName + "/bin"
       }
-      //rustc --test -L ../bin hello_test.rc
       val execCompile = rustPath + argument + rawPath + src + " --out-dir " + bin
       val logger: ProcessLogger = writeResultToMessageConsole(crate)
 
