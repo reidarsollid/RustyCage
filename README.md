@@ -16,7 +16,7 @@ Travis site
 https://travis-ci.org/reidarsollid/RustyCage
 
 RustyCage is written in Scala and needs Scala compiler for installation
-http://download.scala-ide.org/sdk/lithium/e44/scala211/dev/site
+http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site/
 
 Introduction
 http://reidarsollid.com/2012/03/27/rustycage-a-rust-lang-ide-plugin-for-eclipse/
