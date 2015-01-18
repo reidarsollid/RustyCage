@@ -10,7 +10,7 @@ class PreferenceInitializer extends AbstractPreferenceInitializer {
     val store = RustPlugin.prefStore
     store.setDefault(SAVE_BEFORE_COMPILE, true)
     if(Platform.getOS.equalsIgnoreCase(Platform.OS_WIN32)){
-      store.setDefault(RUST_C, "C:\\Programfiles\\rust\\bin\\")
+      store.setDefault(RUST_C, "C:\\Rust\\bin\\")
     }else {
       store.setDefault(RUST_C, "/usr/local/bin/")
     }

@@ -13,8 +13,8 @@ import org.rustycage.run.MessageConsoleScala
 object RustyCageCompile {
 
   import scala.sys.process._
-
-  def getCompilerName = if (Platform.getOS.equalsIgnoreCase(Platform.OS_WIN32)) "rustc.exe" else "rustc"
+  def isWindows = Platform.getOS.equalsIgnoreCase(Platform.OS_WIN32)
+  def getCompilerName = if (isWindows) "rustc.exe" else "rustc"
 
 
   def compile(crate: IResource, argument: String, monitor: IProgressMonitor, project: IProject): Boolean = {
@@ -23,7 +23,7 @@ object RustyCageCompile {
       val rustPath: String = preferenceStore.getString(PreferenceConstants.RUST_C)
 
       val projectName: String = project.getName
-      val rawPath: String = crate.getRawLocationURI.getRawPath
+      val rawPath: String = if (isWindows) crate.getRawLocationURI.getRawPath.substring(1) else crate.getRawLocationURI.getRawPath
 
       val endIndex: Int = rawPath.indexOf(projectName)
       var src: String = ""

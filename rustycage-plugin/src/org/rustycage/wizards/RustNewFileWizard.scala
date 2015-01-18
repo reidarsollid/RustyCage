@@ -124,12 +124,9 @@ class RustNewFileWizard extends Wizard with INewWizard {
       | */
       |#[main]
       |fn run() {
-      |  spawn(hello);
-      |}
-      |
-      |fn hello() {
       |  println!("Hello world");
       |}
+      |
       | """.stripMargin
 
   private val TEMPLATE_LIB =
