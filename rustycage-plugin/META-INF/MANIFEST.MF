@@ -43,4 +43,11 @@ Export-Package: com.codeminders.scalaws.helpers.io,
  org.rustycage.preferences,
  org.rustycage.run,
  org.rustycage.wizards
+Import-Package: org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ org.eclipse.jface,
+ org.eclipse.ui,
+ org.eclipse.core.commands,
+ org.eclipse.swt,
+ org.osgi.framework
 

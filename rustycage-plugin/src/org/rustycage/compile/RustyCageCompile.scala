@@ -13,8 +13,8 @@ import org.rustycage.run.MessageConsoleScala
 object RustyCageCompile {
 
   import scala.sys.process._
-  def isWindows = Platform.getOS.equalsIgnoreCase(Platform.OS_WIN32)
-  def getCompilerName = if (isWindows) "rustc.exe" else "rustc"
+  def isWindows: Boolean = Platform.getOS.equalsIgnoreCase(Platform.OS_WIN32)
+  def getCompilerName: String = if (isWindows) "rustc.exe" else "rustc"
 
 
   def compile(crate: IResource, argument: String, monitor: IProgressMonitor, project: IProject): Boolean = {

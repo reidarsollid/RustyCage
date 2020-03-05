@@ -31,11 +31,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.googlecode</groupId>
-                <artifactId>maven-idea-plugin</artifactId>
-                <version>1.6.1</version>
-            </plugin>
-            <plugin>
                 <groupId>org.eclipse.tycho</groupId>
                 <artifactId>tycho-compiler-plugin</artifactId>
                 <version>${tycho.version}</version>

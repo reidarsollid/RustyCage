@@ -7,9 +7,9 @@ import org.eclipse.swt.SWT
 class RustScanner extends RuleBasedScanner {
   val rule: WordRule = new WordRule(new IWordDetector() {
 
-    def isWordStart(c: Char) = Character.isJavaIdentifierStart(c)
+    def isWordStart(c: Char): Boolean = Character.isJavaIdentifierStart(c)
 
-    def isWordPart(c: Char) = Character.isJavaIdentifierPart(c)
+    def isWordPart(c: Char): Boolean = Character.isJavaIdentifierPart(c)
 
   }, Token.WHITESPACE)
 
@@ -30,10 +30,10 @@ class RustScanner extends RuleBasedScanner {
   )
 
   def whiteSpaceRule = new WhitespaceRule(new IWhitespaceDetector() {
-    def isWhitespace(c: Char) = Character.isWhitespace(c)
+    def isWhitespace(c: Char): Boolean = Character.isWhitespace(c)
   })
 
-  val rules = Array[IRule](rule,
+  val rules: Array[IRule] = Array[IRule](rule,
     new RustPointerRule(pointer),
     new NumberRule(numbers),
     new EndOfLineRule("//", comment, '\\'),

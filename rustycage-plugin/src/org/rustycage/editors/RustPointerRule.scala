@@ -8,7 +8,7 @@ import org.eclipse.jface.text.rules.Token
 class RustPointerRule(token: IToken) extends IRule {
   val POINTERS = Set('@', '~', '&')
 
-  def isPointer(character: Char) = POINTERS.contains(character)
+  def isPointer(character: Char): Boolean = POINTERS.contains(character)
 
   override def evaluate(charScanner: ICharacterScanner): IToken = {
     var character: Char = charScanner.read.toChar
